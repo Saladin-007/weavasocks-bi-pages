@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>WeavaSocks Shopify 分析 BI看板</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root{
+        --bg:#f7f5f1; --panel:#fffdfa; --panel2:#f1eee7;
+        --ink:#1d2422; --ink2:#4c5652; --ink3:#7d8782;
+        --line:#ddd8cd; --line2:#c9c3b4;
+        --accent:#14665a; --accent-ink:#0d4a41; --accent-soft:#e2efec;
+        --amber:#a85b12; --amber-soft:#f7ead9;
+        --red:#b23a2c; --red-soft:#f9e7e3;
+        --green:#1e7a4f; --green-soft:#e3f0e8;
+        --gold:#8a6d1f;
+        --chart-grid:#e3ded2; --chart-text:#7d8782;
+        --shadow:0 1px 2px rgba(29,36,34,.05),0 6px 18px rgba(29,36,34,.05);
+      }
+      @media (prefers-color-scheme: dark){
+        :root{
+          --bg:#141816; --panel:#1c211f; --panel2:#232926;
+          --ink:#ece9e2; --ink2:#b6bcb8; --ink3:#8b948f;
+          --line:#333a37; --line2:#454f4a;
+          --accent:#4db8a4; --accent-ink:#8fd8c8; --accent-soft:#1e332f;
+          --amber:#e09a4e; --amber-soft:#3a2d1c;
+          --red:#e0785f; --red-soft:#3d2622;
+          --green:#5cb98a; --green-soft:#1e3329;
+          --gold:#cdb26a;
+          --chart-grid:#2c3330; --chart-text:#8b948f;
+          --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);
+        }
+      }
+      *{box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      body{margin:0;background:var(--bg);color:var(--ink);
+        font-family:"IBM Plex Sans",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+        font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+      .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+      .wrap{max-width:1180px;margin:0 auto;padding:0 18px 56px}
+      a{color:var(--accent)}
+      header{padding:30px 0 6px}
+      .dateline{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;color:var(--ink2);font-size:13px}
+      .dateline .store{font-weight:700;color:var(--ink);font-size:14px;letter-spacing:.02em}
+      .dateline .dot{color:var(--ink3)}
+      h1{font-family:"IBM Plex Serif",Georgia,"Songti SC",serif;font-size:clamp(26px,4.6vw,40px);line-height:1.18;margin:10px 0 8px;font-weight:700}
+      h1 .thin{font-weight:500;color:var(--ink2)}
+      .verdict{font-size:clamp(15px,2.4vw,17.5px);line-height:1.65;color:var(--ink);max-width:56em;margin:0}
+      .verdict b{color:var(--accent-ink)}
+      .verdict .bad{color:var(--red);font-weight:600}
+      .snapshot{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+      .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 12px;font-size:12.5px;color:var(--ink2)}
+      .chip b{color:var(--ink);font-weight:600}
+      .chip.warn{border-color:var(--amber);background:var(--amber-soft);color:var(--ink)}
+      .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 6px}
+      .kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 16px 13px;box-shadow:var(--shadow)}
+      .kpi .lab{font-size:12.5px;color:var(--ink2);font-weight:600;letter-spacing:.04em}
+      .kpi .num{font-family:"IBM Plex Serif",Georgia,serif;font-size:clamp(26px,3.4vw,34px);font-weight:700;line-height:1.15;margin:4px 0 2px}
+      .kpi .num small{font-size:.52em;font-weight:600;color:var(--ink2)}
+      .kpi .delta{font-size:13px;line-height:1.5}
+      .kpi .sub{font-size:12px;color:var(--ink3);margin-top:2px}
+      .up{color:var(--green);font-weight:600}.down{color:var(--red);font-weight:600}.flat{color:var(--ink2);font-weight:600}
+      section{margin-top:34px}
+      .sec-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:14px}
+      .sec-head h2{font-family:"IBM Plex Serif",Georgia,"Songti SC",serif;font-size:21px;margin:0;font-weight:700}
+      .sec-head .no{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--accent);font-weight:600}
+      .sec-head p{margin:0;color:var(--ink2);font-size:13.5px}
+      .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+      .grid32{display:grid;grid-template-columns:3fr 2fr;gap:12px}
+      .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow)}
+      .card h3{margin:0 0 4px;font-size:15px;font-weight:700}
+      .card .note{font-size:12.5px;color:var(--ink2);margin:0 0 10px;line-height:1.55}
+      .card .foot{font-size:12px;color:var(--ink3);margin-top:10px;line-height:1.55}
+      svg.chart{width:100%;height:auto;display:block}
+      .seg{display:inline-flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden;margin-left:auto}
+      .seg button{appearance:none;border:0;background:transparent;color:var(--ink2);font:inherit;font-size:12.5px;padding:5px 12px;cursor:pointer}
+      .seg button[aria-pressed="true"]{background:var(--accent);color:#fff;font-weight:600}
+      @media (prefers-color-scheme: dark){.seg button[aria-pressed="true"]{color:#0d2420}}
+      .row-flex{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+      table{width:100%;border-collapse:collapse;font-size:13.5px}
+      th{ text-align:left;color:var(--ink2);font-size:12px;font-weight:600;letter-spacing:.03em;padding:7px 8px;border-bottom:1.5px solid var(--line2);white-space:nowrap}
+      td{padding:8px;border-bottom:1px solid var(--line);vertical-align:middle}
+      td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+      tr.hl td{background:var(--accent-soft);font-weight:600}
+      .barcell{position:relative;min-width:120px}
+      .barcell .bar{position:absolute;left:8px;top:50%;transform:translateY(-50%);height:16px;border-radius:3px;background:var(--accent);opacity:.28}
+      .barcell .val{position:relative;font-weight:600}
+      .funnel-row{display:grid;grid-template-columns:86px 1fr 232px;gap:10px;align-items:center;margin:9px 0}
+      .funnel-row .fl{font-size:13px;color:var(--ink2);font-weight:600}
+      .funnel-track{height:22px;background:var(--panel2);border-radius:5px;position:relative;overflow:hidden}
+      .funnel-fill{position:absolute;inset:0 auto 0 0;border-radius:5px;background:var(--accent)}
+      .funnel-fill.y{background:var(--line2)}
+      .funnel-fill.a{background:var(--gold)}
+      .funnel-row .fv{font-size:12.5px;text-align:right;line-height:1.6}
+      .funnel-row .fv b{font-size:13px}
+      .step-line{font-size:12.5px;color:var(--ink2);background:var(--panel2);border-radius:6px;padding:7px 11px;margin:10px 0 2px;line-height:1.7}
+      .step-line b{color:var(--ink)}
+      .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink2);margin:4px 0 8px}
+      .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+      .hbar{display:grid;grid-template-columns:118px 1fr 92px;gap:10px;align-items:center;margin:8px 0;font-size:13px}
+      .hbar .hl2{color:var(--ink2);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .hbar .track{height:14px;background:var(--panel2);border-radius:4px;position:relative}
+      .hbar .fill{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:4px}
+      .hbar .hv{text-align:right;font-size:12.5px}
+      .alert{border:1px solid var(--amber);background:var(--amber-soft);border-radius:12px;padding:15px 17px}
+      .alert h3{margin:0 0 5px;font-size:15px}
+      .alert p{margin:0;font-size:13.5px;line-height:1.65}
+      .insight{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:13px 15px;margin:10px 0}
+      .insight p{margin:0;font-size:14px;line-height:1.65}
+      .insight .t{font-weight:700}
+      ol.actions{margin:0;padding-left:20px}
+      ol.actions li{margin:9px 0;font-size:14px;line-height:1.65}
+      ol.actions b{color:var(--accent-ink)}
+      .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;border-radius:4px;padding:1px 7px;vertical-align:1px;margin-right:6px}
+      .tag.hot{background:var(--red-soft);color:var(--red)}
+      .tag.cool{background:var(--accent-soft);color:var(--accent-ink)}
+      .tag.warn{background:var(--amber-soft);color:var(--amber);border:1px solid var(--amber)}
+      .tag.fact{background:var(--green-soft);color:var(--green)}
+      .tag.guess{background:var(--panel2);color:var(--ink2);border:1px solid var(--line2)}
+      .tag.none{background:var(--red-soft);color:var(--red)}
+      .market-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+      .market-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow)}
+      .market-card h3{margin:0 0 8px;font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+      .market-card ul{margin:0;padding-left:18px}
+      .market-card li{margin:7px 0;font-size:13.5px;line-height:1.65}
+      .market-card li b{color:var(--ink)}
+      .market-card .link-note{font-size:12.5px;color:var(--ink2);background:var(--panel2);border-radius:6px;padding:7px 11px;margin-top:10px;line-height:1.6}
+      .market-card .link-note b{color:var(--accent-ink)}
+      @media (max-width:900px){.market-grid{grid-template-columns:1fr}}
+      .cadence{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px 16px 10px;box-shadow:var(--shadow);margin-top:12px}
+      .cadence h3{margin:12px 0 2px;font-size:15px;font-weight:700}
+      .cadence .note{font-size:12.5px;color:var(--ink2);margin:0 0 6px;line-height:1.55}
+      .c-row{display:grid;grid-template-columns:148px 1fr;gap:6px 16px;padding:11px 0;border-top:1px solid var(--line)}
+      .c-row:first-of-type{border-top:0}
+      .c-when{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--accent-ink);font-weight:600;line-height:1.5}
+      .c-when .cd{display:block;color:var(--ink3);font-weight:400;font-size:11.5px}
+      .c-body .c-t{font-weight:700;font-size:14px}
+      .c-body p{margin:3px 0 0;font-size:13.5px;line-height:1.65;color:var(--ink)}
+      .c-body p b{color:var(--accent-ink)}
+      .c-row.now{background:var(--accent-soft);border-radius:8px;padding-left:10px;padding-right:10px;margin-left:-10px;margin-right:-10px;border-top-color:transparent}
+      .c-row.peak .c-when{color:var(--red)}
+      @media (max-width:640px){.c-row{grid-template-columns:1fr;gap:2px}}
+      .audit-ok{border:1px solid var(--green);background:var(--green-soft);border-radius:12px;padding:15px 17px;display:flex;gap:14px;align-items:flex-start}
+      .audit-ok .badge{flex:none;width:34px;height:34px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;line-height:1}
+      @media (prefers-color-scheme: dark){.audit-ok .badge{color:#0d2420}}
+      .audit-ok h3{margin:0 0 3px;font-size:16px}
+      .audit-ok p{margin:0;font-size:13.5px;line-height:1.65}
+      .audit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+      @media (max-width:900px){.audit-grid{grid-template-columns:1fr}}
+      .audit-list{margin:0;padding-left:18px}
+      .audit-list li{margin:7px 0;font-size:13.5px;line-height:1.65}
+      .audit-list li b{color:var(--ink)}
+      .pass{color:var(--green);font-weight:700;white-space:nowrap}
+      footer{margin-top:40px;border-top:1px solid var(--line);padding-top:14px;color:var(--ink3);font-size:12.5px;line-height:1.7}
+      footer b{color:var(--ink2)}
+      @media (max-width:900px){
+        .kpis{grid-template-columns:repeat(2,1fr)}
+        .grid2,.grid32{grid-template-columns:1fr}
+        .funnel-row{grid-template-columns:62px 1fr 168px}
+        .hbar{grid-template-columns:96px 1fr 84px}
+        th.hide-m,td.hide-m{display:none}
+      }
+      @media (max-width:460px){ .kpis{grid-template-columns:1fr 1fr;gap:9px} .kpi{padding:13px 12px 10px} }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="dateline">
+          <span class="store">WEAVASOCKS · SHOPIFY 生意分析</span>
+          <span class="dot">·</span><span>2026 年 11 月 4 日（周三）</span>
+          <span class="dot">·</span><span>北京时间口径</span>
+          <span class="dot">·</span><span>货币 USD</span>
+        </div>
+        <h1>今日截至 01:19 共 2 单、$246.57，<span class="thin">昨日全天 22 单、$1,325.91 收官</span></h1>
+        <p class="verdict">
+          北京时间今日 11 月 4 日截至 <b>01:19（未完日）</b>：<b>2 单、$246.57</b>，客单价 <b>$123.29</b>（2 单均在 00 时进场）。
+          同期对齐：昨日同期（11 月 3 日截至 01:19）为 3 单、$316.56、客单价 $105.52，今日较昨日同期 <b>-1 单、-$69.99</b>，客单价 <b>+16.8%</b>——凌晨样本很小，不作信号解读（08:00 站内审查已确认结账链路通畅，见第 08 节）。
+          昨日全天终值（北京时间完整日）<b>22 单、$1,325.91、客单价 $60.27</b>；昨日含两单 $0 纯赠品单，客单价被这两单拉低，不要误读为价格走弱。
+          今天仍是<b>未完日</b>，全天尚未展开，按全天判断、不按凌晨空档下结论。
+        </p>
+        <div class="snapshot">
+          <span class="chip">数据快照 <b>11 月 4 日 01:19（北京）</b> · 08:19 全量班次</span>
+          <span class="chip warn">今天是<b>未完日</b>（截至 01:19），当日数字还会变化</span>
+          <span class="chip">对比基准 <b>昨日同期（截至 01:19）＋昨日全天（北京口径）</b></span>
+        </div>
+        <p style="font-size:12.5px;color:var(--ink2);margin:10px 0 0;line-height:1.6"><b>口径说明：</b>全部时间为北京时间；今日/昨日按每单创建时间换算到 Asia/Shanghai 划分，是本看板的主口径；店铺货币 USD；2026-11-04 为未完日（截至 01:19），当日数字还会变化；昨日 2026-11-03 为完整日（北京口径 22 单、$1,325.91、客单价 $60.27）。另有 Shopify 分析日口径的逐日序列（第 01 节），因日界不同，个别日期与北京口径略有差异，两处均已标注口径。页内所有“今日”均指北京时间 2026-11-04 未完日。本页只放汇总数字，不含顾客姓名、邮箱、地址、电话和完整单号；不做利润分析。</p>
+      </header>
+      <!-- KPI -->
+      <div class="kpis" role="group" aria-label="关键指标">
+        <div class="kpi">
+          <div class="lab">今日订单（11/4 · 截至 01:19 · 未完日）</div>
+          <div class="num">2 <small>单</small></div>
+          <div class="delta">昨日同期 3 单 <span class="down">-1 单</span> · 昨日全天 22 单</div>
+          <div class="sub">今日截至 01:19 共 2 单（00 时 2 单）；今日未完，不外推全天</div>
+        </div>
+        <div class="kpi">
+          <div class="lab">今日销售额（11/4 · 未完日）</div>
+          <div class="num">$246.57</div>
+          <div class="delta">昨日同期 $316.56 <span class="down">-$69.99</span></div>
+          <div class="sub">昨日全天（北京口径完整日）为 $1,325.91；今日未完，金额随后续订单进场还会变化</div>
+        </div>
+        <div class="kpi">
+          <div class="lab">今日客单价（11/4）</div>
+          <div class="num">$123.29</div>
+          <div class="delta">昨日同期 $105.52 <span class="up">+16.8%</span> · 昨日全天 $60.27</div>
+          <div class="sub">昨日全天 $60.27（含两单 $0 纯赠品单拉低）；今日仅 2 单、样本小，待后续订单进场后再看</div>
+        </div>
+        <div class="kpi">
+          <div class="lab">近 30 天总销售额</div>
+          <div class="num">$48,187.83</div>
+          <div class="delta">869 单 · 客单价 $55.46</div>
+          <div class="sub">窗口 10-04 至 11-04（末日未完）；折扣占毛额约 25.2%；日均 28.0 单、$1,554.45</div>
+        </div>
+      </div>
+
+      <!-- 1 trend -->
+      <section>
+        <div class="sec-head">
+          <span class="no">01</span><h2>近 30 天走势</h2>
+          <p>柱 = 每日总销售额（USD），线 = 订单数（分析日口径）。窗口 2026-10-04 至 11-04 共 869 单、总销售额 $48,187.83、客单价 $55.46，日均 28.0 单、$1,554.45；近 7 天（10-28 至 11-03）184 单、$10,486.94，前 7 天 206 单、$10,959.21；11-02 全天终值 $2,286.15 / 33 单，为窗口内第二高单日；11-03 全天终值 $1,325.91 / 22 单；11-04 为未完日，截至 01:19 为 $246.57 / 2 单，不作全天定论。窗口为滚动窗口（10-03 已出窗），总额变化不等于生意下滑。</p>
+          <div class="seg" role="group" aria-label="走势范围">
+            <button id="seg14" aria-pressed="false">14 天</button>
+            <button id="seg30" aria-pressed="true">31 天</button>
+          </div>
+        </div>
+        <div class="card">
+          <svg class="chart" id="trendChart" viewBox="0 0 1120 340" role="img" aria-label="近30天每日总销售额与订单数走势图"></svg>
+          <p class="foot">窗口：店铺日序列 2026-10-04 – 11-04（11-04 为未完日，截至 01:19）。30 天合计：毛销售额 $62,102.99、折扣 −$15,637.27、冲销 −$425.98、净销售额 $46,039.74、运费 $1,653.93、总销售额 $48,187.83。</p>
+        </div>
+      </section>
+
+      <!-- 2 today vs yesterday -->
+      <section>
+        <div class="sec-head">
+          <span class="no">02</span><h2>今天 vs 昨天（北京时间）</h2>
+          <p>今日/昨日按每单创建时间换算到北京时间划分。核心对比是“今日截至 01:19（北京）”与“昨日同期（截至 01:19）”的严格对齐；今日是未完日，同时列出昨日全天（北京口径）供参照。</p>
+        </div>
+        <div class="grid32">
+          <div class="card">
+            <h3>同期对齐对比</h3>
+            <p class="note">今日为未完日（截至 01:19，北京）；昨日全天为北京口径完整日。今日 2 单、$246.57，昨日同期 3 单、$316.56，同期 -1 单、-$69.99；今日仍是未完日，数字仍会继续变化。</p>
+            <table>
+              <thead><tr><th>指标</th><th class="n">今天至今 11/4</th><th class="n">昨日同期</th><th class="n">同期变化</th><th class="n hide-m">昨天全天 11/3（北京）</th></tr></thead>
+              <tbody>
+                <tr><td>订单数</td><td class="n mono">2</td><td class="n mono">3</td><td class="n"><span class="down">-1 单</span></td><td class="n mono hide-m">22</td></tr>
+                <tr><td>销售额</td><td class="n mono">$246.57</td><td class="n mono">$316.56</td><td class="n"><span class="down">-$69.99</span></td><td class="n mono hide-m">$1,325.91</td></tr>
+                <tr><td>客单价</td><td class="n mono">$123.29</td><td class="n mono">$105.52</td><td class="n"><span class="up">+16.8%</span></td><td class="n mono hide-m">$60.27</td></tr>
+              </tbody>
+            </table>
+            <p class="foot">今日 vs 昨日全天（北京口径，未完日对比）：今日截至 01:19 为 2 单、$246.57、客单价 $123.29，昨日全天 22 单、$1,325.91、客单价 $60.27；昨日同期（截至 01:19）为 3 单、$316.56、客单价 $105.52，今日较昨日同期 -1 单、-$69.99、客单价 +16.8%。凌晨样本很小，不作信号解读——08:00 站内审查已确认结账链路通畅（见第 08 节）。昨日含两单 $0 纯赠品单，客单价 $60.27 被拉低，不要误读为价格走弱。</p>
+          </div>
+          <div class="card">
+            <h3>今日下单时段（北京时间 11/4，2 单）</h3>
+            <p class="note">柱 = 每小时订单数。截至 01:19，00 时 2 单 $246.57，其余时段尚未开始，合计 2 单、$246.57。</p>
+            <svg class="chart" id="hourChart" viewBox="0 0 520 190" role="img" aria-label="11月4日各小时订单数分布图"></svg>
+            <p class="foot">北京时间凌晨至上午对应美国白天 / 晚间——广告与再营销投放时段应继续权重放在美国白天 / 晚间。北京时间白天对应美国深夜，中午空档属预期，不作需求信号解读。</p>
+          </div>
+        </div>
+        <div class="card" style="margin-top:12px">
+          <h3>转化漏斗：近 30 天 ＋ 逐日</h3>
+          <p class="note">近 30 天：会话 68,100、加购 2,078、到达结账 1,560、完成结账 853，完成 / 会话约 1.25%。加购 2,078 对完成 853 的漏斗缺口，是结账再营销的重点人群（见第 07 节节奏）。逐日见下表：11 月 2 日为完整日，11 月 3 日为未完日。</p>
+          <div id="funnel"></div>
+          <div class="step-line">逐级转化（近 30 天）：会话 → 加购 <b>3.05%</b> ｜ 加购 → 到达结账 <b>75.1%</b> ｜ 到达结账 → 完成 <b>54.7%</b> ｜ 整体转化（会话 → 完成）<b>约 1.25%</b>。漏损主要发生在加购之前；加购到结账之间也有明显流失，是黑五再营销的重点人群。</div>
+          <table style="margin-top:10px">
+            <thead><tr><th>窗口</th><th class="n">会话</th><th class="n">加购</th><th class="n">到达结账</th><th class="n">完成结账</th><th class="n">转化率</th></tr></thead>
+            <tbody>
+              <tr><td>近 30 天</td><td class="n mono">68,100</td><td class="n mono">2,078</td><td class="n mono">1,560</td><td class="n mono">853</td><td class="n mono">1.25%</td></tr>
+              <tr><td>2026-11-02（完整日）</td><td class="n mono">861</td><td class="n mono">83</td><td class="n mono">74</td><td class="n mono">33</td><td class="n mono">3.83%</td></tr>
+              <tr class="hl"><td>2026-11-03（未完日，截至 08:42）</td><td class="n mono">739</td><td class="n mono">29</td><td class="n mono">34</td><td class="n mono">15</td><td class="n mono">2.03%</td></tr>
+            </tbody>
+          </table>
+          <p class="foot">注意：11-03 的 2.03% 是未完日的部分日数字，随今日后续会话与订单进场还会变化，须谨慎解读，不能与完整日直接定论。另注：客户口径（按日合计）近 30 天新客 718 人、回头客 140 人，与此处“完成结账 853”是不同序列、不同指标，不要合并或相加解读（见第 05 节）。</p>
+        </div>
+      </section>
+
+      <!-- 3 windows -->
+      <section>
+        <div class="sec-head">
+          <span class="no">03</span><h2>近 30 天总览：折扣负担重，近期力度在收窄</h2>
+          <p>窗口 2026-10-04 至 11-03（末日未完）。30 天折扣 −$15,637.27、占毛销售额约 25.2%，负担偏重；但近期在收窄：11 月 2 日折扣占毛额约 20.5%、11 月 3 日未完日约 18.6%，均低于 30 天水平。客单价高位更像多双装组合（bundle）拉动，而不是靠更深折扣——此为推断，详见第 07 节。</p>
+        </div>
+        <div class="grid2">
+          <div class="card">
+            <h3>近 30 天销售额构成</h3>
+            <table>
+              <tbody>
+                <tr><td>订单数</td><td class="n mono">869 单</td></tr>
+                <tr><td>毛销售额</td><td class="n mono">$62,102.99</td></tr>
+                <tr><td>折扣</td><td class="n mono">−$15,637.27（占毛额约 25.2%）</td></tr>
+                <tr><td>冲销</td><td class="n mono">−$425.98</td></tr>
+                <tr><td>净销售额</td><td class="n mono">$46,039.74</td></tr>
+                <tr><td>运费</td><td class="n mono">$1,653.93</td></tr>
+                <tr class="hl"><td>总销售额</td><td class="n mono">$48,187.83</td></tr>
+                <tr><td>客单价（总销售额 ÷ 单数）</td><td class="n mono">$55.46</td></tr>
+                <tr><td>日均</td><td class="n mono">28.0 单 · $1,554.45</td></tr>
+              </tbody>
+            </table>
+            <p class="foot">本看板不做利润分析（无成本口径），以上只到销售额构成为止。</p>
+          </div>
+          <div class="card">
+            <h3>折扣与组合装信号</h3>
+            <table>
+              <tbody>
+                <tr><td>近 30 天折扣率（折扣 ÷ 毛销售额）</td><td class="n mono">约 25.2%</td></tr>
+                <tr><td>11 月 2 日折扣率（完整日）</td><td class="n mono">约 20.5%</td></tr>
+                <tr><td>11 月 3 日折扣率（未完日）</td><td class="n mono">约 18.6%</td></tr>
+                <tr><td>近 7 天 vs 前 7 天</td><td class="n mono">184 单 / $10,486.94 vs 206 单 / $10,959.21</td></tr>
+                <tr><td>近 30 天客单价</td><td class="n mono">$55.46</td></tr>
+                <tr><td>昨日客单价（11-02 完整日）</td><td class="n mono">$69.28</td></tr>
+                <tr><td>今日客单价（11-03 未完日）</td><td class="n mono">$60.27</td></tr>
+              </tbody>
+            </table>
+            <p class="foot">读法：30 天折扣负担偏重（约 25.2%），但近两日折扣率收窄到 20.5% / 18.6%，客单价却升到 $69.28 / $60.27——与“组合装结构拉动”一致，与“靠降价拉动”不一致（推断）。近 7 天对比含未完日因素，不要过度解读。黑五前应靠组包而非继续加深单双折扣（见第 07 节节奏）。</p>
+          </div>
+        </div>
+        <div class="card" style="margin-top:12px">
+          <h3>折扣率：30 天 vs 近两日</h3>
+          <p class="note">30 天整体约 25.2%；11 月 2 日（完整日）约 20.5%、11 月 3 日（未完日）约 18.6%——折扣力度近期收窄。11-03 为未完日，还会随后续订单变化。</p>
+          <svg class="chart" id="discChart" viewBox="0 0 1120 250" role="img" aria-label="折扣率对比图"></svg>
+          <p class="foot">结论不变：折扣已经是重负担，增量应来自篮子与组包，而不是再加深折扣深度。</p>
+        </div>
+      </section>
+
+      <!-- 4 traffic -->
+      <section>
+        <div class="sec-head">
+          <span class="no">04</span><h2>流量与转化</h2>
+          <p>近 30 天会话 68,100、加购 2,078、到达结账 1,560、完成结账 853，完成 / 会话约 1.25%；11 月 2 日（完整日）861 个会话、转化 3.83%；11 月 3 日未完日暂为 739 个会话、转化 2.03%，为部分日数字，须谨慎解读。</p>
+        </div>
+        <div class="alert" role="note">
+          <h3>⚠ 11-03 转化 2.03% 是未完日数字，会继续变化</h3>
+          <p>今日截至 08:42：739 个会话、29 次加购、34 次到达结账、完成结账 15 单、转化 2.03%——这是部分日数字，随今日后续流量进场还会移动，不与完整日作定论对比。昨日 11 月 2 日（完整日）为 861 个会话、83 次加购、74 次到达结账、完成 33 单、转化 3.83%。近 30 天整体转化约 1.25%（68,100 个会话、完成 853 单），漏斗缺口在加购 2,078 对完成 853 之间，是结账再营销的重点。读时注意区分窗口。</p>
+        </div>
+        <div class="grid2" style="margin-top:12px">
+          <div class="card">
+            <h3>设备会话（近 30 天）</h3>
+            <p class="note">桌面 49,262 占 72.3%；移动 17,587 占 25.8%、未知 831 占 1.2%、平板 415 占 0.6%、其他 5。流量以桌面为主，移动占四分之一强。</p>
+            <div id="deviceBars"></div>
+            <p class="foot">再营销与落地页承接应先按桌面大流量排，同时不放弃移动端的基本体验检查（见第 07 节节奏）。</p>
+          </div>
+          <div class="card">
+            <h3>国家会话（近 30 天）</h3>
+            <p class="note">美国 39,319 占 57.7%，为会话第一来源；其后为巴西 7,314、哥伦比亚 2,938、厄瓜多尔 2,024、巴基斯坦 1,367、孟加拉国 1,167。此为会话口径；订单侧美国占绝对主体（见第 05 节引荐与第 07 节）。</p>
+            <div id="countryBars"></div>
+            <p class="foot">结论：选品、话术与投放都按美国市场排；非美国会话量不小但订单转化集中在美国，不单独做本地化动作。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 channels & customers -->
+      <section>
+        <div class="sec-head">
+          <span class="no">05</span><h2>订单引荐来源与客户</h2>
+          <p>以下为近 30 天订单引荐来源（单数 / 总额）：Google 搜索 529 单占 30 天单数 61.5%，是订单的绝对主力渠道；客户侧仍靠新客拉动（新客 718 人、回头客 140 人，按日合计口径，分开列示）。客户数与“完成结账 853”是不同序列、不同指标，不要合并。</p>
+        </div>
+        <div class="grid32">
+          <div class="card">
+            <h3>订单从哪个渠道来（近 30 天引荐来源）</h3>
+            <div id="refBars"></div>
+            <p class="foot">Google 搜索 529 单 / $29,031.33（占单数 61.5%），保住高意图搜索词是渠道第一优先级；直接 / 空白 160 单、weavasocks 自有引荐 125 单居其后；社交侧 Instagram 4 单、Facebook 2 单、YouTube 2 单，量级很小。</p>
+          </div>
+          <div class="card">
+            <h3>新客 vs 回头客（近 30 天，按日合计）</h3>
+            <div id="custBars"></div>
+            <p class="foot">30 天新客 718 人、回头客 140 人（按日合计口径，分开列示），新客占主导；今日（11-03，未完日）新客 14 人、回头客 1 人。注意：客户序列与漏斗的“完成结账 853”是不同序列、不同指标，不要合并解读。增长靠拉新驱动，复购与再营销仍有很大的补课空间。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6 products -->
+      <section>
+        <div class="sec-head">
+          <span class="no">06</span><h2>产品 Top 10（近 30 天，按毛销售额）</h2>
+          <p>前十由棉质低帮 / 脚踝 / 毛巾衬垫款主导，美利奴线仅第 9 名一款（Men's Merino Wool Lightweight Dress Crew）；结论：当前销售主力仍是棉质基础款与多双装购买，保暖 / 美利奴线宜作组合增量。</p>
+        </div>
+        <div class="card">
+          <table id="prodTable">
+            <thead><tr><th>产品</th><th class="n">毛销售额</th><th class="n">净销售额</th><th class="n">订单</th><th>点评</th></tr></thead>
+            <tbody></tbody>
+          </table>
+          <p class="foot">11.11 与黑五主推应落在已验证的头部棉袜（低帮 + 毛巾衬垫）与多双装上，Dual-Knit 美利奴中筒（$15.99，审查确认库存充足）作组合搭配，不临时换主推品类。</p>
+        </div>
+        <div class="card" style="margin-top:12px">
+          <h3>产品结构</h3>
+          <p style="font-size:14px;line-height:1.65;margin:0">前十由<b>棉质低帮 / 脚踝 / 毛巾衬垫款</b>主导：Top 1 Heel Tab Low-Cut（$2,213.70 / 38 单）与 Top 2 Terry Cushion Ankle（$2,055.13 / 37 单）断层领先。第 5 名 Men's Terry Cushion Low Cut 仅 9 单、净额 $457.94 明显偏低，属高客单低频款，不宜当主力推。美利奴线只有第 9 名 Men's Merino Wool Lightweight Dress Crew（$999.50 / 11 单）进榜，保暖款更适合做加购 / 组包的增量，而不是现在的主推（见第 07 节）。</p>
+        </div>
+      </section>
+
+      <!-- 7 US market context -->
+      <section>
+        <div class="sec-head">
+          <span class="no">07</span><h2>美国市场背景：已核实与推断分开写</h2>
+          <p>每条都标了等级：<span class="tag fact">已核实</span> 是本站实拉数据与可查证日历；<span class="tag guess">推断</span> 是结合本站数据的判断，不是已证因果。本节最后附<b>营销节奏</b>：按当前日期往后排，每个节点前做什么，并与当期数据对上。</p>
+        </div>
+        <div class="market-grid">
+          <div class="market-card">
+            <h3>已核实事实 <span class="tag fact">已核实 · 本站数据</span></h3>
+            <ul>
+              <li><b>数据来源：</b>本页数字为北京时间 2026-11-03 10:19 从 Shopify 实拉（08:19 全量班次）；今天是 2026 年 11 月 3 日（周二），距 11.11（11 月 11 日）约 8 天，其后依次是感恩节（11/26 周四）、黑五（11/27 周五）、网一（11/30 周一）、圣诞（12/25 周五）及圣诞发货截止。假日季窗口已经打开。</li>
+              <li><b>昨日是窗口内第二高单日：</b>11 月 2 日全天 $2,286.15 / 33 单，仅次于 10 月 18 日 $2,455.64；客单价 $69.28 远高于 30 天均值 $55.44。今日晨间 pace 低于昨日同期（16 单 vs 26 单）但客单价更高（$69.83 vs $67.30）；04 时零单属正常晨间波动，08:00 站内审查已确认结账链路通畅（见第 08 节）。</li>
+              <li><b>折扣力度近期收窄：</b>11 月 2 日折扣占毛额约 20.5%、11 月 3 日未完日约 18.6%，均低于 30 天的约 25.2%——客单价高位不是靠更深折扣换来的。</li>
+              <li><b>近 7 天对比含未完日因素：</b>近 7 天（10-28 至 11-03 未完日）178 单 / $10,278.32，前 7 天 206 单 / $10,959.21；近 7 天含一个未完日，不要过度解读为趋势下滑。</li>
+              <li><b>渠道结构：</b>Google 搜索占 30 天单数 61.5%（529 单 / $29,031.33）；漏斗上加购 2,078 对完成 853，缺口明显。设备会话以桌面为主（72.3%），国家会话美国占 57.7%。</li>
+              <li><b>假日季外部背景（据 2026-11-02 美国袜子市场日报已核实）：</b>Adobe 2026 假日季预测与 NOAA 冬季展望已在日报中核实并作为本季背景引用；本页不转述未经本轮复核的具体预测数字，只把它们作为“假日季需求窗口 + 冬季季节背景”使用，具体数值以日报原文为准。</li>
+              <li><b>CBP 申报规则只是宽限期，不是免税恢复：</b>据 2026-11-02 每日市场报告引 Thompson Hine / CBP，国际邮件申报规则（Entry Type 13）强制执行日延至 2027-01-20，但 $800 小额豁免仍暂停——不得据此改定价或补货假设。</li>
+              <li><b>首页尚无假日主图：</b>2026-11-01 06:46 的首页检查未见黑五或 11.11 主图（hero），本页不声称任何假日主图已上线；是否切换仍待拍板（见节奏区）。</li>
+              <li><b>Top 产品仍是棉质低帮 / 脚踝款：</b>Heel Tab Low-Cut（$2,213.70 / 38 单）与 Terry Cushion Ankle（$2,055.13 / 37 单）居前两位；Dual-Knit 美利奴中筒单双 $15.99，第 08 节审查确认库存充足。</li>
+              <li><b>客户仍靠新客拉动：</b>近 30 天新客 718 人、回头客 140 人（按日合计口径，分开列示，与完成结账 853 为不同序列、不同指标）；今日未完日新客 14 人、回头客 1 人。</li>
+            </ul>
+            <p class="link-note">对本站的含义：动作落在已验证的头部棉袜、多双装价值与再营销蓄水上；折扣深度要收着用——30 天折扣负担已经约 25.2%，近两日收窄到 20% 上下是对的方向。</p>
+          </div>
+          <div class="market-card">
+            <h3>竞品动态 <span class="tag none">本月暂无新增</span></h3>
+            <p style="font-size:12.5px;color:var(--ink2);margin:0 0 10px;line-height:1.6">每天 8 点档查询一次，有新增才追加；信息按月度保留，出月自动踢出，每条注明时间。</p>
+            <ul>
+              <li>本月暂无新增已核实竞品动态（截至 2026-11-03）。今日（11 月 3 日）美国袜子市场日报尚未发布（约 09:47 才出），本次 8 点档没有可用的当日已核实竞品新增，故不追加条目；10 月及更早条目已按月度保留规则踢出。</li>
+            </ul>
+            <p class="link-note">处理原则：没查到的就保留“无新增”状态，不用推测填充；后续引用竞品信息时标明来源与核查日期。</p>
+          </div>
+          <div class="market-card">
+            <h3>推断 <span class="tag guess">推断 · 需验证</span></h3>
+            <ul>
+              <li><b>客单价高位更像组合装结构，而非更深折扣：</b>昨日客单价 $69.28、今日 $69.83，均远高于 30 天 $55.44，而折扣率反而收窄（20.5% / 18.6% vs 30 天约 25.2%）——指向 8/18/30 双装组合结构拉动，而不是靠加深折扣。这是基于本站自身数字的推断，不是已核实的市场事实。</li>
+              <li><b>季节背景（推断）：</b>11 月初是美国假日季前奏，消费者正转向囤货装与送礼购买，与当前较高的客单价相符；NOAA 冬季展望已在 2026-11-02 日报中核实（见已核实区），但把某个区域的冷 / 暖直接对应到本站选品与销量，仍属推断，本页不作已证结论。</li>
+              <li><b>头部款式符合囤货 / 价值装心态：</b>棉质低帮与毛巾衬垫脚踝款领跑 Top 10，与假日季前囤货、买价值装的心态相符，而不是单双送礼购买。</li>
+              <li><b>保暖款是增量、不是主力：</b>Top 10 仍由棉质款主导，美利奴线仅一款进榜第 9，保暖款宜作加购 / 组包增量，不单独押注主推位。</li>
+              <li><b>观察点——晨间 pace 不作信号：</b>今日截至 10:19 的 16 单低于昨日同期 26 单，但 04 时零单与晨间低谷属正常波动，08:00 审查已确认结账链路通畅；按全天判断、不按晨间空档判断。</li>
+              <li><b>杠杆在搜索承接与存量转化：</b>Google 搜索贡献 61.5% 的订单，保住高意图搜索词比买新流量更对路；加购 2,078 对完成 853 的漏斗缺口，是结账再营销的第一目标人群。</li>
+            </ul>
+            <p class="link-note">使用方式：这组推断只定动作方向，不是已证因果；若今日后续时段客单价明显回落，相关判断就要重估。</p>
+          </div>
+          <div class="market-card">
+            <h3>渠道结构提醒 <span class="tag fact">本站数据</span></h3>
+            <ul>
+              <li><b>Google 搜索是订单主力：</b>529 单 / $29,031.33，占 30 天单数 61.5%（订单引荐口径）；直接 / 空白 160 单、weavasocks 自有引荐 125 单居其后，社交渠道量级很小（Instagram 4 单、Facebook 2 单）。</li>
+              <li><b>市场就是美国市场：</b>国家会话美国 39,319 占 57.7% 居首，订单侧美国占绝对主体，选品与话术按美国市场排（见第 04 节）。</li>
+              <li><b>漏斗漏损在加购前后：</b>近 30 天 68,100 个会话、2,078 次加购、完成 853 单（约 1.25%）；加购 → 完成之间的流失人群是黑五再营销的第一目标。</li>
+            </ul>
+            <p class="link-note">优先级：<b>Google 高意图词承接 + 结账再营销第一</b>，邮件做黑五前蓄水增量，付费拉新小步测试、不押注。</p>
+          </div>
+        </div>
+        <div class="cadence">
+          <h3>营销节奏：从现在到圣诞，按节点排</h3>
+          <p class="note">节点日期为 2026 年美国日历 <span class="tag fact">已核实</span>；每一档的动作都对应当期本站数据（折扣率、客单价、产品 Top、渠道结构），不是只列日期。</p>
+          <div class="c-row now">
+            <div class="c-when">现在 – 11/11<span class="cd">11.11（11 月 11 日）· 约 8 天后 · 预热蓄水</span></div>
+            <div class="c-body"><span class="c-t">11.11 预热蓄水：棉质低筒 / 船袜 Top 款 + Dual-Knit 美利奴中筒组合主推</span>
+              <p>现阶段做<b>预热蓄水</b>：主推<b>棉质低筒 / 船袜 Top 款</b>（Top 1 Heel Tab Low-Cut、Top 2 Terry Cushion Ankle）与 <b>Dual-Knit 美利奴中筒</b>（$15.99，第 08 节审查确认库存充足）组合，页面与广告把 <b>bundle 均价与多色混搭</b>讲清；统一 Meta 广告的落地链接，不要多条链接指向不同页面。渠道上 <b>Google 搜索占 30 天单数 61.5%</b>，保住高意图搜索词；再营销先圈加购 / 结账未完成人群——近 30 天<b>加购 2,078 对完成 853</b> 的漏斗缺口就是蓄水池。话术用<b>组合装拉动客单价</b>的故事（昨日客单价 $69.28、折扣率仅约 20.5%），不靠更深折扣。</p></div>
+          </div>
+          <div class="c-row">
+            <div class="c-when">11/12 – 11/25<span class="cd">感恩节（11/26 周四）前 · 再营销蓄水</span></div>
+            <div class="c-body"><span class="c-t">感恩节前再营销蓄水：用高客单价组包买家 + Top 款人群建池</span>
+              <p>感恩节 11 月 26 日前做<b>再营销蓄水</b>：池子分两路建，一是<b>高客单价组包买家与加购 / 结账未完成人群</b>，二是<b>棉质低帮 / 中筒 Top 款</b>的浏览与购买人群，黑五直接调用。昨日 <b>$69.28 客单价</b>证明组包定价成立；折扣深度保持在约 <b>20%</b> 附近，而不是 30 天平均的约 <b>25.2%</b>，除非量明显停滞再加深。<b>Google 先投高意向词</b>，泛词后置；邮件名单提前建，赶在黑五前完成一轮老客 + 近 30 天 718 名新客的预热触达。</p></div>
+          </div>
+          <div class="c-row">
+            <div class="c-when">11/26<span class="cd">感恩节 11/26（周四）· 当日节点</span></div>
+            <div class="c-body"><span class="c-t">感恩节（预热）：美利奴内衬中筒走送礼话术 + 老客预热邮件，晚间切黑五早鸟</span>
+              <p>感恩节前先做预热：<b>美利奴内衬保暖中筒</b>线走<b>送礼</b>话术（该线尚未成 Top 主力，定位为礼赠 / 加购增量，不押主推位），并给<b>老客与近 30 天新客</b>发一轮预热邮件蓄水。感恩节当天白天美国用户以家庭聚会为主、购物时段后移，白天不加投、不改价；晚间起把蓄水期建好的<b>站点访客 + 弃购再营销池</b>切到<b>黑五早鸟</b>话术，主推仍是 <b>Top 1、2 棉袜组包</b>与 <b>Dual-Knit 美利奴中筒</b>组合，折扣守约 <b>20%</b> 口径、不提前破价；午夜直接衔接黑五放量，不留空档。</p></div>
+          </div>
+          <div class="c-row peak">
+            <div class="c-when">11/27<span class="cd">黑五 11/27（周五）· 放量</span></div>
+            <div class="c-body"><span class="c-t">黑五放量：已验证组包档位 × 棉袜 / 中筒 Top 产品，Google 高意向词优先</span>
+              <p>峰值日最强推<b>已验证的 8/18/30 双装档位</b>，主推落在<b>棉质低帮 / 脚踝 Top 产品</b>与 <b>Dual-Knit 美利奴中筒</b>组合上，美利奴内衬保暖中筒作冷季加购款；<b>Google 先投高意向词</b>，泛词后置。漏斗显示加购→完成之间有明显流失，黑五当天重点再营销<b>加购 / 结账弃单人群</b>，并用邮件 / 社交触达近 30 天新增的 <b>718 名新客</b>。折扣深度不突破蓄水期口径（约 20%），除非量停滞。</p></div>
+          </div>
+          <div class="c-row peak">
+            <div class="c-when">11/30<span class="cd">网一 11/30（周一）· 收尾</span></div>
+            <div class="c-body"><span class="c-t">网一收尾：再营销加购 / 结账弃单人群 + “看过没买”的组包访客</span>
+              <p>以<b>再营销</b>承接黑五未转化与弃购人群——锚点就是近 30 天漏斗：<b>加购 2,078、到达结账 1,560、完成 853</b>，加购 / 结账后未完成的人群优先回收；同时圈<b>浏览过组包但未购买</b>的访客，话术用<b>限时收官 / 最后一波</b>紧迫感，主推仍是 Top 10 的组包档位，给出明确的<b>最后一波组包价格</b>窗口；网一结束后价格与话术回到圣诞档期节奏，不无限延长大促。</p></div>
+          </div>
+          <div class="c-row">
+            <div class="c-when">12 月上旬 – 12/25<span class="cd">圣诞 12/25（周五），发货截止在 12 月中旬 · 收尾</span></div>
+            <div class="c-body"><span class="c-t">收尾：按发货截止倒排，截止前主打送礼组包，截止后转在库保证</span>
+              <p>圣诞 12 月 25 日前按<b>发货截止倒排收尾</b>：本站美国配送为多日时效，圣诞发货截止日（ship-by，12 月中旬，<b>确切日期确认后尽早对外公布</b>，不要等临近才发）前主打<b>送礼就绪的组包</b>与<b>保证送达</b>信息；截止一过，话术切换为<b>最后现货收尾</b>（在库现货、售完即止），不再承诺圣诞前送达。不承诺未经核实的送达日期。</p></div>
+          </div>
+          <div class="c-row">
+            <div class="c-when">全程<span class="cd">设备结构提醒</span></div>
+            <div class="c-body"><span class="c-t">移动端保持在视野内，但不围绕它重做</span>
+              <p>移动占会话 <b>25.8%</b>、桌面占 <b>72.3%</b>——保持移动端承接检查，但在移动转化被单独核实之前，不围绕移动端重做页面。</p></div>
+          </div>
+          <div class="c-row">
+            <div class="c-when">待拍板<span class="cd">沿袭未决 · 本轮未定</span></div>
+            <div class="c-body"><span class="c-t">首页主图是否切换到 11.11 主推，仍待决定</span>
+              <p>是否把首页主图换成<b>棉质低帮 18 双装</b>与<b>美利奴 Lite 中筒 8 双装</b>——2026-11-01 06:46 检查时首页未见黑五或 11.11 主图，此后未记录负责人决定，本轮不替其拍板、不声称主图已上线。</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8 site audit -->
+      <section id="site-audit">
+        <div class="sec-head">
+          <span class="no">08</span><h2>站内审查：无重大 Bug</h2>
+          <p>站内审查 · 2026-11-03 08:00–08:45（北京时间）· 以普通美国顾客、无登录状态实测，不下单、不付款、不改店铺设置。</p>
+        </div>
+        <div class="audit-ok" role="note">
+          <div class="badge" aria-hidden="true">✓</div>
+          <div>
+            <h3>结论：无重大 Bug。</h3>
+            <p>本次共查 5 项，全部通过：从首页、主推产品页、集合页到 Bundle 加购、购物车与结账全链路可走通，未发现会阻断下单的重大问题。以下小问题均不算重大 Bug，不影响下单。</p>
+          </div>
+        </div>
+        <div class="audit-grid">
+          <div class="card">
+            <h3>审查范围与结果</h3>
+            <p class="note">均以普通美国顾客、无登录状态实测，不下单、不付款、不改店铺设置。</p>
+            <ol class="audit-list">
+              <li><b>首页 https://weavasocks.com/：</b>正常打开，Hero 横幅与产品图齐全，27 张图全部解码、无空白、无 404（“Spin for a Surprise!”弹窗可关闭，不影响下单）。 <span class="pass">通过</span></li>
+              <li><b>主推产品页 Women's Dual-Knit Cotton-Faced Merino Wool-Lined Thermal Crew Socks：</b>正常打开，单双 $15.99、现货，9 色可选、尺码仅 US Women's 5-9；与 Shopify 后台一致（后台 ACTIVE，6 色 $15.99、3 款 SLIGHTLY THINNER $13.99，9 个规格均有库存，总库存 17947）。 <span class="pass">通过</span></li>
+              <li><b>集合页 Women's Midweight Socks：</b>正常打开，产品图齐全（35 张图全部解码），主推款在列；集合页“From $13.99”为最低规格价，与后台 $13.99 规格一致，不是价格错误。 <span class="pass">通过</span></li>
+              <li><b>Bundle 选择与加购：</b>8/18/30 双档均出现、可选（8 双 $104.88、18 双 $195.66、30 双 $258.90）；从空购物车单次加购 8 双档，购物车正确显示 8 件（非此前误报的 16 件——此前 16 件是共享浏览器既有购物车残留 8 件 + 新加 8 件，复核已证实非翻倍 Bug）。 <span class="pass">通过</span></li>
+              <li><b>购物车与结账：</b>购物车页、结账页均可正常进入到付款步骤（付款区、PayPal/Klarna/Afterpay/Affirm 等均可见，未输入任何支付信息、未下单）。 <span class="pass">通过</span></li>
+            </ol>
+            <p class="foot"><b>转化漏斗对照：</b>今晨至 07:19（北京时间）已有 12 单进账，昨同时间 18 单，属正常晨间波动、无断崖；结账链路本身通畅，未发现站内原因导致的漏斗中断。</p>
+          </div>
+          <div class="card">
+            <h3>小问题 <span class="tag warn">均不算重大 Bug · 不影响下单</span></h3>
+            <ul class="audit-list">
+              <li><b>四舍五入差异：</b>8 双档购物车实收为 $104.96（单双 $13.12），比页面标价 $104.88 高 $0.08，属四舍五入差异。</li>
+              <li><b>运费险显示口径：</b>购物车页运费险显示与小计口径有小不一致（勾选显示但未计入小计）。</li>
+            </ul>
+          </div>
+        </div>
+        <p class="foot" style="font-size:12px;color:var(--ink3);margin-top:10px;line-height:1.6">审查时间：2026-11-03 08:00–08:45（北京时间）。审查频率：每天一次，早上 8:00（北京时间）同步。</p>
+      </section>
+
+      <!-- 9 actions -->
+      <section>
+        <div class="sec-head">
+          <span class="no">09</span><h2>行动建议</h2>
+          <p>5 条，紧扣本期数据，按执行顺序排。</p>
+        </div>
+        <div class="card">
+          <ol class="actions">
+            <li><b>11.11 预热蓄水（约 8 天后）：棉质低筒 / 船袜 Top 款 + Dual-Knit 美利奴中筒（$15.99）组合主推，讲清 bundle 均价与多色混搭。</b>Top 1 Heel Tab Low-Cut 与 Top 2 Terry Cushion Ankle 是已验证主力，Dual-Knit 中筒审查确认库存充足、作组合搭配；落地页把每双均价 + 免邮 + 可混色同屏讲清，统一 Meta 落地链接；话术用组合装拉动客单价，不靠加深折扣（昨日折扣率约 20.5% vs 30 天约 25.2%）。</li>
+            <li><b>保住 Google 高意图搜索词。</b>Google 搜索占 30 天单数 61.5%（529 单 / $29,031.33），是订单主力渠道；高意向词预算与排名优先保住，泛词后置，社交渠道量级很小、不押注。</li>
+            <li><b>结账再营销先行：圈加购 / 结账未完成人群。</b>近 30 天加购 2,078、到达结账 1,560、完成 853，缺口就是蓄水池；11.11 与黑五前优先回收这批人，再扩到 Top 款浏览人群。</li>
+            <li><b>感恩节（11/26）前再营销蓄水，黑五（11/27）放量、网一（11/30）收尾。</b>用高客单价组包买家（昨日客单价 $69.28）与 Top 款人群建池，黑五最强推 8/18/30 双装档位，美利奴内衬保暖中筒做冷季加购；网一用限时收官话术回收黑五未转化人群；折扣守约 20% 口径、不突破蓄水期深度。</li>
+            <li><b>12 月上中旬收尾：圣诞发货截止日尽早公布，截止前主打送礼组包 + 保证送达，截止后转在库保证。</b>圣诞（12/25）前按发货截止倒排，确切截止日确认后尽早对外公布，不承诺未经核实的送达日期；首页主图是否切换到低帮 18 双装 + 美利奴 Lite 8 双装仍待拍板。</li>
+          </ol>
+        </div>
+      </section>
+
+      <footer>
+        <p><b>数据快照：北京时间 2026 年 11 月 4 日 01:19 从 Shopify 实拉（08:19 全量班次）；今日为未完日；站内审查区见第 08 节。</b></p>
+        <p><b>数据来源与口径。</b>本页为该时点的快照，页面本身不实时联网。全部时间为北京时间；店铺货币 USD；今日/昨日按订单创建时间换算到 Asia/Shanghai 划分（主口径）：2026-11-04 为未完日（截至 01:19，2 单、$246.57、客单价 $123.29），当日数字还会变化；昨日 2026-11-03 为完整日（北京口径 22 单、$1,325.91、客单价 $60.27），昨日同期（截至 01:19）为 3 单、$316.56、客单价 $105.52，今日较昨日同期 -1 单、-$69.99、客单价 +16.8%。30 天汇总窗口 2026-10-04 至 11-03（末日未完，滚动窗口，10-03 已出窗）：869 单、毛销售额 $62,102.99、折扣 −$15,637.27（约占毛额 25.2%）、冲销 −$425.98、净销售额 $46,039.74、总销售额 $48,187.83、客单价 $55.46，日均 28.0 单、$1,554.45；运费 $1,653.93 仅作为销售额构成中的一个数字。近 7 天（10-28 至 11-03 未完日）184 单、$10,486.94，前 7 天 206 单、$10,959.21。会话与漏斗：近 30 天会话 68,100、加购 2,078、到达结账 1,560、完成结账 853，完成 / 会话约 1.25%；11-02 会话 861、加购 83、到达结账 74、完成 33、转化 3.83%；11-03 未完日会话 739、加购 29、到达结账 34、完成 15、转化 2.03%。客户口径（按日合计，与完成结账为不同序列）：近 30 天新客 718 人、回头客 140 人，分开列示、不合并总数；11-03 未完日新客 14 人、回头客 1 人。本页只含汇总数字，不含顾客姓名、邮箱、地址、电话和完整单号。本看板不做利润分析。<b>美国市场背景（第 07 节）的分级口径：</b>已核实部分为本站实拉数字、假日季日历背景（11.11 在 11-11、感恩节 11-26、黑五 11-27、网一 11-30、圣诞 12-25 及 12 月中旬发货截止临近，确切截止日待确认），Adobe 2026 假日季预测与 NOAA 冬季展望（据 2026-11-02 美国袜子市场日报核实，本页不转述未复核的具体预测数字），2026-11-01 06:46 首页检查未见黑五或 11.11 主图，以及 CBP Entry Type 13 强制日延至 2027-01-20 但 $800 小额豁免仍暂停一事（据 2026-11-02 每日市场报告引 Thompson Hine / CBP，属宽限期、非免税恢复）；竞品动态按每天 8 点档查询、按月度保留的口径处理，本月暂无新增已核实竞品动态（截至 2026-11-03），不声称任何未经核实的竞品动作；组合装拉动客单价、囤货 / 价值装心态、季节转向与区域冷 / 暖对应选品等判断为结合本站数据的推断、已标注，不作已证因果。<b>站内审查（第 08 节）的口径：</b>站内审查（第 08 节）的口径为 2026 年 11 月 3 日 08:00–08:45（北京时间），结论为无重大 Bug；本节每天早上 8:00 同步一次，每小时数据更新不覆盖本区。</p>
+      </footer>
+    </div>
+
+    <script>
+      "use strict";
+      function cssVar(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+      function fmt$(v){return "$" + v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});}
+      function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+
+      /* 数据：店铺日序列 2026-10-04 – 11-04（11-04 为未完日，截至 01:19） */
+      var salesDays=[ // [日期, 订单, 总销售额]
+        ["2026-10-04",27,1230.08],["2026-10-05",30,1495.56],["2026-10-06",27,1211.87],
+        ["2026-10-07",23,1367.07],["2026-10-08",33,1558.15],["2026-10-09",17,775.91],
+        ["2026-10-10",24,1567.22],["2026-10-11",23,1735.36],["2026-10-12",31,1506.32],
+        ["2026-10-13",19,1051.38],["2026-10-14",28,1491.48],["2026-10-15",29,1564.76],
+        ["2026-10-16",35,2333.65],["2026-10-17",31,1639.07],["2026-10-18",43,2455.64],
+        ["2026-10-19",37,2334.25],["2026-10-20",20,1177.34],["2026-10-21",40,2295.05],
+        ["2026-10-22",26,1214.51],["2026-10-23",25,1382.77],["2026-10-24",29,1564.49],
+        ["2026-10-25",32,1644.35],["2026-10-26",34,1864.04],["2026-10-27",20,994.00],
+        ["2026-10-28",41,2262.60],["2026-10-29",23,1414.21],["2026-10-30",21,1119.61],
+        ["2026-10-31",23,1180.09],["2026-11-01",21,898.37],["2026-11-02",33,2286.15],
+        ["2026-11-03",22,1325.91],
+        ["2026-11-04",2,246.57]
+      ];
+      var hoursNov3={0:2};
+
+      function md(d){var p=d.split("-");return (+p[1])+"/"+(+p[2]);}
+
+      /* ---------- 走势图 ---------- */
+      function drawTrend(n){
+        var svg=document.getElementById("trendChart"); if(!svg) return;
+        var data=salesDays.slice(-n);
+        var W=1120,H=340,pl=58,pr=52,pt=18,pb=34,iw=W-pl-pr,ih=H-pt-pb;
+        var maxT=0,maxO=0,i,d;
+        for(i=0;i<data.length;i++){ if(data[i][2]>maxT)maxT=data[i][2]; if(data[i][1]>maxO)maxO=data[i][1]; }
+        maxT=Math.ceil(maxT/500)*500; maxO=Math.ceil(maxO/10)*10;
+        var accent=cssVar("--accent"),gold=cssVar("--gold"),
+            grid=cssVar("--chart-grid"),txt=cssVar("--chart-text"),ink2=cssVar("--ink2");
+        var s="",bw=iw/data.length;
+        for(var g=0;g<=4;g++){var y=pt+ih-ih*g/4;
+          s+='<line x1="'+pl+'" y1="'+y+'" x2="'+(W-pr)+'" y2="'+y+'" stroke="'+grid+'" stroke-width="1"/>';
+          s+='<text x="'+(pl-8)+'" y="'+(y+4)+'" text-anchor="end" font-size="11.5" fill="'+txt+'" font-family="IBM Plex Mono,monospace">$'+(maxT*g/4).toLocaleString()+'</text>';
+          s+='<text x="'+(W-pr+8)+'" y="'+(y+4)+'" font-size="11.5" fill="'+txt+'" font-family="IBM Plex Mono,monospace">'+(maxO*g/4)+'</text>';}
+        var pts=[];
+        for(i=0;i<data.length;i++){d=data[i];
+          var x=pl+bw*i+bw*0.18,w=bw*0.64,bh=ih*d[2]/maxT,by=pt+ih-bh;
+          s+='<rect x="'+x+'" y="'+by+'" width="'+w+'" height="'+bh+'" rx="2" fill="'+accent+'" opacity="0.82"><title>'+d[0]+' 总销售额 '+fmt$(d[2])+' · '+d[1]+' 单</title></rect>';
+          pts.push((pl+bw*i+bw/2)+","+(pt+ih-ih*d[1]/maxO));
+          if(i%Math.ceil(data.length/8)===0||i===data.length-1)
+            s+='<text x="'+(pl+bw*i+bw/2)+'" y="'+(H-10)+'" text-anchor="middle" font-size="11.5" fill="'+txt+'">'+md(d[0])+'</text>';
+        }
+        s+='<polyline points="'+pts.join(" ")+'" fill="none" stroke="'+gold+'" stroke-width="2.2" stroke-linejoin="round"/>';
+        for(i=0;i<data.length;i++){d=data[i];
+          s+='<circle cx="'+(pl+bw*i+bw/2)+'" cy="'+(pt+ih-ih*d[1]/maxO)+'" r="2.6" fill="'+gold+'"><title>'+d[0]+' 订单 '+d[1]+' 单</title></circle>';}
+        s+='<text x="'+pl+'" y="'+(pt-4)+'" font-size="11.5" fill="'+ink2+'">左轴 $ 总销售额</text>';
+        s+='<text x="'+(W-pr)+'" y="'+(pt-4)+'" text-anchor="end" font-size="11.5" fill="'+ink2+'">右轴 订单数（金线）</text>';
+        svg.innerHTML=s;
+      }
+      /* ---------- 折扣率对比图 ---------- */
+      function drawDisc(){
+        var svg=document.getElementById("discChart"); if(!svg) return;
+        var rows=[["近 30 天",25.2],["11/02（完整日）",20.5],["11/03（未完日）",18.6]];
+        var W=1120,H=250,pl=52,pr=20,pt=20,pb=32,iw=W-pl-pr,ih=H-pt-pb,maxV=30;
+        var accent=cssVar("--accent"),gold=cssVar("--gold"),grid=cssVar("--chart-grid"),txt=cssVar("--chart-text"),ink=cssVar("--ink");
+        var s="";
+        [0,10,20,30].forEach(function(v){var y=pt+ih-ih*v/maxV;
+          s+='<line x1="'+pl+'" y1="'+y+'" x2="'+(W-pr)+'" y2="'+y+'" stroke="'+grid+'"/>';
+          s+='<text x="'+(pl-8)+'" y="'+(y+4)+'" text-anchor="end" font-size="11.5" fill="'+txt+'" font-family="IBM Plex Mono,monospace">'+v+'%</text>';});
+        var bw=iw/rows.length,i;
+        for(i=0;i<rows.length;i++){
+          var bh=ih*rows[i][1]/maxV,x=pl+bw*i+bw*0.28,w=bw*0.44;
+          s+='<rect x="'+x+'" y="'+(pt+ih-bh)+'" width="'+w+'" height="'+bh+'" rx="3" fill="'+(i===0?gold:accent)+'" opacity="0.85"><title>'+rows[i][0]+' 折扣率 '+rows[i][1]+'%</title></rect>';
+          s+='<text x="'+(pl+bw*i+bw/2)+'" y="'+(pt+ih-bh-8)+'" text-anchor="middle" font-size="13" font-weight="600" fill="'+ink+'" font-family="IBM Plex Mono,monospace">'+rows[i][1]+'%</text>';
+          s+='<text x="'+(pl+bw*i+bw/2)+'" y="'+(H-8)+'" text-anchor="middle" font-size="11.5" fill="'+txt+'">'+rows[i][0]+'</text>';
+        }
+        svg.innerHTML=s;
+      }
+      /* ---------- 小时图 ---------- */
+      function drawHours(){
+        var svg=document.getElementById("hourChart"); if(!svg) return;
+        var W=520,H=190,pl=30,pr=8,pt=16,pb=28,iw=W-pl-pr,ih=H-pt-pb,maxV=4;
+        var accent=cssVar("--accent"),grid=cssVar("--chart-grid"),txt=cssVar("--chart-text");
+        var s="",bw=iw/24,h;
+        for(var g=0;g<=4;g++){var y=pt+ih-ih*g/maxV;
+          s+='<line x1="'+pl+'" y1="'+y+'" x2="'+(W-pr)+'" y2="'+y+'" stroke="'+grid+'"/>';
+          s+='<text x="'+(pl-6)+'" y="'+(y+4)+'" text-anchor="end" font-size="10.5" fill="'+txt+'" font-family="IBM Plex Mono,monospace">'+g+'</text>';}
+        for(h=0;h<24;h++){var v=hoursNov3[h]||0,x=pl+bw*h+1.5,bh=ih*v/maxV;
+          if(v>0) s+='<rect x="'+x+'" y="'+(pt+ih-bh)+'" width="'+(bw-3)+'" height="'+bh+'" rx="2" fill="'+accent+'" opacity="0.85"><title>'+h+':00–'+h+':59 · '+v+' 单</title></rect>';
+          if(h%3===0) s+='<text x="'+(pl+bw*h+bw/2)+'" y="'+(H-8)+'" text-anchor="middle" font-size="10.5" fill="'+txt+'">'+h+'时</text>';}
+        svg.innerHTML=s;
+      }
+      /* ---------- 漏斗 ---------- */
+      function drawFunnel(){
+        var el=document.getElementById("funnel"); if(!el) return;
+        var stages=[
+          {name:"会话",t:68100},
+          {name:"加购",t:2078},
+          {name:"到达结账",t:1560},
+          {name:"完成结账",t:853}
+        ];
+        var max=68100,html="";
+        var sT=stages[0].t;
+        function fmtPct(v,base){var p=v/base*100;return (p>=10?p.toFixed(1):p.toFixed(2))+'%';}
+        stages.forEach(function(st){
+          html+='<div class="funnel-row"><div class="fl">'+st.name+'</div>'
+            +'<div><div class="funnel-track"><div class="funnel-fill" style="width:'+Math.max(st.t/max*100,1.2)+'%"></div></div></div>'
+            +'<div class="fv mono">近 30 天 <b>'+st.t.toLocaleString()+'</b> · 占会话 '+fmtPct(st.t,sT)+'</div></div>';
+        });
+        el.innerHTML=html;
+      }
+      /* ---------- 横条 ---------- */
+      function hbars(elId,rows,sqrtScale){
+        var el=document.getElementById(elId); if(!el) return;
+        var max=0,i; for(i=0;i<rows.length;i++) if(rows[i][1]>max)max=rows[i][1];
+        var html="";
+        rows.forEach(function(r){
+          var w=sqrtScale?Math.sqrt(r[1]/max)*100:r[1]/max*100;
+          html+='<div class="hbar"><div class="hl2">'+esc(r[0])+'</div><div class="track"><div class="fill" style="width:'+Math.max(w,1)+'%"></div></div><div class="hv mono">'+r[2]+'</div></div>';
+        });
+        el.innerHTML=html;
+      }
+      /* ---------- 产品表 ---------- */
+      function drawProducts(){
+        var rows=[
+          ["Women's 98% Cotton Heel Tab Low-Cut Socks",2213.70,1578.30,38,"第 1 名 · 棉袜主力"],
+          ["Women's 92% Cotton Terry Cushion Ankle Socks",2055.13,1508.78,37,"棉袜主力"],
+          ["Men's 92% Premium Cotton Terry Cushion Sport Socks",1738.55,963.29,16,"—"],
+          ["Men's 98% Cotton Everyday Low-Cut Ankle Socks",1284.65,923.90,28,"—"],
+          ["Men's 92% Cotton Terry Cushion Low Cut Socks",1248.75,457.94,9,"仅 9 单，净额偏低"],
+          ["Men's 98% Cotton High-Density Ribbed Crew Socks",1218.78,815.11,22,"—"],
+          ["Women's 92% Cotton Terry Athletic Crew Socks",1199.00,871.30,18,"—"],
+          ["Men's 98% Cotton Classic Ribbed Crew Socks",1128.87,933.48,21,"—"],
+          ["Men's 98% Merino Wool Lightweight Dress Crew Socks",999.50,752.65,11,"美利奴线唯一进榜"],
+          ["Women's 98% Cotton Classic Roll Top Slouch Crew Socks",969.03,704.89,20,"—"]
+        ];
+        var tb=document.querySelector("#prodTable tbody"); if(!tb) return;
+        var max=rows[0][1],html="";
+        rows.forEach(function(r){
+          html+='<tr><td>'+esc(r[0])+'</td>'
+            +'<td class="n barcell"><span class="bar" style="width:'+Math.round(r[1]/max*110)+'px"></span><span class="val mono">'+fmt$(r[1])+'</span></td>'
+            +'<td class="n mono">'+fmt$(r[2])+'</td>'
+            +'<td class="n mono">'+r[3]+'</td>'
+            +'<td style="font-size:12.5px;color:var(--ink2)">'+esc(r[4])+'</td></tr>';
+        });
+        tb.innerHTML=html;
+      }
+      function drawAll(){
+        drawTrend(currentRange); drawDisc(); drawHours(); drawFunnel(); drawProducts();
+        hbars("deviceBars",[
+          ["桌面",49262,"49,262 · 72.3%"],
+          ["移动",17587,"17,587 · 25.8%"],
+          ["未知",831,"831 · 1.2%"],
+          ["平板",415,"415 · 0.6%"],
+          ["其他",5,"5 · 0.0%"]
+        ],false);
+        hbars("countryBars",[
+          ["美国",39319,"39,319 · 57.7%"],
+          ["巴西",7314,"7,314"],
+          ["哥伦比亚",2938,"2,938"],
+          ["厄瓜多尔",2024,"2,024"],
+          ["巴基斯坦",1367,"1,367"],
+          ["孟加拉国",1167,"1,167"]
+        ],true);
+        hbars("refBars",[
+          ["Google 搜索",529,"529 单 · $29,031.33"],
+          ["直接 / 空白",160,"160 单 · $7,633.88"],
+          ["weavasocks",125,"125 单 · $8,341.82"],
+          ["DuckDuckGo 搜索",10,"10 单 · $696.51"],
+          ["Bing 搜索",6,"6 单 · $371.73"],
+          ["nymag",5,"5 单 · $224.33"],
+          ["Instagram",4,"4 单 · $201.78"],
+          ["android",4,"4 单 · $315.92"],
+          ["payoneer",2,"2 单 · $103.56"],
+          ["Facebook",2,"2 单 · $86.90"],
+          ["YouTube",2,"2 单 · $111.08"],
+          ["googlesyndication",2,"2 单 · $91.59"]
+        ],true);
+        hbars("custBars",[
+          ["新客",718,"718 人"],
+          ["回头客",140,"140 人"]
+        ],false);
+      }
+      var currentRange=32;
+      var b14=document.getElementById("seg14"),b30=document.getElementById("seg30");
+      function setRange(n){currentRange=n;
+        b14.setAttribute("aria-pressed",n===14?"true":"false");
+        b30.setAttribute("aria-pressed",n===32?"true":"false");
+        drawTrend(n);}
+      b14.addEventListener("click",function(){setRange(14);});
+      b30.addEventListener("click",function(){setRange(32);});
+      drawAll();
+      if(window.matchMedia){var mq=window.matchMedia("(prefers-color-scheme: dark)");
+        if(mq.addEventListener) mq.addEventListener("change",drawAll);}
+    </script>
+  </body>
+</html>
