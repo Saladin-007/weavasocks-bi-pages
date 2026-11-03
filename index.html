@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>WeavaSocks BI看板</title>
+<style>
+  :root{
+    --bg:#f4f5f3; --surface:#ffffff; --surface2:#eceee9; --line:#dde1da;
+    --text:#1a2220; --muted:#5c6b66; --faint:#8a9791;
+    --teal:#0e6b5e; --teal-bg:#e2f1ec; --teal-dark:#0a4f45;
+    --red:#b42318; --red-bg:#fdecea; --red-line:#f3c6c1;
+    --amber:#8a5a00; --amber-bg:#fff3d6; --amber-line:#ecd9a0;
+    --blue:#17548f; --blue-bg:#e6f0fa;
+    --green:#1a7a3a; --green-bg:#e6f4ea;
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#121614; --surface:#1b211f; --surface2:#232a27; --line:#2f3a36;
+      --text:#e8edea; --muted:#a7b5af; --faint:#7d8d87;
+      --teal:#4ec9b2; --teal-bg:#173a33; --teal-dark:#7adbc8;
+      --red:#ff8a80; --red-bg:#3d1f1c; --red-line:#5c2f2a;
+      --amber:#f0c05a; --amber-bg:#3a2f10; --amber-line:#5c4c1a;
+      --blue:#7ab3ec; --blue-bg:#1a304a;
+      --green:#6fd48d; --green-bg:#173324;
+    }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+  section{scroll-margin-top:16px}
+  section:focus{outline:none}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans SC",Segoe UI,Roboto,sans-serif;line-height:1.55;font-size:15px}
+  a{color:var(--teal)}
+  .wrap{max-width:1080px;margin:0 auto;padding:20px 16px 56px}
+  /* header */
+  .topbar{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;justify-content:space-between;margin-bottom:6px}
+  h1{font-size:26px;line-height:1.25;margin:0;font-weight:800;letter-spacing:-.01em}
+  .subtitle{color:var(--muted);font-size:14px;margin-top:4px}
+  .badge-live{display:inline-flex;align-items:center;gap:7px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:13px;font-weight:600;white-space:nowrap}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex:none}
+  .notice{background:var(--amber-bg);border:1px solid var(--amber-line);border-radius:12px;padding:12px 14px;font-size:13.5px;margin:14px 0 18px}
+  .notice strong{color:var(--amber)}
+  .notice p{margin:0}
+  /* KPI */
+  .kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:8px}
+  @media(max-width:640px){.kpi-grid{grid-template-columns:repeat(2,1fr)} h1{font-size:23px}}
+  .kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 12px}
+  a.kpi{display:block;text-decoration:none;color:inherit;cursor:pointer;position:relative;transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease}
+  a.kpi:hover{border-color:var(--teal);box-shadow:0 2px 10px rgba(0,0,0,.08)}
+  a.kpi:active{transform:translateY(1px)}
+  a.kpi:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+  @media (prefers-reduced-motion: reduce){a.kpi{transition:none} a.kpi:active{transform:none}}
+  .kpi .num{font-size:30px;font-weight:800;line-height:1.05;letter-spacing:-.02em}
+  .kpi .num small{font-size:15px;font-weight:700;color:var(--muted)}
+  .kpi .label{font-size:13.5px;font-weight:700;margin-top:2px}
+  .kpi .desc{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.45}
+  .kpi .go{display:inline-flex;align-items:center;gap:3px;font-size:12px;font-weight:700;color:var(--teal);margin-top:7px}
+  .kpi.red .num{color:var(--red)} .kpi.amber .num{color:var(--amber)} .kpi.teal .num{color:var(--teal)}
+  section:target .sec-head h2{color:var(--teal)}
+  section:target .card, section:target .funnel .cell{border-color:var(--teal)}
+  /* sections */
+  section{margin-top:26px}
+  .sec-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .sec-head h2{font-size:18px;margin:0;font-weight:800}
+  .sec-head .count{font-size:13px;font-weight:700;background:var(--surface2);border:1px solid var(--line);padding:1px 9px;border-radius:999px}
+  .sec-head .hint{font-size:13px;color:var(--muted)}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .row{display:flex;flex-wrap:wrap;gap:10px 16px;padding:14px 16px;border-bottom:1px solid var(--line);align-items:flex-start}
+  .row:last-child{border-bottom:none}
+  .row-main{flex:1 1 320px;min-width:0}
+  .order-line{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+  .order-no{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums}
+  .amount{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums}
+  .tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .tag-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-line)}
+  .tag-amber{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-line)}
+  .tag-teal{background:var(--teal-bg);color:var(--teal-dark)}
+  .tag-blue{background:var(--blue-bg);color:var(--blue)}
+  .tag-green{background:var(--green-bg);color:var(--green)}
+  .tag-gray{background:var(--surface2);color:var(--muted)}
+  .reason{font-size:14px;margin-top:5px}
+  .meta{font-size:13px;color:var(--muted);margin-top:4px}
+  .action{flex:0 0 240px;max-width:100%;background:var(--surface2);border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.5}
+  .action b{display:block;font-size:12px;letter-spacing:.04em;color:var(--muted);margin-bottom:3px}
+  @media(max-width:640px){.action{flex:1 1 100%}}
+  .alert-row{background:var(--red-bg)}
+  /* product feedback */
+  .fb-group-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:18px 0 8px}
+  .fb-group-head:first-of-type{margin-top:14px}
+  .fb-group-head h3{font-size:15px;margin:0;font-weight:800}
+  .fb-group-head .gcount{font-size:12px;font-weight:700;background:var(--surface2);border:1px solid var(--line);padding:1px 8px;border-radius:999px;color:var(--muted)}
+  .prod-name{font-size:14.5px;font-weight:700;line-height:1.45;margin-top:2px}
+  .fb-summary{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}
+  @media(max-width:640px){.fb-summary{grid-template-columns:repeat(2,1fr)}}
+  .fb-summary .cell{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .fb-summary .cell .n{font-size:20px;font-weight:800;line-height:1.1}
+  .fb-summary .cell .t{font-size:12.5px;color:var(--muted);margin-top:2px}
+  /* judge.me */
+  .funnel{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  @media(max-width:640px){.funnel{grid-template-columns:repeat(2,1fr)}}
+  .funnel .cell{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px;text-align:center}
+  .funnel .cell .n{font-size:28px;font-weight:800}
+  .funnel .cell .t{font-size:13px;color:var(--muted);margin-top:2px}
+  .template-box{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-top:10px}
+  .template-box h3{margin:0 0 8px;font-size:15px}
+  .template-box ul{margin:6px 0;padding-left:20px;font-size:14px}
+  .template-box p{font-size:14px;margin:6px 0}
+  .code-chip{display:inline-block;background:var(--teal-bg);color:var(--teal-dark);font-weight:800;padding:2px 9px;border-radius:8px;font-size:14px;letter-spacing:.02em}
+  .rules{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+  @media(max-width:640px){.rules{grid-template-columns:1fr}}
+  .rule{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:13px 14px;font-size:13.5px}
+  .rule b{display:block;margin-bottom:3px;font-size:14px}
+  .track-lines{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+  .track-line{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline;font-size:13.5px}
+  .track-label{font-weight:700;white-space:nowrap}
+  .track-copy{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:13.5px;line-height:1.45;background:var(--surface2);border:1px solid var(--line);border-radius:6px;padding:2px 8px;cursor:pointer;color:inherit;word-break:break-all;text-align:left;max-width:100%}
+  .track-copy:hover{border-color:var(--teal)}
+  .track-copy:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .track-copy-hint{font-size:11.5px;color:var(--faint);white-space:nowrap}
+  .copy-feedback{font-size:12px;font-weight:700;color:var(--green);opacity:0;transition:opacity .15s ease;white-space:nowrap}
+  .copy-feedback.show{opacity:1}
+  @media (prefers-reduced-motion: reduce){.copy-feedback{transition:none}}
+  .track-pending{color:var(--muted);font-size:13px;line-height:1.55}
+  footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:12.5px;color:var(--muted)}
+  .legend{font-size:12.5px;color:var(--muted);margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div>
+      <h1>WeavaSocks 运营 BI 看板</h1>
+      <div class="subtitle">待发货 · 待决定 · 最终决定 · 17TRACK · 派送超时 · 4PX 跟进 · 产品反馈 · 好评邀请 — 每日待办总览</div>
+    </div>
+    <div class="badge-live"><span class="dot"></span> 数据截至 2026-11-03 08:00</div>
+  </div>
+
+  <div class="notice" role="note">
+    <p><strong>本页说明：</strong>数据截至 <strong>2026 年 11 月 3 日 08:00</strong>（北京时间），来源为 Shopify 只读核查与客服邮箱实查，<strong>未做任何改单</strong>。本页<strong>只读</strong>，只用于查看和决策——取消、退款、改地址都需另行安排确认后，再到 Shopify / 邮箱里操作。本页只显示订单号、金额、日期、状态和原因，不显示顾客姓名、邮箱、家庭地址、电话；完整物流单号只在下方 4PX 物流跟进区显示，其他区不写完整物流单号。待用户操作的订单，在用户亲口说操作完之前，每日继续提醒、继续列着；#29468 的换地址已于 2026-11-02 晚完成，已从待用户操作提醒中移除。</p>
+  </div>
+
+  <!-- 概览 -->
+  <section aria-labelledby="h-overview">
+    <div class="sec-head"><h2 id="h-overview">今日待处理概览</h2><span class="hint">点击任意一项，自动下滑到下方对应区</span></div>
+    <div class="kpi-grid">
+      <a class="kpi" href="#sec-ship" aria-label="已付款未发货 24 单，点击定位到待发货区"><div class="num">24 <small>单</small></div><div class="label">已付款未发货</div><div class="desc">#29511–#29532 共 22 单（11-02 至 11-03 下单）+ #29468 + #29411</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-ship" aria-label="下单超 3 天未发货 1 单，点击定位到待发货区"><div class="num">1 <small>单</small></div><div class="label">下单超 3 天未发货</div><div class="desc">#29411 · 10-29 下单 · $31.96 · 已 5 天未发货</div><span class="go">查看 ↓</span></a>
+      <a class="kpi red" href="#sec-ship" aria-label="过期支付异常 1 单，点击定位到待发货区过期支付部分"><div class="num">1 <small>单</small></div><div class="label">过期支付异常</div><div class="desc">#28820 · EXPIRED / 未发货 · $92.57 · 单独列，不当正常待发货</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-preconfirm" aria-label="发货前需确认 0 单，点击定位到发货前需确认订单汇总区"><div class="num">0 <small>单</small></div><div class="label">发货前需确认</div><div class="desc">颜色待确认 + 客诉问题待确认 · 暂无待确认订单</div><span class="go">查看 ↓</span></a>
+      <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 0 单，点击定位到已确认可放行发货订单区"><div class="num">0 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">确认问题已解决、可放行包货发货 · 暂无待放行订单</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-pending" aria-label="今日新客诉邮件 4 个新案件加 3 封存量跟进，点击定位到待决定区"><div class="num">4 <small>新案 + 3 封跟进</small></div><div class="label">今日新客诉邮件</div><div class="desc">今日新到客诉邮件：新案件 4 个，另有存量案件跟进邮件 3 封</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-pending" aria-label="待决定 9 单未决定，点击定位到待决定区"><div class="num">9 <small>单</small></div><div class="label">待决定 · 未决定</div><div class="desc">未发货 1 单（#29464）+ 已发货 8 单，均未决定，见待决定区</div><span class="go">查看 ↓</span></a>
+      <a class="kpi red" href="#sec-pending" aria-label="待用户操作提醒 1 单，点击定位到待决定区提醒部分"><div class="num">1 <small>单</small></div><div class="label">待用户操作提醒</div><div class="desc">#29464 · $65.94 · Shopify 仍显示 PAID、无退款记录，待核对处理</div><span class="go">查看 ↓</span></a>
+      <a class="kpi teal" href="#sec-final" aria-label="最终决定已退款 1 单，点击定位到最终决定区"><div class="num">1 <small>单</small></div><div class="label">最终决定 · 已退款</div><div class="desc">#28576 · $50.40 · REFUNDED / FULFILLED，退款决定已定</div><span class="go">查看 ↓</span></a>
+      <a class="kpi" href="#sec-track" aria-label="今日 17TRACK 逐单警报 5 条，点击定位到 17TRACK 区"><div class="num">5 <small>条</small></div><div class="label">今日 17TRACK 逐单警报</div><div class="desc">新增 2 单（#27868、#29206）+ 重复 3 单，只计逐单警报</div><span class="go">查看 ↓</span></a>
+      <a class="kpi red" href="#sec-timeout" aria-label="派送超时 7 单，点击定位到派送超时区"><div class="num">7 <small>单</small></div><div class="label">派送时间超过一般时效</div><div class="desc">已发货超 16 天未送达，见下方专区明细</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-4px" aria-label="需向 4PX 跟进 9 单，点击定位到 4PX 区"><div class="num">9 <small>单</small></div><div class="label">需向 4PX 物流跟进</div><div class="desc">投递失败 / 地址 / 退回 / 延迟 / 无动静，逐单待问</div><span class="go">查看 ↓</span></a>
+      <a class="kpi teal" href="#sec-judge" aria-label="今日新增五星用户 1 人已发邀请 1 封，点击定位到好评邀请区"><div class="num">1 <small>人 · 1 封</small></div><div class="label">今日五星 → Trustpilot 邀请</div><div class="desc">新增五星用户 1 人（订单 #28911）· 已发 1 封 · 待审批 0 封</div><span class="go">查看 ↓</span></a>
+      <a class="kpi" href="#sec-feedback" aria-label="近30天产品反馈盘点 11 单，点击定位到产品反馈盘点区"><div class="num">11 <small>单</small></div><div class="label">近30天产品反馈盘点</div><div class="desc">基于已备案客诉 · 薄 2 · 尺码 2 · 破洞 1 · 发错 3 · 其他 3</div><span class="go">查看 ↓</span></a>
+    </div>
+    <p class="legend">口径：待决定区只放尚未走完核实与决定流程的事项，明确标为“未决定”；只有走完流程、决定已定的结果才进最终决定区。17TRACK 报错本身只是警报，不是最终决定。</p>
+  </section>
+
+  <!-- 待发货 -->
+  <section id="sec-ship" aria-labelledby="h-ship">
+    <div class="sec-head"><h2 id="h-ship">待发货 · 已付款未发货</h2><span class="count">24 单</span><span class="hint">截至 2026-11-03 08:00 · Shopify 实查 · 过期支付异常另列，不计入 24 单</span></div>
+    <div class="card">
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29511 – #29532</span><span class="tag tag-teal">已付款 · 未发货</span><span class="tag tag-gray">2026-11-02 至 2026-11-03 下单 · 共 22 单</span></div>
+          <div class="reason"><strong>情况：</strong>11 月 2 日至 11 月 3 日下单的 22 单，订单号 #29511 至 #29532。</div>
+          <div class="meta">状态：均为 PAID / UNFULFILLED，属正常待发货队列。</div>
+        </div>
+        <div class="action"><b>下一步</b>按正常发货流程处理；本看板不直接改单。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29468</span><span class="amount">$41.94</span><span class="tag tag-teal">地址已改完 · 待发货</span><span class="tag tag-gray">2026-10-31 下单</span></div>
+          <div class="reason"><strong>情况：</strong>已付款未发货。本单的换地址事项已于 2026-11-02 晚完成，已从待用户操作提醒中移除；订单本身仍未发货，只待发货。</div>
+          <div class="meta">状态：PAID / UNFULFILLED，仅待发货，不再有待改单事项。</div>
+        </div>
+        <div class="action"><b>下一步</b>按正常发货流程处理。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29411</span><span class="amount">$31.96</span><span class="tag tag-amber">超 3 天未发货 · 单独列</span><span class="tag tag-gray">2026-10-29 下单</span></div>
+          <div class="reason"><strong>情况：</strong>已付款未发货，已 5 天未发货，是 24 单中唯一一单下单超 3 天仍未发货。</div>
+          <div class="meta">状态：PAID / UNFULFILLED，待跟进。</div>
+        </div>
+        <div class="action"><b>下一步 · 待跟进</b>单独跟进本单发货安排，不要与 11-02 至 11-03 的正常待发单混同处理。</div>
+      </div>
+      <div class="row alert-row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28820</span><span class="amount">$92.57</span><span class="tag tag-red">过期支付异常 · 单独列</span><span class="tag tag-gray">2026-10-09 下单</span></div>
+          <div class="reason"><strong>情况：</strong>财务状态为 EXPIRED（已过期）、未发货。这不是一单正常的待发货订单，不计入上方 24 单的正常待发口径。</div>
+          <div class="meta">不要当作普通待发货去催仓库发货。</div>
+        </div>
+        <div class="action"><b>下一步</b>单独核查过期支付 / 支付失效的资金状态，再决定后续处理。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 发货前需确认订单汇总 -->
+  <section id="sec-preconfirm" aria-labelledby="h-preconfirm">
+    <div class="sec-head"><h2 id="h-preconfirm">发货前需确认订单汇总</h2><span class="count">0 单 · 暂无待确认</span><span class="hint">发货前须确认、暂不能包货发货的订单才列入本区 · 问题解决后移入下方已确认可放行发货区</span></div>
+    <div class="notice" role="note" style="margin-top:0">
+      <p><strong>判定与流转规则：</strong>本区汇总所有在发货前需要做确认、暂不能包货发货的订单，来源分两类：<strong>A. 颜色待确认</strong> — 同一订单中同一颜色袜子数量达到 8 双及以上（例如 8 双白、8 双黑），须用历史 Quick check 模板发邮件向顾客确认是全要同色还是混色；<strong>B. 客诉问题待确认</strong> — 发货前因客诉、地址、尺码、颜色搭配等需要顾客确认的订单。本区只列<strong>未发货、尚未确认</strong>的订单，逐单列明订单号、款式、颜色、尺码、数量、待确认原因、确认邮件是否已发、顾客是否已回复；确认问题解决后，将该单从本区移出、列入下方“已确认可放行发货订单”区。本区不显示顾客姓名、邮箱、家庭地址、电话和完整物流单号。原先单独的“颜色待确认”区已并入本区作为 A 类，不再重复单列。</p>
+    </div>
+    <div class="fb-group-head"><h3>A. 颜色待确认</h3><span class="gcount">0 单</span></div>
+    <div class="card">
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="tag tag-green">暂无待确认订单</span><span class="tag tag-gray">截至 2026-11-03 17:53 实查</span></div>
+          <div class="reason"><strong>情况：</strong>近期订单 #29511 至 #29535 均已 FULFILLED，暂无未发货的同色 8 双及以上待确认订单。</div>
+          <div class="meta">今日 17:43 已有一封针对 #29523 的 Quick check 确认邮件发出；该单已发货，不列入本区待确认，也不列入下方可放行区，仅在此说明。后续如出现符合规则的未发货订单，将按订单号、款式、颜色、尺码、数量、待确认原因、确认邮件是否已发、顾客是否已回复逐单列入本类。</div>
+        </div>
+        <div class="action"><b>下一步</b>新订单出现同色 8 双及以上且未发货时，先发 Quick check 确认邮件，再列入本类跟进回复状态。</div>
+      </div>
+    </div>
+    <div class="fb-group-head"><h3>B. 客诉问题待确认</h3><span class="gcount">0 单</span></div>
+    <div class="card">
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="tag tag-green">暂无待确认订单</span><span class="tag tag-gray">截至 2026-11-03 17:53 实查</span></div>
+          <div class="reason"><strong>情况：</strong>截至 2026-11-03 17:53 实查，暂无未发货、因客诉问题（客诉、地址、尺码、颜色搭配等）需要在发货前向顾客确认的订单。</div>
+          <div class="meta">后续如出现此类未发货订单，将按订单号、款式、颜色、尺码、数量、待确认原因、确认邮件是否已发、顾客是否已回复逐单列入本类。</div>
+        </div>
+        <div class="action"><b>下一步</b>出现发货前客诉待确认订单时，先发确认邮件，再列入本类跟进回复状态；问题解决后移入下方可放行区。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 已确认可放行发货订单 -->
+  <section id="sec-releasable" aria-labelledby="h-releasable">
+    <div class="sec-head"><h2 id="h-releasable">已确认可放行发货订单</h2><span class="count">0 单 · 暂无待放行</span><span class="hint">确认问题已解决、可放行包货发货的订单才列入本区</span></div>
+    <div class="notice" role="note" style="margin-top:0">
+      <p><strong>判定与流转规则：</strong>本区汇总上方“发货前需确认订单汇总”区中确认问题已解决、可放行包货发货的订单，逐单列明订单号、款式、颜色、尺码、数量、确认解决方式 / 日期。<strong>正常发货后（Shopify 状态变为 FULFILLED）即从本区拿掉，不再保留。</strong>本区不显示顾客姓名、邮箱、家庭地址、电话和完整物流单号。</p>
+    </div>
+    <div class="card">
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="tag tag-green">暂无待放行订单</span><span class="tag tag-gray">截至 2026-11-03 17:53 实查</span></div>
+          <div class="reason"><strong>情况：</strong>截至 2026-11-03 17:53 实查，暂无已确认待放行订单；近期订单 #29511 至 #29535 均已 FULFILLED。</div>
+          <div class="meta">#29523 的 Quick check 已于今日 17:43 发出，但该单已发货，不列入本区。后续订单确认问题解决后，先移入本区，正常发货（FULFILLED）后即从本区移除。</div>
+        </div>
+        <div class="action"><b>下一步</b>有订单从上方待确认区确认解决后移入本区放行发货；发货完成即移除。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 待决定 -->
+  <section id="sec-pending" aria-labelledby="h-pending">
+    <div class="sec-head"><h2 id="h-pending">待决定 — 未决定</h2><span class="count">9 单 · 未决定</span><span class="hint">以下均为未决定，不能当作已决定取消 / 退款 / 换地址 / 补发</span></div>
+    <div class="notice" role="note" style="margin-top:0">
+      <p><strong>本区口径：</strong>本区内容是尚未走完核实和决定流程的请求，只能标为<strong>未决定 / 待决定</strong>。已发货的退款 / 退货 / 换货 / 质量类，必须先沟通、定下决定后，才能移入最终决定区；退货类按退货流程，须等退回包裹送达仓库确认后才决定退款。待用户操作的订单，在用户亲口说操作完之前，每日继续提醒。</p>
+    </div>
+
+    <div class="fb-group-head"><h3>未发货（1 单）</h3><span class="gcount">未决定</span></div>
+    <div class="card">
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29464</span><span class="amount">$65.94</span><span class="tag tag-red">未决定 · 待用户核对处理</span><span class="tag tag-gray">2026-10-31 下单</span><span class="tag tag-gray">PAID / FULFILLMENT_NOT_REQUIRED</span></div>
+          <div class="reason"><strong>情况：</strong>顾客要求取消 / 退款，已付款、发货已取消标记。Shopify 仍显示 PAID，未见 REFUNDED。</div>
+          <div class="meta">状态：未决定，待用户核对是否真正退款到账；核对前不进已退款区。同时列入下方待用户操作提醒。</div>
+        </div>
+        <div class="action"><b>下一步 · 待用户操作</b>请用户核对 #29464 是否已退款并处理；在用户亲口说退款完成前，不从提醒中移除。</div>
+      </div>
+    </div>
+
+    <div class="fb-group-head"><h3>已发货 — 退款 / 退货 / 换货 / 质量（8 单）</h3><span class="gcount">未决定 · 须先沟通再决定</span></div>
+    <div class="card">
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28716</span><span class="amount">$70.75</span><span class="tag tag-amber">未决定 · 质量 / 退款</span><span class="tag tag-blue">重复顾客</span><span class="tag tag-gray">PAID / FULFILLED</span></div>
+          <div class="reason"><strong>情况：</strong>顾客反馈一双袜子洗后缩水、现在太紧，要求退款。</div>
+          <div class="meta">状态：未决定，须先沟通再定。</div>
+        </div>
+        <div class="action"><b>下一步 · 待决定</b>先与顾客沟通核实情况，再定处理方案。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29047</span><span class="amount">$59.04</span><span class="tag tag-amber">未决定 · 质量</span><span class="tag tag-teal">今日新增</span><span class="tag tag-gray">PAID / FULFILLED</span></div>
+          <div class="reason"><strong>情况：</strong>质量投诉：袜子比预期薄，穿 2 次后脚趾处破损；顾客询问退货政策。</div>
+          <div class="meta">状态：未决定。</div>
+        </div>
+        <div class="action"><b>下一步 · 待决定</b>先沟通核实破损情况与退货政策口径，再定方案。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28679</span><span class="amount">$35.54</span><span class="tag tag-amber">未决定 · 退货</span><span class="tag tag-blue">重复顾客</span><span class="tag tag-gray">PAID / FULFILLED</span></div>
+          <div class="reason"><strong>情况：</strong>退货请求：尺码太大、未穿着、婴儿尺码。此前已向顾客发出专属半价换小码、问可不可以的邮件，仍在等顾客回复。</div>
+          <div class="meta">状态：未决定。顾客回复是否接受前不作决定；如走退货流程，退款须等退回包裹送达仓库确认后才决定。</div>
+        </div>
+        <div class="action"><b>下一步 · 待决定</b>等顾客回复半价换小码方案是否可以；未回复前不定方案。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28818</span><span class="amount">$50.40</span><span class="tag tag-amber">未决定 · 换货 / 退货</span><span class="tag tag-blue">重复顾客</span><span class="tag tag-gray">PAID / FULFILLED</span></div>
+          <div class="reason"><strong>情况：</strong>顾客现表示想要大一码，愿意退回现有这双；不打算再多买。</div>
+          <div class="meta">状态：换货还是退货未决定；尚无退货包裹、无运单号。</div>
+        </div>
+        <div class="action"><b>下一步 · 待决定</b>先定换货还是退货，再按对应流程沟通。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29025</span><span class="amount">$59.04</span><span class="tag tag-amber">未决定 · 质量 / 退货</span><span class="tag tag-blue">重复顾客</span><span class="tag tag-gray">PAID / FULFILLED</span></div>
+          <div class="reason"><strong>情况：</strong>质量投诉（太薄）；顾客现已明确询问退货流程。</div>
+          <div class="meta">状态：未决定。</div>
+        </div>
+        <div class="action"><b>下一步 · 待决定</b>沟通退货流程与后续方案，寄回前不定退款。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#27510</span><span class="amount">$35.97</span><span class="tag tag-amber">未决定 · 质量 / 尺码</span><span class="tag tag-blue">重复顾客</span><span class="tag tag-gray">PAID / FULFILLED</span></div>
+          <div class="reason"><strong>情况：</strong>质量 / 合脚跟进：顾客澄清所有短袜都有该问题，中筒袜没有。</div>
+          <div class="meta">状态：未决定，尚无已定方案。</div>
+        </div>
+        <div class="action"><b>下一步 · 待决定</b>根据澄清内容定下一步沟通与处理方案。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29112</span><span class="amount">$146.14</span><span class="tag tag-amber">未决定 · 质量</span><span class="tag tag-gray">存量 · 今日无新邮件</span><span class="tag tag-gray">PAID / FULFILLED</span></div>
+          <div class="reason"><strong>情况：</strong>质量投诉，沟通回复已发送，方案未定。</div>
+          <div class="meta">状态：未决定。本单为存量案件，今日无新邮件。</div>
+        </div>
+        <div class="action"><b>下一步 · 待决定</b>等顾客反馈后，再定处理方案。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29043</span><span class="amount">$82.13</span><span class="tag tag-amber">未决定 · 赠品未收到</span><span class="tag tag-teal">今日新增</span><span class="tag tag-gray">PAID / FULFILLED</span></div>
+          <div class="reason"><strong>情况：</strong>顾客反馈免费赠品未收到。</div>
+          <div class="meta">状态：未决定，须先核实。</div>
+        </div>
+        <div class="action"><b>下一步 · 待决定</b>先核实赠品发放 / 物流情况，再定处理。</div>
+      </div>
+    </div>
+
+    <div class="fb-group-head"><h3>待用户操作提醒（结转）</h3><span class="gcount">1 单</span></div>
+    <div class="card">
+      <div class="row alert-row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29464</span><span class="amount">$65.94</span><span class="tag tag-red">待核对 · 待处理</span><span class="tag tag-gray">PAID / FULFILLMENT_NOT_REQUIRED</span></div>
+          <div class="reason"><strong>提醒：</strong>取消 / 退款请求。Shopify 仍显示 PAID、无退款记录，需用户核对并处理；在用户亲口说退款完成前，每日继续提醒。</div>
+          <div class="meta">#29468 换地址已于 2026-11-02 晚完成，不再列入本提醒。</div>
+        </div>
+        <div class="action"><b>待用户操作</b>核对并处理 #29464 退款。</div>
+      </div>
+    </div>
+    <p class="legend">今日邮件口径：今日新客诉邮件为新案件 4 个 + 存量案件跟进邮件 3 封；新增与存量在本区分开标注（“今日新增”与“存量 · 今日无新邮件”）。#29386 为顾客确认颜色无误，仅为确认、不是客诉，不列为案件。另需用户单独决定 / 安排（本次更新未执行、未改任何订单，除下方 Trustpilot 邀请外未发客诉邮件）：① 决定并确认上述待决定案件的处理，尤其退货费用口径仍未统一；② 按下方清单联系 4PX 跟进 9 单；③ 核对并处理 #29464。</p>
+  </section>
+
+  <!-- 最终决定 -->
+  <section id="sec-final" aria-labelledby="h-final">
+    <div class="sec-head"><h2 id="h-final">最终决定</h2><span class="count">已退款 1 单</span><span class="hint">只放走完流程、决定已定的结果</span></div>
+    <div class="card">
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28576</span><span class="amount">$50.40</span><span class="tag tag-green">最终决定 · 已退款</span><span class="tag tag-gray">2026-09-30 下单</span><span class="tag tag-gray">REFUNDED / FULFILLED</span></div>
+          <div class="reason"><strong>情况：</strong>已付款已发货，2026-09-30 发货，2026-10-07 后无动静。顾客已于 2026-11-01 确认选择退款，Shopify 状态已为 REFUNDED。包裹下落仍在下方 4PX 区继续询问，但不改变退款决定。</div>
+          <div class="meta">最终决定：退款已处理完毕。本单不再列入待决定区。</div>
+        </div>
+        <div class="action"><b>状态</b>已关闭退款决定；包裹下落仍在下方 4PX 区继续跟进。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17TRACK -->
+  <section id="sec-track" aria-labelledby="h-track">
+    <div class="sec-head"><h2 id="h-track">17TRACK 物流报错 · 今日逐单警报</h2><span class="count">5 条 · 新增 2 · 重复 3</span><span class="hint">只列逐单警报，不写聚合日汇总数字</span></div>
+    <div class="card">
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29179</span><span class="tag tag-amber">重复 · 投递失败</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">2026-10-21 发货</span></div>
+          <div class="reason"><strong>报错理由：</strong>最新 2026-11-02：尝试投递 — 地址无效，包裹无法投递、已退回设施。顾客已于 2026-10-30 确认地址与投递指引，仍投递失败。</div>
+          <div class="meta">匹配结果：今日无新顾客邮件，待主动跟进。</div>
+        </div>
+        <div class="action"><b>下一步</b>见下方 4PX 区：问确认为何仍判地址无效及重派进度。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28939</span><span class="tag tag-amber">重复 · 可能异常</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">2026-10-14 发货</span></div>
+          <div class="reason"><strong>报错理由：</strong>最新 2026-11-01：在途转运至下一设施、延迟到达。</div>
+          <div class="meta">匹配结果：无顾客往来，待主动跟进。</div>
+        </div>
+        <div class="action"><b>下一步</b>见下方 4PX 区：问当前位置与预计送达。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#27868</span><span class="tag tag-red">新增 · 退回 / 弃件</span><span class="tag tag-gray">YunExpress</span><span class="tag tag-gray">2026-09-02 发货</span></div>
+          <div class="reason"><strong>报错理由：</strong>最新 2026-10-26：退回 / 弃件轨迹（包裹已弃置，退回包裹已下架）。</div>
+          <div class="meta">匹配结果：无顾客往来，待主动跟进。承运商为 YunExpress，非 4PX。</div>
+        </div>
+        <div class="action"><b>下一步</b>向 YunExpress 跟进，不进下方 4PX 区。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29206</span><span class="tag tag-red">新增 · 在途延迟</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">2026-10-22 发货</span></div>
+          <div class="reason"><strong>报错理由：</strong>最新 2026-11-01：在途转运至下一设施、延迟到达（2026-10-31 已到达 USPS 设施）。</div>
+          <div class="meta">匹配结果：无顾客往来，待主动跟进。</div>
+        </div>
+        <div class="action"><b>下一步</b>见下方 4PX 区：问当前位置与预计送达。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29098</span><span class="tag tag-amber">重复 · 投递失败</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">2026-10-19 发货</span></div>
+          <div class="reason"><strong>报错理由：</strong>最新 2026-11-01：投递失败 — 因门禁 / 建筑入口限制 / 安保要求无法进入投递地点，将安排再次投递。</div>
+          <div class="meta">匹配结果：无顾客往来，待主动跟进。</div>
+        </div>
+        <div class="action"><b>下一步</b>见下方 4PX 区：问门禁失败后的重派状态。</div>
+      </div>
+    </div>
+    <p class="legend">说明：今日逐单警报合计 5 条（新增 2 单、重复 3 单）；#27868 同一时刻重复发送的警报只计 1 条。本区只计逐单警报，不使用聚合日汇总数字。</p>
+  </section>
+
+  <!-- 派送超时 -->
+  <section id="sec-timeout" aria-labelledby="h-timeout">
+    <div class="sec-head"><h2 id="h-timeout">派送时间超过一般时效</h2><span class="count">7 单</span><span class="hint">已发货、超过 16 天未送达</span></div>
+    <div class="notice" role="note" style="margin-top:0">
+      <p><strong>时效口径：</strong>本区按<strong>已发货超过 16 天仍未送达</strong>划入。每单写明订单号、发货日、承运商、最后扫描日和停滞天数。数据截至 2026-11-03 08:00。</p>
+    </div>
+    <div class="card">
+      <div class="row alert-row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28576</span><span class="tag tag-red">超时 · 已退款</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">2026-09-30 发货</span></div>
+          <div class="reason"><strong>情况：</strong>最后扫描 2026-10-07；发货后 34 天 / 距最后扫描 27 天。已退款（决定已定，见最终决定区）。</div>
+        </div>
+        <div class="action"><b>状态</b>退款已定；包裹下落仍向 4PX 跟进。</div>
+      </div>
+      <div class="row alert-row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#27749</span><span class="tag tag-red">超时 · 退回 / 弃件</span><span class="tag tag-gray">YunExpress</span><span class="tag tag-gray">2026-08-31 发货</span></div>
+          <div class="reason"><strong>情况：</strong>最后退回 / 弃件轨迹 2026-10-15；发货后 64 天 / 距最后扫描 19 天。</div>
+        </div>
+        <div class="action"><b>状态</b>承运商 YunExpress，只进本区，不进 4PX 区。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28675</span><span class="tag tag-amber">超时</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">2026-10-04 发货</span></div>
+          <div class="reason"><strong>情况：</strong>最后扫描 2026-10-17；发货后 30 天 / 距最后扫描 17 天。</div>
+        </div>
+        <div class="action"><b>状态</b>待 4PX 跟进，见下方。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28705</span><span class="tag tag-amber">超时</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">2026-10-05 发货</span></div>
+          <div class="reason"><strong>情况：</strong>最后扫描 2026-10-16；发货后 29 天 / 距最后扫描 18 天。</div>
+        </div>
+        <div class="action"><b>状态</b>待 4PX 跟进，见下方。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28838</span><span class="tag tag-amber">超时</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">2026-10-11 发货</span></div>
+          <div class="reason"><strong>情况：</strong>最后扫描 2026-10-23；发货后 23 天 / 距最后扫描 11 天。</div>
+        </div>
+        <div class="action"><b>状态</b>待 4PX 跟进，见下方。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28939</span><span class="tag tag-amber">超时 · 在途延迟</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">2026-10-14 发货</span></div>
+          <div class="reason"><strong>情况：</strong>最后扫描 2026-11-01；发货后 20 天 / 距最后扫描 2 天。</div>
+        </div>
+        <div class="action"><b>状态</b>待 4PX 跟进，见下方。</div>
+      </div>
+      <div class="row alert-row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#27868</span><span class="tag tag-red">超时 · 退回 / 弃件</span><span class="tag tag-gray">YunExpress</span><span class="tag tag-gray">2026-09-02 发货</span></div>
+          <div class="reason"><strong>情况：</strong>最后扫描 2026-10-26；发货后 62 天 / 距最后扫描 8 天。</div>
+        </div>
+        <div class="action"><b>状态</b>承运商 YunExpress，只进本区，不进 4PX 区。</div>
+      </div>
+    </div>
+    <p class="legend">未进本区说明：#29098（15 天）、#29190（12 天）、#29179（13 天）、#29206（12 天）未满 16 天，故不进本区。</p>
+  </section>
+
+  <!-- 4PX -->
+  <section id="sec-4px" aria-labelledby="h-4px">
+    <div class="sec-head"><h2 id="h-4px">需要向 4PX 物流跟进的订单</h2><span class="count">9 单</span><span class="hint">逐单写明问题类型与要向 4PX 问的具体事项 · 头程 / 尾程单号点击即可复制</span></div>
+    <div class="notice" role="note" style="margin-top:0">
+      <p><strong>跟进口径：</strong>只要物流有问题 — 卡住超时、投递失败、地址问题、时效问题、退回等 — 都列入本区向 4PX 问情况。非 4PX 的 #27749、#27868（承运商 YunExpress）只进超时区、不进本区。</p>
+    </div>
+    <div class="card">
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29098</span><span class="tag tag-amber">投递失败</span><span class="tag tag-gray">4PX</span></div>
+          <div class="reason"><strong>问题类型：</strong>投递失败（门禁无法进入）。</div>
+          <div class="track-lines">
+            <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003277945255CN" aria-label="复制头程单号 4PX3003277945255CN">4PX3003277945255CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
+            <div class="track-line"><span class="track-label">尾程：</span><span class="track-pending">尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补</span></div>
+          </div>
+        </div>
+        <div class="action"><b>要向 4PX 问</b>门禁投递失败后的再次投递状态。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29190</span><span class="tag tag-amber">退回 GOFO 设施</span><span class="tag tag-gray">4PX</span></div>
+          <div class="reason"><strong>问题类型：</strong>包裹已退回 GOFO 设施。</div>
+          <div class="track-lines">
+            <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003291679815CN" aria-label="复制头程单号 4PX3003291679815CN">4PX3003291679815CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
+            <div class="track-line"><span class="track-label">尾程：</span><span class="track-pending">尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补</span></div>
+          </div>
+        </div>
+        <div class="action"><b>要向 4PX 问</b>退回原因与再次投递状态。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28838</span><span class="tag tag-amber">地址无法定位</span><span class="tag tag-gray">4PX</span></div>
+          <div class="reason"><strong>问题类型：</strong>地址无法定位。</div>
+          <div class="track-lines">
+            <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003249390366CN" aria-label="复制头程单号 4PX3003249390366CN">4PX3003249390366CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
+            <div class="track-line"><span class="track-label">尾程：</span><span class="track-pending">尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补</span></div>
+          </div>
+        </div>
+        <div class="action"><b>要向 4PX 问</b>失败的精确细节与再次投递选项。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28705</span><span class="tag tag-amber">无门禁无法投递</span><span class="tag tag-gray">4PX</span></div>
+          <div class="reason"><strong>问题类型：</strong>无门禁无法投递。</div>
+          <div class="track-lines">
+            <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003226342197CN" aria-label="复制头程单号 4PX3003226342197CN">4PX3003226342197CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
+            <div class="track-line"><span class="track-label">尾程：</span><span class="track-pending">尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补</span></div>
+          </div>
+        </div>
+        <div class="action"><b>要向 4PX 问</b>再次投递的状态。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28675</span><span class="tag tag-amber">无门禁后转指定设施</span><span class="tag tag-gray">4PX</span></div>
+          <div class="reason"><strong>问题类型：</strong>无门禁无法投递后，已转至指定设施。</div>
+          <div class="track-lines">
+            <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003222757261CN" aria-label="复制头程单号 4PX3003222757261CN">4PX3003222757261CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
+            <div class="track-line"><span class="track-label">尾程：</span><span class="track-pending">尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补</span></div>
+          </div>
+        </div>
+        <div class="action"><b>要向 4PX 问</b>设施当前状态与下一步处理。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29179</span><span class="tag tag-amber">地址无效</span><span class="tag tag-gray">4PX</span></div>
+          <div class="reason"><strong>问题类型：</strong>地址无效。顾客已于 2026-10-30 确认地址并给出投递指引，2026-11-02 仍以地址无效投递失败、退回设施。</div>
+          <div class="track-lines">
+            <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003289561139CN" aria-label="复制头程单号 4PX3003289561139CN">4PX3003289561139CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
+            <div class="track-line"><span class="track-label">尾程：</span><span class="track-pending">尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补</span></div>
+          </div>
+        </div>
+        <div class="action"><b>要向 4PX 问</b>顾客已于 2026-10-30 确认地址与指引、为何仍判地址无效，以及再次投递进度。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28939</span><span class="tag tag-amber">在途延迟</span><span class="tag tag-gray">4PX</span></div>
+          <div class="reason"><strong>问题类型：</strong>在途延迟到达。</div>
+          <div class="track-lines">
+            <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003260489599CN" aria-label="复制头程单号 4PX3003260489599CN">4PX3003260489599CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
+            <div class="track-line"><span class="track-label">尾程：</span><span class="track-pending">尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补</span></div>
+          </div>
+        </div>
+        <div class="action"><b>要向 4PX 问</b>当前位置与预计送达时间。</div>
+      </div>
+      <div class="row alert-row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28576</span><span class="tag tag-red">10-07 后无动静</span><span class="tag tag-gray">4PX</span></div>
+          <div class="reason"><strong>问题类型：</strong>2026-10-07 后无动静。本单退款已定（见最终决定区），此处只问包裹下落。</div>
+          <div class="track-lines">
+            <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003211989703CN" aria-label="复制头程单号 4PX3003211989703CN">4PX3003211989703CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
+            <div class="track-line"><span class="track-label">尾程（GOFO）：</span><button type="button" class="track-copy" data-copy="GFUS01075909705603" aria-label="复制尾程单号 GFUS01075909705603">GFUS01075909705603</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
+          </div>
+        </div>
+        <div class="action"><b>要向 4PX 问</b>包裹下落、是否已退回。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29206</span><span class="tag tag-amber">在途延迟</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">2026-10-22 发货</span></div>
+          <div class="reason"><strong>问题类型：</strong>在途延迟到达（2026-10-31 已到达 USPS 设施，2026-11-01 仍显示转运延迟）。</div>
+          <div class="track-lines">
+            <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003293195641CN" aria-label="复制头程单号 4PX3003293195641CN">4PX3003293195641CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
+            <div class="track-line"><span class="track-label">尾程：</span><span class="track-pending">尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补</span></div>
+          </div>
+        </div>
+        <div class="action"><b>要向 4PX 问</b>当前位置与预计送达时间。</div>
+      </div>
+    </div>
+    <p class="legend">合计 9 单。跟进结果回来并与顾客沟通定案前，不把物流问题直接写成新的退款 / 补发决定。</p>
+  </section>
+
+  <!-- 7d 近30天产品反馈盘点 -->
+  <section id="sec-feedback" aria-labelledby="h-feedback">
+    <div class="sec-head"><h2 id="h-feedback">近30天产品反馈盘点（基于已备案客诉）</h2><span class="count">11 单</span><span class="hint">2026-10-02 至 2026-11-01 · 只盘产品本身</span></div>
+    <div class="notice" role="note" style="margin-top:0">
+      <p><strong>盘点口径：</strong>本区只收<strong>产品本身</strong>的反馈 — 薄、尺码、破洞、发错款色等；物流、取消、地址类不算。数据来源为第一批客诉备案 + 近期邮件核实，备案时每关键词只取前 20 条，<strong>不是全量普查</strong>，标题因此写“基于已备案客诉”。下方按问题类型分组，具体到哪一款袜子、什么问题、订单号、日期和当前状态；订单含多款且投诉未指明具体哪一款的，只列订单款式，不硬指一款。</p>
+    </div>
+    <div class="fb-summary" aria-label="产品反馈分组汇总">
+      <div class="cell"><div class="n">2 单</div><div class="t">薄 / 质感偏薄</div></div>
+      <div class="cell"><div class="n">2 单</div><div class="t">尺码偏小 / 穿着不合</div></div>
+      <div class="cell"><div class="n">1 单</div><div class="t">破洞 / 耐用</div></div>
+      <div class="cell"><div class="n">3 单</div><div class="t">发错款色 / 款式</div></div>
+      <div class="cell"><div class="n">3 单</div><div class="t">其他产品反馈</div></div>
+    </div>
+
+    <div class="fb-group-head"><h3>分组 1 · 薄 / 质感偏薄</h3><span class="gcount">2 单</span></div>
+    <div class="card">
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29112</span><span class="tag tag-gray">2026-10-31</span><span class="tag tag-teal">已回复 · 未决定退款 / 补发</span></div>
+          <div class="prod-name">Men's 99% Supima Cotton Breathable Mesh Ankle Socks</div>
+          <div class="reason"><strong>问题：</strong>客户说太薄，担心吸汗和耐用。</div>
+          <div class="meta">状态：已回复说明该款本身就是轻薄透气设计，请穿后反馈；未决定退款 / 补发。</div>
+        </div>
+        <div class="action"><b>看点</b>这是透气网眼款的设计预期与客户厚薄预期不一致，先看穿后反馈再定，不直接归为质量问题。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29025</span><span class="tag tag-gray">2026-10-22</span><span class="tag tag-amber">已回复 · 待核对</span></div>
+          <div class="prod-name">Women's 98% Cotton 5&quot; Quarter Heather Classic Socks</div>
+          <div class="reason"><strong>问题：</strong>客户说质量不满意、太薄。</div>
+          <div class="meta">状态：已回复，待核对。</div>
+        </div>
+        <div class="action"><b>看点</b>与上一单同为“薄”的反馈，但款式不同，需分开核对是款式本身偏薄还是单品质感问题。</div>
+      </div>
+    </div>
+
+    <div class="fb-group-head"><h3>分组 2 · 尺码偏小 / 穿着不合</h3><span class="gcount">2 单</span></div>
+    <div class="card">
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28818</span><span class="tag tag-gray">2026-10-30 / 31</span><span class="tag tag-amber">已回复退货流程 · 退款未决定</span></div>
+          <div class="prod-name">Women's 99% Cotton Ultra-Thin Non-Binding Summer Socks</div>
+          <div class="reason"><strong>问题：</strong>客户说太小，要求退货。</div>
+          <div class="meta">状态：已回复退货流程（未穿、未洗、原包装寄回 Fontana 仓库，寄后回运单号）。退款未决定 — 等退货物流送达确认后，再报退款、再进 BI 退款区；送达前不进退款区。</div>
+        </div>
+        <div class="action"><b>下一步</b>等客户寄回并确认送达后，再报退款决定，不提前写入退款区。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28819</span><span class="tag tag-gray">2026-10-19</span><span class="tag tag-gray">已解释 · 不作补发</span></div>
+          <div class="prod-name">Women's Modal &amp; Mulberry Silk Blend 7.5&quot; All-Season Crew Socks</div>
+          <div class="reason"><strong>问题：</strong>穿着不合 / 个人偏好。</div>
+          <div class="meta">状态：已解释为非质量问题，不作补发。</div>
+        </div>
+        <div class="action"><b>看点</b>与 #28818 区分：本单为穿着偏好，不是尺码明显偏小的退货流程单。</div>
+      </div>
+    </div>
+
+    <div class="fb-group-head"><h3>分组 3 · 破洞 / 耐用</h3><span class="gcount">1 单</span></div>
+    <div class="card">
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#27349</span><span class="tag tag-gray">2026-10-12</span><span class="tag tag-teal">登记为免费补发</span></div>
+          <div class="prod-name">Men's 47.5% Merino Wool Everyday Crew Socks</div>
+          <div class="reason"><strong>问题：</strong>袜子破洞，客户要求部分退款。</div>
+          <div class="meta">状态：登记口径为免费补发（按已发回复口径，未核实到货）。</div>
+        </div>
+        <div class="action"><b>看点</b>本组目前只有这一款出现破洞反馈，后续若同款再现，应优先复查耐用性。</div>
+      </div>
+    </div>
+
+    <div class="fb-group-head"><h3>分组 4 · 发错款色 / 款式</h3><span class="gcount">3 单</span></div>
+    <div class="card">
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28385</span><span class="tag tag-gray">2026-10-03</span><span class="tag tag-teal">已免费补发正确颜色</span></div>
+          <div class="prod-name">Women's 98% Cotton Relaxed-Fit Heather Crew Socks</div>
+          <div class="reason"><strong>问题：</strong>系统原因颜色全部记成白色、发错色。</div>
+          <div class="meta">状态：已免费补发正确颜色（按已发回复口径）。</div>
+        </div>
+        <div class="action"><b>看点</b>问题在系统记色环节，不是袜子本身质量，需防同类记色错误再发错。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29158</span><span class="tag tag-gray">2026-10-20</span><span class="tag tag-amber">已回复 · 待核对</span><span class="tag tag-gray">Shopify 显示 REFUNDED</span></div>
+          <div class="prod-name">Men's 99% Supima Cotton Wide-Ribbed Crew Socks</div>
+          <div class="reason"><strong>问题：</strong>发错货。</div>
+          <div class="meta">状态：已回复待核对；Shopify 显示 REFUNDED。</div>
+        </div>
+        <div class="action"><b>下一步</b>核对发错的具体款 / 色与退款对应关系，避免重复处理。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28712</span><span class="tag tag-gray">2026-10-24</span><span class="tag tag-teal">已免费补发</span></div>
+          <div class="prod-name">Women's 92% Cotton Terry Athletic Crew Socks</div>
+          <div class="reason"><strong>问题：</strong>登记为质量类，颜色 / 确认不符。</div>
+          <div class="meta">状态：已免费补发（按已发回复口径）。</div>
+        </div>
+        <div class="action"><b>看点</b>归在发错 / 不符一类：重点是发货前颜色与订单确认的一致性。</div>
+      </div>
+    </div>
+
+    <div class="fb-group-head"><h3>分组 5 · 其他产品反馈</h3><span class="gcount">3 单</span><span style="font-size:12.5px;color:var(--muted)">订单含多款、投诉未指明具体哪一款时，只列订单款式，不硬指一款</span></div>
+    <div class="card">
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#27510</span><span class="tag tag-gray">2026-10-18</span><span class="tag tag-amber">质量类 · 待客户确认</span></div>
+          <div class="prod-name">订单款式（未指明具体哪一款）：Women's 97% Cotton 6.6&quot; Essential Crew Socks · Women's 95% Cotton Ultra-Thin Mesh No-Show Socks</div>
+          <div class="reason"><strong>问题：</strong>质量类反馈，待客户确认具体款式 / 问题。</div>
+          <div class="meta">状态：待客户确认，不硬指为其中某一款的问题。</div>
+        </div>
+        <div class="action"><b>下一步</b>等客户指明款式后再归入对应分组，在此之前只保留订单级记录。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28716</span><span class="tag tag-gray">2026-10-20</span><span class="tag tag-gray">退换类 · 已解释无补发</span></div>
+          <div class="prod-name">订单款式（未指明具体哪一款）：Men's 95% Cotton Ultra-Thin Mesh No-Show Socks · Men's 92% Cotton Terry Cushion Low Cut Socks</div>
+          <div class="reason"><strong>问题：</strong>退换类产品反馈。</div>
+          <div class="meta">状态：已解释，无补发。</div>
+        </div>
+        <div class="action"><b>看点</b>订单含两款，投诉未落到单款，不拆分归因。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28635</span><span class="tag tag-gray">2026-10-12</span><span class="tag tag-amber">退换类 · 客户付单程运费后补发</span></div>
+          <div class="prod-name">Women's 98% Cotton High-Density Ribbed Crew Socks</div>
+          <div class="reason"><strong>问题：</strong>退换类产品反馈。</div>
+          <div class="meta">状态：登记口径为客户付单程运费后补发。</div>
+        </div>
+        <div class="action"><b>看点</b>本单产品已明确到单款，按退换口径跟进后续补发即可。</div>
+      </div>
+    </div>
+    <p class="legend">小结：近30天已备案的产品反馈里，“薄”集中在透气 / 超薄定位的款上（#29112、#29025），尺码问题以超薄夏款 #28818 最明确且已走退货流程，破洞目前只有美利奴日常款 #27349 一单，发错类有 3 单且多与颜色记错 / 发货确认有关。以上均为已备案口径，后续新增反馈按同一分组滚动更新。</p>
+  </section>
+
+
+  <!-- Judge.me -->
+  <section id="sec-judge" aria-labelledby="h-judge">
+    <div class="sec-head"><h2 id="h-judge">Judge.me 五星好评 → Trustpilot 邀请</h2><span class="count">今日 · 11-03</span><span class="hint">数据截至 2026-11-03 08:00</span></div>
+    <div class="funnel">
+      <div class="cell"><div class="n">1 条</div><div class="t">今日新增五星评论</div></div>
+      <div class="cell"><div class="n">1 人</div><div class="t">去重后新增五星用户</div></div>
+      <div class="cell"><div class="n">1 封</div><div class="t">已发 Trustpilot 邀请</div></div>
+      <div class="cell"><div class="n">0 封</div><div class="t">待审批</div></div>
+    </div>
+    <div class="template-box">
+      <h3>今日说明与模板口径备查</h3>
+      <p>今日新增五星用户 <strong>1 人</strong>（评论在订单 <strong>#28911</strong>，按人去重计 1 次），已发 Trustpilot 邀请 <strong>1 封</strong>，待审批 <strong>0 封</strong>。该用户此前在已发邮件中无 Trustpilot 邀请记录。1 星评论不发邀请，本次无新增 1 星邀请发送。</p>
+      <ul>
+        <li>模板：Emma 模板 — A small favor from Emma at WeavaSocks</li>
+        <li>Trustpilot 链接：<a href="https://www.trustpilot.com/review/weavasocks.com" target="_blank" rel="noopener">trustpilot.com/review/weavasocks.com</a></li>
+        <li>感谢码：<span class="code-chip">WEAVAFAMILY20</span> — 20% OFF，可叠加使用。</li>
+        <li>去重规则：按人算，不按条算；同一用户多条五星只发 1 封。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 9 规则 -->
+  <section aria-labelledby="h-rules">
+    <div class="sec-head"><h2 id="h-rules">每日更新规则（已内置）</h2></div>
+    <div class="rules">
+      <div class="rule"><b>新增与存量分开</b>每天早上 8 点左右更新时，当天新到的取消 / 退款 / 改地址 / 客诉单独标“新增”，未处理完的存量继续保留，直到处理关闭为止，不会第二天就消失。</div>
+      <div class="rule"><b>重复顾客要标出来</b>同一顾客再次来信时单独标记，并带出他之前的订单和问题类型，避免当成全新客诉重复处理。本期 #28716、#28679、#28818、#29025、#27510 均已标为重复顾客。</div>
+      <div class="rule"><b>已发货 ≠ 未发货</b>取消和退款必须先看发货状态：未发货可取消 + 全额退款；已发货的要求取消 + 退款要单独定方案，不能混用同一流程。</div>
+      <div class="rule"><b>异常单单独列</b>像 #28820 这种财务状态 EXPIRED 的过期支付单，单独列为异常，不混进正常待发货清单，也不催仓库发货。</div>
+      <div class="rule"><b>17TRACK 只看逐单</b>只收有订单号的逐单警报（投递失败 / 可能异常）；只有合计数字的日汇总、周报和聚合预警不进看板。每单都要标匹配结果：已有客诉 / 已跟进 / 无往来待主动跟进。</div>
+      <div class="rule"><b>好评邀请即时 + 每日汇总</b>五星好评的 Trustpilot 邀请以后即时发送（同一人只发一次）；看板每天只汇总当日新增用户数与当日完成邀请数，首期例外为本周汇总。</div>
+      <div class="rule"><b>派送超时口径</b>一般时效为发货后 7–10 个工作日（站内美国 7–16 天）；发货超 16 天仍未送达进超时区，长时间无新扫描另标“卡住”。刚发货、仅有运单信息的单不算超时。</div>
+      <div class="rule"><b>4PX 跟进是待跟进、不是决定</b>卡住、投递失败、地址、时效、退回等问题统一进 4PX 跟进区，逐单写明要问什么。物流方回复并与顾客沟通定案前，不写成已退款 / 已补发 / 已取消。非 4PX 承运商（如 YunExpress）单独跟进，不混入 4PX 区。</div>
+      <div class="rule"><b>产品反馈滚动近30天</b>每天更新时按同样口径滚动近30天窗口（只盘产品本身，物流 / 取消 / 地址不算），基于已备案客诉分组汇总：薄、尺码、破洞、发错、其他。订单含多款且未指明哪一款时只列订单款式、不硬指一款；退货类（如 #28818）须等退货物流送达确认后才报退款、再进退款区。</div>
+    </div>
+  </section>
+
+
+  <footer>
+    WeavaSocks BI 看板 · 数据截至 2026-11-03 08:00（北京时间） · 数据来源：Shopify 订单（只读核查、未做任何改单）、客服邮箱实查、17TRACK 逐单警报、Judge.me 评论。本页为静态快照，打开时不会实时拉取新数据；以每天早上 8 点左右的更新版为准。待用户操作的订单在用户亲口说操作完之前每日继续提醒。隐私：本页不含顾客姓名、邮箱、家庭地址、电话；完整物流单号仅在 4PX 物流跟进区显示。
+  </footer>
+
+</div>
+<script>
+  // 概览卡片点击定位：平滑滚动到对应区（同时保留原生锚点作为无 JS 时的回退）
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('a.kpi[href^="#"]').forEach(function(link){
+      link.addEventListener('click', function(e){
+        var id = link.getAttribute('href').slice(1);
+        var target = document.getElementById(id);
+        if(!target) return;
+        e.preventDefault();
+        target.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'});
+        if(history && history.replaceState){ history.replaceState(null, '', '#' + id); }
+        target.setAttribute('tabindex', '-1');
+        target.focus({preventScroll: true});
+      });
+    });
+  })();
+  // 4PX 区物流单号快捷复制：点击单号复制该单号，旁边短暂显示“已复制”，不跳转
+  document.querySelectorAll('.track-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var text = btn.getAttribute('data-copy') || btn.textContent.trim();
+      var line = btn.parentNode;
+      var fb = line ? line.querySelector('.copy-feedback') : null;
+      function showDone(){
+        if(!fb) return;
+        fb.classList.add('show');
+        setTimeout(function(){ fb.classList.remove('show'); }, 1400);
+      }
+      function fallbackCopy(){
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'absolute';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch(e) {}
+        document.body.removeChild(ta);
+        showDone();
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(showDone).catch(fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+    });
+  });
+  // 纯展示页，无数据请求。仅做一个小增强：点击订单号复制，方便去 Shopify 搜索。
+  document.querySelectorAll('.order-no').forEach(function(el){
+    var t = el.textContent.trim();
+    if(t.indexOf('#') !== 0) return;
+    el.style.cursor = 'pointer';
+    el.title = '点击复制订单号 ' + t + '，可粘贴到 Shopify 搜索';
+    el.addEventListener('click', function(){
+      var num = t.replace('#','');
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(num).then(function(){
+          var old = el.textContent; el.textContent = '已复制 ' + t;
+          setTimeout(function(){ el.textContent = old; }, 1100);
+        }).catch(function(){});
+      }
+    });
+  });
+</script>
+</body>
+</html>
