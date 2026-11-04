@@ -147,9 +147,9 @@
       <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 0 单，点击定位到已确认可放行发货订单区"><div class="num">0 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">本日 0 单 · 昨日 3 单已发货并按规则拿掉</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 7 单，点击定位到待决定区"><div class="num">7 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">均为已发货待决定 · 未发货待决定无新增</div><span class="go">查看 ↓</span></a>
       <a class="kpi" href="#sec-final" aria-label="最终决定区 3 单，点击定位到最终决定区"><div class="num">3 <small>单</small></div><div class="label">最终决定区</div><div class="desc">2 单退款已完成 + 1 单补发待操作（#28818）</div><span class="go">查看 ↓</span></a>
-      <a class="kpi teal" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 0 单，点击定位到 17TRACK 区"><div class="num">0 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">本日无新增逐单警报 · 聚合预警不计入</div><span class="go">查看 ↓</span></a>
+      <a class="kpi teal" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 1 单，点击定位到 17TRACK 区"><div class="num">1 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">#29322 · 投递失败（Wrong Address）· 聚合预警不计入</div><span class="go">查看 ↓</span></a>
       <a class="kpi red" href="#sec-timeout" aria-label="派送超时 7 单，点击定位到派送超时区"><div class="num">7 <small>单</small></div><div class="label">派送超时</div><div class="desc">已发货、超过 16 天未送达，见下方专区明细</div><span class="go">查看 ↓</span></a>
-      <a class="kpi amber" href="#sec-4px" aria-label="需要向 4PX 跟进 9 单，点击定位到 4PX 区"><div class="num">9 <small>单</small></div><div class="label">需要向 4PX 跟进</div><div class="desc">投递失败 / 地址 / 退回 / 延迟 / 无动静，逐单待问</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-4px" aria-label="需要向 4PX 跟进 10 单，点击定位到 4PX 区"><div class="num">10 <small>单</small></div><div class="label">需要向 4PX 跟进</div><div class="desc">投递失败 / 地址 / 退回 / 延迟 / 无动静，逐单待问</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-judge" aria-label="当日新增 Judge.me 五星 1 人，新增 Trustpilot 邀请 0 封，点击定位到好评邀请区"><div class="num">1 <small>人 · 0 封</small></div><div class="label">Judge.me 五星 → Trustpilot 邀请</div><div class="desc">新增五星 1 人（#28867）· 该人已于 11-03 23:57 收到邀请，不重复发送 · 待审批 0 封</div><span class="go">查看 ↓</span></a>
     </div>
     <p class="legend">口径：待决定区只放尚未走完核实与决定流程的事项，明确标为“未决定”，不能当作已决定取消 / 退款 / 换地址 / 补发；17TRACK 报错本身只是警报，不是最终决定。</p>
@@ -345,15 +345,15 @@
 
   <!-- 17TRACK -->
   <section id="sec-track" aria-labelledby="h-track">
-    <div class="sec-head"><h2 id="h-track">17TRACK 逐单警报（当日新增）</h2><span class="count">0 单</span><span class="hint">只计逐单警报，不使用聚合总数</span></div>
+    <div class="sec-head"><h2 id="h-track">17TRACK 逐单警报（当日新增）</h2><span class="count">1 单</span><span class="hint">只计逐单警报，不使用聚合总数</span></div>
     <div class="card">
-      <div class="row">
+      <div class="row alert-row">
         <div class="row-main">
-          <div class="order-line"><span class="tag tag-green">当日新增 0 单</span><span class="tag tag-gray">截至 2026-11-04 08:00</span></div>
-          <div class="reason"><strong>情况：</strong>本日无新增逐单投递失败 / 可能异常邮件。</div>
-          <div class="meta">说明：2026-11-03 17:06 收到一封 17TRACK 自定义异常运单聚合预警，按规则不计入逐单警报、不使用其聚合总数。</div>
+          <div class="order-line"><span class="order-no">#29322</span><span class="tag tag-red">投递失败 · Wrong Address（地址错误）</span><span class="tag tag-gray">2026-11-04 13:48 收到警报</span></div>
+          <div class="reason"><strong>情况：</strong>2026-11-04 13:48 收到投递失败警报，最近轨迹 2026-11-03 15:17:53 美国 Rexburg, ID，原因 Wrong Address（地址错误），包裹将退回仓库。</div>
+          <div class="meta">说明：该警报只是警报、不是最终决定；2026-11-03 17:06 收到一封 17TRACK 自定义异常运单聚合预警，按规则不计入逐单警报、不使用其聚合总数。</div>
         </div>
-        <div class="action"><b>下一步</b>无新增逐单警报需跟进；存量物流问题见下方超时区与 4PX 区。</div>
+        <div class="action"><b>下一步</b>已列入下方 4PX 跟进区向 4PX 问情况；跟进结果回来并与顾客沟通定案前，不写成最终决定。</div>
       </div>
     </div>
   </section>
@@ -417,11 +417,21 @@
 
   <!-- 4PX -->
   <section id="sec-4px" aria-labelledby="h-4px">
-    <div class="sec-head"><h2 id="h-4px">需要向 4PX 物流跟进的订单</h2><span class="count">9 单</span><span class="hint">完整头程单号点击即可复制 · 点击后短暂显示“已复制”、不跳转</span></div>
+    <div class="sec-head"><h2 id="h-4px">需要向 4PX 物流跟进的订单</h2><span class="count">10 单</span><span class="hint">完整头程单号点击即可复制 · 点击后短暂显示“已复制”、不跳转</span></div>
     <div class="notice" role="note" style="margin-top:0">
       <p><strong>跟进口径：</strong>只要物流有问题 — 卡住超时、投递失败、地址问题、时效问题、退回等 — 都列入本区向 4PX 问情况。除 #28576 外，其余各单尾程未核实不编造，尾程写“尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补”。非 4PX 的 YunExpress 订单只进超时区、不进本区。</p>
     </div>
     <div class="card">
+      <div class="row alert-row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29322</span><span class="tag tag-red">投递失败（地址错误 Wrong Address）</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">发货 2026-10-26</span></div>
+          <div class="track-lines">
+            <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003307393896CN" aria-label="复制头程单号 4PX3003307393896CN">4PX3003307393896CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
+            <div class="track-line"><span class="track-label">尾程：</span><span class="track-pending">尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补</span></div>
+          </div>
+        </div>
+        <div class="action"><b>要向 4PX 问</b>地址错误的具体原因、包裹退回仓库后的现状、是否可凭更正地址重新投递。</div>
+      </div>
       <div class="row">
         <div class="row-main">
           <div class="order-line"><span class="order-no">#29098</span><span class="tag tag-amber">投递失败（门禁无法进入）</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">发货 2026-10-19</span></div>
@@ -514,7 +524,7 @@
         <div class="action"><b>要向 4PX 问</b>包裹当前位置与预计送达。</div>
       </div>
     </div>
-    <p class="legend">合计 9 单。跟进结果回来并与顾客沟通定案前，不把物流问题直接写成新的退款 / 补发决定。</p>
+    <p class="legend">合计 10 单。跟进结果回来并与顾客沟通定案前，不把物流问题直接写成新的退款 / 补发决定。</p>
   </section>
 
   <!-- Judge.me -->
