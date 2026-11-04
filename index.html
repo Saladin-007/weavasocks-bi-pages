@@ -149,7 +149,7 @@
       <a class="kpi" href="#sec-final" aria-label="最终决定区 3 单，点击定位到最终决定区"><div class="num">3 <small>单</small></div><div class="label">最终决定区</div><div class="desc">2 单退款已完成 + 1 单补发待操作（#28818）</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 2 单，点击定位到 17TRACK 区"><div class="num">2 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">#29322 · 投递失败（Wrong Address）；#29393 · 可能异常（Return to customers / No channel available）· 聚合预警不计入</div><span class="go">查看 ↓</span></a>
       <a class="kpi red" href="#sec-timeout" aria-label="派送超时 7 单，点击定位到派送超时区"><div class="num">7 <small>单</small></div><div class="label">派送超时</div><div class="desc">已发货、超过 16 天未送达，见下方专区明细</div><span class="go">查看 ↓</span></a>
-      <a class="kpi amber" href="#sec-4px" aria-label="需要向 4PX 跟进 11 单，点击定位到 4PX 区"><div class="num">11 <small>单</small></div><div class="label">需要向 4PX 跟进</div><div class="desc">投递失败 / 地址 / 退回 / 延迟 / 无动静，逐单待问</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-4px" aria-label="需要向 4PX 跟进 12 单，点击定位到 4PX 区"><div class="num">12 <small>单</small></div><div class="label">需要向 4PX 跟进</div><div class="desc">投递失败 / 地址 / 退回 / 延迟 / 无动静，逐单待问</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-judge" aria-label="当日新增 Judge.me 五星 1 人，新增 Trustpilot 邀请 0 封，点击定位到好评邀请区"><div class="num">1 <small>人 · 0 封</small></div><div class="label">Judge.me 五星 → Trustpilot 邀请</div><div class="desc">新增五星 1 人（#28867）· 该人已于 11-03 23:57 收到邀请，不重复发送 · 待审批 0 封</div><span class="go">查看 ↓</span></a>
     </div>
     <p class="legend">口径：待决定区只放尚未走完核实与决定流程的事项，明确标为“未决定”，不能当作已决定取消 / 退款 / 换地址 / 补发；17TRACK 报错本身只是警报，不是最终决定。</p>
@@ -425,7 +425,7 @@
 
   <!-- 4PX -->
   <section id="sec-4px" aria-labelledby="h-4px">
-    <div class="sec-head"><h2 id="h-4px">需要向 4PX 物流跟进的订单</h2><span class="count">11 单</span><span class="hint">完整头程单号点击即可复制 · 点击后短暂显示“已复制”、不跳转</span></div>
+    <div class="sec-head"><h2 id="h-4px">需要向 4PX 物流跟进的订单</h2><span class="count">12 单</span><span class="hint">完整头程单号点击即可复制 · 点击后短暂显示“已复制”、不跳转</span></div>
     <div class="notice" role="note" style="margin-top:0">
       <p><strong>跟进口径：</strong>只要物流有问题 — 卡住超时、投递失败、地址问题、时效问题、退回等 — 都列入本区向 4PX 问情况。除 #28576 外，其余各单尾程未核实不编造，尾程写“尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补”。非 4PX 的 YunExpress 订单只进超时区、不进本区。</p>
     </div>
@@ -541,8 +541,19 @@
         </div>
         <div class="action"><b>要向 4PX 问</b>包裹当前位置与预计送达。</div>
       </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29137</span><span class="tag tag-amber">在途延迟 · 顾客二次催件</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">发货 2026-10-20</span></div>
+          <div class="reason"><strong>情况：</strong>$43.96 · 下单 2026-10-19（顾客来信）· FULFILLED。10-24 到达目的机场后停滞，10-31 最新轨迹为邮政网络在途；顾客 2026-11-05 再次来信称 11-04 仍未收到。客服 10-28 已回复称已联系物流方催促，至今未送达。</div>
+          <div class="track-lines">
+            <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003283301281CN" aria-label="复制头程单号 4PX3003283301281CN">4PX3003283301281CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
+            <div class="track-line"><span class="track-label">尾程：</span><button type="button" class="track-copy" data-copy="SPXSAT003022610200038337" aria-label="复制尾程单号 SPXSAT003022610200038337">SPXSAT003022610200038337</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span><span class="track-pending">（顾客来信引用的客服 10-28 回复中提及）</span></div>
+          </div>
+        </div>
+        <div class="action"><b>要向 4PX 问</b>包裹当前位置与预计送达、10-24 后转邮政网络的原因、是否可加速派送。</div>
+      </div>
     </div>
-    <p class="legend">合计 11 单。跟进结果回来并与顾客沟通定案前，不把物流问题直接写成新的退款 / 补发决定。</p>
+    <p class="legend">合计 12 单。跟进结果回来并与顾客沟通定案前，不把物流问题直接写成新的退款 / 补发决定。</p>
   </section>
 
   <!-- Judge.me -->
