@@ -149,7 +149,7 @@
       <a class="kpi" href="#sec-final" aria-label="最终决定区 3 单，点击定位到最终决定区"><div class="num">3 <small>单</small></div><div class="label">最终决定区</div><div class="desc">2 单退款已完成 + 1 单补发待操作（#28818）</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 0 单，点击定位到 17TRACK 区"><div class="num">0 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">本日无新增逐单警报 · 聚合预警不计入</div><span class="go">查看 ↓</span></a>
       <a class="kpi red" href="#sec-timeout" aria-label="派送超时 8 单，点击定位到派送超时区"><div class="num">8 <small>单</small></div><div class="label">派送超时</div><div class="desc">已发货、超过 16 天未送达，见下方专区明细</div><span class="go">查看 ↓</span></a>
-      <a class="kpi amber" href="#sec-4px" aria-label="需要向 4PX 跟进 12 单，点击定位到 4PX 区"><div class="num">12 <small>单</small></div><div class="label">需要向 4PX 跟进</div><div class="desc">投递失败 / 地址 / 退回 / 延迟 / 无动静，逐单待问</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-4px" aria-label="需要向 4PX 跟进 13 单，点击定位到 4PX 区"><div class="num">13 <small>单</small></div><div class="label">需要向 4PX 跟进</div><div class="desc">投递失败 / 地址 / 退回 / 延迟 / 无动静，逐单待问</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-judge" aria-label="当日新增 Judge.me 五星 0 人，新增 Trustpilot 邀请 0 封，点击定位到好评邀请区"><div class="num">0 <small>人 · 0 封</small></div><div class="label">Judge.me 五星 → Trustpilot 邀请</div><div class="desc">新增五星 0 人 · 新增邀请 0 封 · 待审批 0 封</div><span class="go">查看 ↓</span></a>
     </div>
     <p class="legend">口径：待决定区只放尚未走完核实与决定流程的事项，明确标为“未决定”，不能当作已决定取消 / 退款 / 换地址 / 补发；17TRACK 报错本身只是警报，不是最终决定。</p>
@@ -441,7 +441,7 @@
 
   <!-- 4PX -->
   <section id="sec-4px" aria-labelledby="h-4px">
-    <div class="sec-head"><h2 id="h-4px">需要向 4PX 物流跟进的订单</h2><span class="count">12 单</span><span class="hint">完整头程单号点击即可复制 · 点击后短暂显示“已复制”、不跳转</span></div>
+    <div class="sec-head"><h2 id="h-4px">需要向 4PX 物流跟进的订单</h2><span class="count">13 单</span><span class="hint">完整头程单号点击即可复制 · 点击后短暂显示“已复制”、不跳转</span></div>
     <div class="notice" role="note" style="margin-top:0">
       <p><strong>跟进口径：</strong>只要物流有问题 — 卡住超时、投递失败、地址问题、时效问题、退回等 — 都列入本区向 4PX 问情况。除 #28576 外，其余各单尾程未核实不编造，尾程写“尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补”。非 4PX 的 YunExpress 订单只进超时区、不进本区。</p>
     </div>
@@ -465,6 +465,17 @@
           </div>
         </div>
         <div class="action"><b>要向 4PX 问</b>地址错误的具体原因、包裹退回仓库后的现状、是否可凭更正地址重新投递。</div>
+      </div>
+      <div class="row alert-row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29329</span><span class="amount">$35.54</span><span class="tag tag-red">末端派送异常（地址不正确 / 不完整）</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">下单 2026-10-26 · 发货 2026-10-26</span><span class="tag tag-gray">PAID / FULFILLED</span></div>
+          <div class="reason"><strong>情况：</strong>商品 Women's Shimmer Split-Toe Tabi Crew Socks (3-Pack) ×1。2026-11-04 09:53 末端派送异常（Delivery Exception）：Incorrect/Insufficient Address，地点 Brooklyn, NY 11211，末端承运 GOFO。</div>
+          <div class="track-lines">
+            <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003309678014CN" aria-label="复制头程单号 4PX3003309678014CN">4PX3003309678014CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
+            <div class="track-line"><span class="track-label">尾程：</span><span class="track-pending">尾程单号未显示，需核对后补</span></div>
+          </div>
+        </div>
+        <div class="action"><b>要向 4PX 问</b>地址不正确 / 不完整的具体原因、包裹现状、是否可凭更正地址重新投递。</div>
       </div>
       <div class="row">
         <div class="row-main">
@@ -570,7 +581,7 @@
         <div class="action"><b>要向 4PX 问</b>包裹当前位置与预计送达、10-24 后转邮政网络的原因、是否可加速派送。</div>
       </div>
     </div>
-    <p class="legend">合计 12 单。跟进结果回来并与顾客沟通定案前，不把物流问题直接写成新的退款 / 补发决定。</p>
+    <p class="legend">合计 13 单。跟进结果回来并与顾客沟通定案前，不把物流问题直接写成新的退款 / 补发决定。</p>
   </section>
 
   <!-- Judge.me -->
