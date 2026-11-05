@@ -143,7 +143,7 @@
       <a class="kpi" href="#sec-ship" aria-label="已付款未发货 19 单，点击定位到待发货区"><div class="num">19 <small>单</small></div><div class="label">已付款未发货</div><div class="desc">均为 2026-11-04 下单，未超 3 天 · #29565–#29584</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-ship" aria-label="超 3 天未发货 0 单，点击定位到待发货区"><div class="num">0 <small>单</small></div><div class="label">超 3 天未发货</div><div class="desc">本日无超 3 天未发货订单</div><span class="go">查看 ↓</span></a>
       <a class="kpi red" href="#sec-ship" aria-label="过期支付异常 1 单，点击定位到待发货区过期支付部分"><div class="num">1 <small>单</small></div><div class="label">过期支付异常</div><div class="desc">#28820 · EXPIRED / UNFULFILLED · $92.57 · 单独列</div><span class="go">查看 ↓</span></a>
-      <a class="kpi amber" href="#sec-preconfirm" aria-label="发货前需确认 2 单，点击定位到发货前需确认订单汇总区"><div class="num">2 <small>单</small></div><div class="label">发货前需确认</div><div class="desc">#29570、#29573 · 同色 8 双及以上待 Quick check 确认</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-preconfirm" aria-label="发货前需确认 3 单，点击定位到发货前需确认订单汇总区"><div class="num">3 <small>单</small></div><div class="label">发货前需确认</div><div class="desc">#29570、#29573、#29597 · #29597 为地址待更正（客诉待确认）</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 1 单，点击定位到已确认可放行发货订单区"><div class="num">1 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">#29565 · 顾客已回复确认（Looks good）</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 7 单，点击定位到待决定区"><div class="num">7 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">均为已发货待决定 · 未发货待决定无新增</div><span class="go">查看 ↓</span></a>
       <a class="kpi" href="#sec-final" aria-label="最终决定区 3 单，点击定位到最终决定区"><div class="num">3 <small>单</small></div><div class="label">最终决定区</div><div class="desc">2 单退款已完成 + 1 单补发待操作（#28818）</div><span class="go">查看 ↓</span></a>
@@ -157,7 +157,7 @@
 
   <!-- 发货前需确认订单汇总 -->
   <section id="sec-preconfirm" aria-labelledby="h-preconfirm">
-    <div class="sec-head"><h2 id="h-preconfirm">发货前需确认订单汇总</h2><span class="count">2 单</span><span class="hint">没收到回复不能判定为可放行</span></div>
+    <div class="sec-head"><h2 id="h-preconfirm">发货前需确认订单汇总</h2><span class="count">3 单</span><span class="hint">没收到回复不能判定为可放行</span></div>
     <div class="card">
       <div class="row">
         <div class="row-main">
@@ -174,6 +174,14 @@
           <div class="meta">状态：收到顾客回复确认前不要发货。</div>
         </div>
         <div class="action"><b>下一步 · 待确认</b>发送 Quick check；收到顾客回复确认（Looks good / 全同色）前不要发货。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29597</span><span class="amount">$19.98</span><span class="tag tag-gray">2026-11-05 · 已付款未发货</span><span class="tag tag-amber">待确认 · 地址待更正（客诉待确认）</span></div>
+          <div class="reason"><strong>情况：</strong>商品为 1 双兔毛混纺罗纹保暖中筒袜。顾客来信要求更正收货地址：订单上地址 1 只写了 Mesquite Ave、缺门牌号，须补为门牌号 2094，城市与邮编不变。</div>
+          <div class="meta">状态：尚未发货，须先更正地址再发货。</div>
+        </div>
+        <div class="action"><b>下一步 · 待确认</b>待用户在 Shopify 更正收货地址（补门牌号 2094）后方可发货。</div>
       </div>
     </div>
     <p class="legend"><strong>#29541 已从本区拿掉：</strong>#29541（$162.00，同色 30 双黑色）顾客已于 2026-11-04 11:24 回复确认全要同色黑色，Shopify 当日 11:58 已发货（FULFILLED），已从本区拿掉，不列入已确认可放行区。</p>
@@ -633,6 +641,13 @@
           <div class="reason"><strong>事项：</strong>发货前确认 2 单的 Quick check 待发；收到顾客回复确认前不要发货。</div>
         </div>
         <div class="action"><b>待用户操作</b>发送 Quick check；收到顾客回复确认前不要发货。</div>
+      </div>
+      <div class="row alert-row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29597</span><span class="tag tag-red">待操作 · 更正收货地址</span></div>
+          <div class="reason"><strong>事项：</strong>在 Shopify 更正收货地址（补门牌号 2094），更正后方可发货（见发货前需确认区）。</div>
+        </div>
+        <div class="action"><b>待用户操作</b>更正收货地址；完成前继续提醒。</div>
       </div>
       <div class="row">
         <div class="row-main">
