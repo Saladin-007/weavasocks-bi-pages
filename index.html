@@ -143,8 +143,8 @@
       <a class="kpi" href="#sec-ship" aria-label="已付款未发货 19 单，点击定位到待发货区"><div class="num">19 <small>单</small></div><div class="label">已付款未发货</div><div class="desc">均为 2026-11-04 下单，未超 3 天 · #29565–#29584</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-ship" aria-label="超 3 天未发货 0 单，点击定位到待发货区"><div class="num">0 <small>单</small></div><div class="label">超 3 天未发货</div><div class="desc">本日无超 3 天未发货订单</div><span class="go">查看 ↓</span></a>
       <a class="kpi red" href="#sec-ship" aria-label="过期支付异常 1 单，点击定位到待发货区过期支付部分"><div class="num">1 <small>单</small></div><div class="label">过期支付异常</div><div class="desc">#28820 · EXPIRED / UNFULFILLED · $92.57 · 单独列</div><span class="go">查看 ↓</span></a>
-      <a class="kpi amber" href="#sec-preconfirm" aria-label="发货前需确认 3 单，点击定位到发货前需确认订单汇总区"><div class="num">3 <small>单</small></div><div class="label">发货前需确认</div><div class="desc">#29565、#29570、#29573 · 同色 8 双及以上待 Quick check 确认</div><span class="go">查看 ↓</span></a>
-      <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 0 单，点击定位到已确认可放行发货订单区"><div class="num">0 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">本日 0 单 · #29565、#29570、#29573 待确认前不能放行</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-preconfirm" aria-label="发货前需确认 2 单，点击定位到发货前需确认订单汇总区"><div class="num">2 <small>单</small></div><div class="label">发货前需确认</div><div class="desc">#29570、#29573 · 同色 8 双及以上待 Quick check 确认</div><span class="go">查看 ↓</span></a>
+      <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 1 单，点击定位到已确认可放行发货订单区"><div class="num">1 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">#29565 · 顾客已回复确认（Looks good）</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 7 单，点击定位到待决定区"><div class="num">7 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">均为已发货待决定 · 未发货待决定无新增</div><span class="go">查看 ↓</span></a>
       <a class="kpi" href="#sec-final" aria-label="最终决定区 3 单，点击定位到最终决定区"><div class="num">3 <small>单</small></div><div class="label">最终决定区</div><div class="desc">2 单退款已完成 + 1 单补发待操作（#28818）</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 1 单，点击定位到 17TRACK 区"><div class="num">1 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">#28436 投递失败 · 已转入 4PX 跟进区 · 聚合预警不计入</div><span class="go">查看 ↓</span></a>
@@ -157,16 +157,8 @@
 
   <!-- 发货前需确认订单汇总 -->
   <section id="sec-preconfirm" aria-labelledby="h-preconfirm">
-    <div class="sec-head"><h2 id="h-preconfirm">发货前需确认订单汇总</h2><span class="count">3 单</span><span class="hint">没收到回复不能判定为可放行</span></div>
+    <div class="sec-head"><h2 id="h-preconfirm">发货前需确认订单汇总</h2><span class="count">2 单</span><span class="hint">没收到回复不能判定为可放行</span></div>
     <div class="card">
-      <div class="row">
-        <div class="row-main">
-          <div class="order-line"><span class="order-no">#29565</span><span class="amount">$65.60</span><span class="tag tag-gray">2026-11-04 · 已付款未发货</span><span class="tag tag-amber">待确认 · 同色 8 双白色</span></div>
-          <div class="reason"><strong>情况：</strong>同色 8 双白色，达同色 8 双及以上确认门槛；Quick check 尚未见已发。</div>
-          <div class="meta">状态：收到顾客回复确认前不要发货。</div>
-        </div>
-        <div class="action"><b>下一步 · 待确认</b>发送 Quick check；收到顾客回复确认（Looks good / 全同色）前不要发货。</div>
-      </div>
       <div class="row">
         <div class="row-main">
           <div class="order-line"><span class="order-no">#29570</span><span class="amount">$65.60</span><span class="tag tag-gray">2026-11-04 · 已付款未发货</span><span class="tag tag-amber">待确认 · 同色 8 双 Cloud White</span></div>
@@ -188,19 +180,20 @@
     <p class="legend"><strong>#29548 已从本区拿掉：</strong>#29548（$67.05，同色 8 双白色）顾客已于 2026-11-04 11:39、11:40 两次回复确认全要同色白色（Looks good / All White），Shopify 当日 11:58 已发货（FULFILLED），已从本区拿掉，不列入已确认可放行区。</p>
     <p class="legend"><strong>#29551 与 #29552 已从本区拿掉：</strong>#29551（$17.98）与 #29552（$18.98）已于 2026-11-04 发货（FULFILLED），合并发货请求随发货结束跟进，不再列入待确认。</p>
     <p class="legend"><strong>#29550 已从本区拿掉：</strong>#29550（8 双白）此前从未发过 Quick check，已于 2026-11-04 09:20 发货，11:17 已补发 Quick check 邮件 — 已发货后补发确认、发货前未确认。顾客已于 2026-11-04 12:16 回复确认（Looks good）。该单不再列入待确认，也不列入已确认可放行。</p>
+    <p class="legend"><strong>#29565 已从本区拿掉：</strong>#29565（$65.60，同色 8 双白色）Quick check 已于 2026-11-05 发出，顾客已于 2026-11-06 00:19 回复确认全要同色白色（Looks good），Shopify 仍为已付款未发货（UNFULFILLED），已移入已确认可放行区。</p>
   </section>
 
   <!-- 已确认可放行发货订单 -->
   <section id="sec-releasable" aria-labelledby="h-releasable">
-    <div class="sec-head"><h2 id="h-releasable">已确认可放行发货订单</h2><span class="count">0 单</span><span class="hint">确认问题已解决、可放行包货发货的订单才列入本区 · 正常发货（FULFILLED）后即拿掉</span></div>
+    <div class="sec-head"><h2 id="h-releasable">已确认可放行发货订单</h2><span class="count">1 单</span><span class="hint">确认问题已解决、可放行包货发货的订单才列入本区 · 正常发货（FULFILLED）后即拿掉</span></div>
     <div class="card">
       <div class="row">
         <div class="row-main">
-          <div class="order-line"><span class="tag tag-green">本日 0 单</span><span class="tag tag-gray">截至 2026-11-05 08:00</span></div>
-          <div class="reason"><strong>情况：</strong>本日无已确认可放行发货订单。</div>
-          <div class="meta">说明：新列入待确认的 #29565、#29570、#29573 在收到顾客回复确认前不能判定为可放行；#29541、#29548 确认后已发货，#29550 属发货后回复确认，均不列入本区。</div>
+          <div class="order-line"><span class="order-no">#29565</span><span class="amount">$65.60</span><span class="tag tag-gray">2026-11-04 · 已付款未发货</span><span class="tag tag-green">已确认 · 同色 8 双白色</span></div>
+          <div class="reason"><strong>情况：</strong>同色 8 双白色，Quick check 已于 2026-11-05 发出，顾客已于 2026-11-06 00:19 回复确认全要同色白色（Looks good）。</div>
+          <div class="meta">说明：#29570、#29573 在收到顾客回复确认前不能判定为可放行；#29541、#29548 确认后已发货，#29550 属发货后回复确认，均不列入本区。</div>
         </div>
-        <div class="action"><b>下一步</b>上方待确认订单确认解决后，先移入本区放行发货；发货完成即移除。</div>
+        <div class="action"><b>下一步</b>可放行包货发货；发货完成（FULFILLED）后即从本区拿掉。</div>
       </div>
     </div>
   </section>
@@ -233,9 +226,9 @@
       <div class="row">
         <div class="row-main">
           <div class="reason"><strong>变化说明：</strong>上一批 #29536–#29556 已从本区拿掉（不再是已付款未发货）。超 3 天未发货：<strong>0 单</strong>。</div>
-          <div class="meta">其中 #29565、#29570、#29573 同时列在上方发货前确认区，须先确认再发货，不要直接包货。</div>
+          <div class="meta">其中 #29570、#29573 同时列在上方发货前确认区，须先确认再发货，不要直接包货。</div>
         </div>
-        <div class="action"><b>下一步</b>其余订单按正常发货流程处理；确认区 3 单先确认再发货。</div>
+        <div class="action"><b>下一步</b>其余订单按正常发货流程处理；确认区 2 单先确认再发货。</div>
       </div>
       <div class="row alert-row">
         <div class="row-main">
@@ -636,10 +629,17 @@
       </div>
       <div class="row alert-row">
         <div class="row-main">
-          <div class="order-line"><span class="order-no">#29565</span><span class="order-no">#29570</span><span class="order-no">#29573</span><span class="tag tag-red">待发送 · Quick check</span></div>
-          <div class="reason"><strong>事项：</strong>发货前确认 3 单的 Quick check 待发；收到顾客回复确认前不要发货。</div>
+          <div class="order-line"><span class="order-no">#29570</span><span class="order-no">#29573</span><span class="tag tag-red">待发送 · Quick check</span></div>
+          <div class="reason"><strong>事项：</strong>发货前确认 2 单的 Quick check 待发；收到顾客回复确认前不要发货。</div>
         </div>
         <div class="action"><b>待用户操作</b>发送 Quick check；收到顾客回复确认前不要发货。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29565</span><span class="tag tag-green">已确认 · 已移入可放行区</span></div>
+          <div class="reason"><strong>事项：</strong>Quick check 已发，顾客已于 2026-11-06 00:19 回复确认（Looks good），已移入已确认可放行区，不再列入待发送提醒。</div>
+        </div>
+        <div class="action"><b>状态</b>已确认，不再提醒。</div>
       </div>
       <div class="row">
         <div class="row-main">
