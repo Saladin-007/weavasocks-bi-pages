@@ -145,8 +145,8 @@
       <a class="kpi red" href="#sec-ship" aria-label="过期支付异常 1 单，点击定位到待发货区过期支付部分"><div class="num">1 <small>单</small></div><div class="label">过期支付异常</div><div class="desc">#28820 · EXPIRED / UNFULFILLED · $92.57 · 单独列</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-preconfirm" aria-label="发货前需确认 3 单，点击定位到发货前需确认订单汇总区"><div class="num">3 <small>单</small></div><div class="label">发货前需确认</div><div class="desc">#29570 Quick check 已发待回复、#29573 Quick check 待发、#29597 地址待更正</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 1 单，点击定位到已确认可放行发货订单区"><div class="num">1 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">#29565 · 顾客已回复确认（Looks good）</div><span class="go">查看 ↓</span></a>
-      <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 9 单，点击定位到待决定区"><div class="num">9 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">均为已发货待决定 · 未发货待决定无新增</div><span class="go">查看 ↓</span></a>
-      <a class="kpi" href="#sec-final" aria-label="最终决定区 3 单，点击定位到最终决定区"><div class="num">3 <small>单</small></div><div class="label">最终决定区</div><div class="desc">2 单退款已完成 + 1 单补发待操作（#28818）</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 8 单，点击定位到待决定区"><div class="num">8 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">均为已发货待决定 · 未发货待决定无新增</div><span class="go">查看 ↓</span></a>
+      <a class="kpi" href="#sec-final" aria-label="最终决定区 4 单，点击定位到最终决定区"><div class="num">4 <small>单</small></div><div class="label">最终决定区</div><div class="desc">2 单退款已完成 + 2 单补发待操作（#28818、#29348）</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 1 单，点击定位到 17TRACK 区"><div class="num">1 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">#29329 投递失败 · 已在 4PX 跟进区 · 聚合预警不计入</div><span class="go">查看 ↓</span></a>
       <a class="kpi red" href="#sec-timeout" aria-label="派送超时 10 单，点击定位到派送超时区"><div class="num">10 <small>单</small></div><div class="label">派送超时</div><div class="desc">已发货、超过 16 天未送达，见下方专区明细</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-4px" aria-label="需要向 4PX 跟进 14 单，点击定位到 4PX 区"><div class="num">14 <small>单</small></div><div class="label">需要向 4PX 跟进</div><div class="desc">投递失败 / 地址 / 退回 / 延迟 / 无动静，逐单待问</div><span class="go">查看 ↓</span></a>
@@ -248,12 +248,12 @@
 
   <!-- 待决定 -->
   <section id="sec-pending" aria-labelledby="h-pending">
-    <div class="sec-head"><h2 id="h-pending">待决定 — 未决定</h2><span class="count">9 单 · 未决定</span><span class="hint">以下均为未决定，不能写成已决定取消 / 退款 / 换地址 / 补发</span></div>
+    <div class="sec-head"><h2 id="h-pending">待决定 — 未决定</h2><span class="count">8 单 · 未决定</span><span class="hint">以下均为未决定，不能写成已决定取消 / 退款 / 换地址 / 补发</span></div>
     <div class="notice" role="note" style="margin-top:0">
       <p><strong>本区口径：</strong>本区内容是尚未走完核实和决定流程的请求，只能标为<strong>未决定 / 待决定</strong>。已发货的退款 / 退货 / 换货 / 质量类，必须先沟通、定下决定后，才能移入最终决定区。新客 / 复购以 Shopify 顾客订单数为准。</p>
     </div>
 
-    <div class="fb-group-head"><h3>已发货待决定（9 单）</h3><span class="gcount">未决定 · 须先沟通再决定</span></div>
+    <div class="fb-group-head"><h3>已发货待决定（8 单）</h3><span class="gcount">未决定 · 须先沟通再决定</span></div>
     <div class="card">
       <div class="row">
         <div class="row-main">
@@ -319,14 +319,6 @@
         </div>
         <div class="action"><b>下一步 · 待决定</b>待决定 — 由用户定补发还是退款及补发地址；未走完核实与决定流程前，不写成已决定补发。</div>
       </div>
-      <div class="row">
-        <div class="row-main">
-          <div class="order-line"><span class="order-no">#29348</span><span class="amount">$37.69</span><span class="tag tag-amber">未决定 · 免费袜子未收到</span><span class="tag tag-gray">2026-10-27 · 已发货</span></div>
-          <div class="reason"><strong>情况：</strong>顾客称促销码 Freesocks 应送的一双免费袜子未收到（订单确认邮件显示 Freesocks 折扣 -$0.00，订单商品行里没有免费袜子），要求二选一：退一双袜子的钱，或补发免费袜子。</div>
-          <div class="meta">状态：未决定，需与顾客沟通后定补发还是退款。</div>
-        </div>
-        <div class="action"><b>下一步 · 待决定</b>待决定 — 先与顾客沟通核实，再定补发免费袜子还是退一双袜子的钱；未走完核实与决定流程前，不写成已决定补发或退款。</div>
-      </div>
     </div>
 
     <div class="fb-group-head"><h3>未发货待决定</h3><span class="gcount">无新增</span></div>
@@ -344,7 +336,7 @@
 
   <!-- 最终决定 -->
   <section id="sec-final" aria-labelledby="h-final">
-    <div class="sec-head"><h2 id="h-final">最终决定</h2><span class="count">3 单</span><span class="hint">只放走完流程后定下来的决定 · 2 单退款已完成、1 单补发待操作</span></div>
+    <div class="sec-head"><h2 id="h-final">最终决定</h2><span class="count">4 单</span><span class="hint">只放走完流程后定下来的决定 · 2 单退款已完成、2 单补发待操作</span></div>
     <div class="card">
       <div class="row">
         <div class="row-main">
@@ -369,6 +361,14 @@
           <div class="meta">补发操作待用户安排，操作完成前继续提醒。</div>
         </div>
         <div class="action"><b>下一步 · 待用户操作</b>安排换大码 8 双补发；完成前每日继续提醒。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29348</span><span class="amount">$37.69</span><span class="tag tag-amber">最终决定 · 补发待操作</span><span class="tag tag-gray">2026-10-27 · 已发货</span></div>
+          <div class="reason"><strong>情况：</strong>顾客称 Freesocks 促销赠送的一双免费袜子未收到（订单确认邮件显示 Freesocks 折扣 -$0.00，商品行无免费袜子）；Emma 2026-11-05 已回复顾客：按 All Sales Final 政策不退部分款，若未收到赠品可免费另寄一双女袜；顾客 2026-11-06 10:50 回复确认包裹密封完好、未见免费袜子，要求寄送赠品袜。最终决定为免费补寄一双赠品袜，不退款。</div>
+          <div class="meta">补发操作待用户安排，操作完成前继续提醒。</div>
+        </div>
+        <div class="action"><b>下一步 · 待用户操作</b>安排免费补寄一双赠品袜；完成前每日继续提醒。</div>
       </div>
     </div>
   </section>
@@ -659,6 +659,13 @@
       </div>
       <div class="row alert-row">
         <div class="row-main">
+          <div class="order-line"><span class="order-no">#29348</span><span class="tag tag-red">待操作 · 补发</span></div>
+          <div class="reason"><strong>事项：</strong>安排免费补寄一双赠品袜（最终决定已定，见最终决定区）。</div>
+        </div>
+        <div class="action"><b>待用户操作</b>安排免费补寄一双赠品袜；完成前继续提醒。</div>
+      </div>
+      <div class="row alert-row">
+        <div class="row-main">
           <div class="order-line"><span class="order-no">#29047</span><span class="tag tag-red">待操作 · 补发</span></div>
           <div class="reason"><strong>事项：</strong>补发 2 双白色 Men's 60% Bamboo Fiber Anti-Odor Crew Socks（White, US Men's 7–10.5），免费补发，原单不用退回。原因：顾客穿 2 次后脚趾处破洞，白色款受影响，顾客已接受补发。</div>
         </div>
@@ -708,8 +715,8 @@
       </div>
       <div class="row">
         <div class="row-main">
-          <div class="order-line"><span class="tag tag-amber">待决定客诉 9 单</span></div>
-          <div class="reason"><strong>事项：</strong>待决定客诉 #29043、#29047、#28716、#28679、#29025、#27510、#29112、#28979、#29348 的最终处理决定。</div>
+          <div class="order-line"><span class="tag tag-amber">待决定客诉 8 单</span></div>
+          <div class="reason"><strong>事项：</strong>待决定客诉 #29043、#29047、#28716、#28679、#29025、#27510、#29112、#28979 的最终处理决定。</div>
         </div>
         <div class="action"><b>待用户操作</b>逐单定最终处理决定后再移入最终决定区。</div>
       </div>
