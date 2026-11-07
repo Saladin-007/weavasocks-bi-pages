@@ -145,7 +145,7 @@
       <a class="kpi red" href="#sec-ship" aria-label="过期支付异常 1 单，点击定位到待发货区过期支付部分"><div class="num">1 <small>单</small></div><div class="label">过期支付异常</div><div class="desc">#28820 · EXPIRED / UNFULFILLED · $92.57 · 单独列</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-preconfirm" aria-label="发货前需确认 3 单，点击定位到发货前需确认订单汇总区"><div class="num">3 <small>单</small></div><div class="label">发货前需确认</div><div class="desc">#29610、#29616、#29617 同色 8 双，Quick check 均待发</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 0 单，点击定位到已确认可放行发货订单区"><div class="num">0 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">#29565 已确认后于 2026-11-06 发货，本日无可放行订单</div><span class="go">查看 ↓</span></a>
-      <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 10 单，点击定位到待决定区"><div class="num">10 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">均为已发货待决定 · 未发货待决定无新增</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 11 单，点击定位到待决定区"><div class="num">11 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">10 单已发货 + 1 单未发货（#29629）</div><span class="go">查看 ↓</span></a>
       <a class="kpi" href="#sec-final" aria-label="最终决定区 6 单，点击定位到最终决定区"><div class="num">6 <small>单</small></div><div class="label">最终决定区</div><div class="desc">3 单退款已完成 + 3 单补发待操作（#28818、#29348、#29047）</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 1 单，点击定位到 17TRACK 区"><div class="num">1 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">#29329 投递失败 · 第 3 次同单警报 · 新增 Address Corrected 轨迹 · 已在 4PX 跟进区 · 聚合预警不计入</div><span class="go">查看 ↓</span></a>
       <a class="kpi red" href="#sec-timeout" aria-label="派送超时 12 单，点击定位到派送超时区"><div class="num">12 <small>单</small></div><div class="label">派送超时</div><div class="desc">已发货、超过 16 天未送达，见下方专区明细</div><span class="go">查看 ↓</span></a>
@@ -247,7 +247,7 @@
 
   <!-- 待决定 -->
   <section id="sec-pending" aria-labelledby="h-pending">
-    <div class="sec-head"><h2 id="h-pending">待决定 — 未决定</h2><span class="count">10 单 · 未决定</span><span class="hint">以下均为未决定，不能写成已决定取消 / 退款 / 换地址 / 补发</span></div>
+    <div class="sec-head"><h2 id="h-pending">待决定 — 未决定</h2><span class="count">11 单 · 未决定</span><span class="hint">以下均为未决定，不能写成已决定取消 / 退款 / 换地址 / 补发</span></div>
     <div class="notice" role="note" style="margin-top:0">
       <p><strong>本区口径：</strong>本区内容是尚未走完核实和决定流程的请求，只能标为<strong>未决定 / 待决定</strong>。已发货的退款 / 退货 / 换货 / 质量类，必须先沟通、定下决定后，才能移入最终决定区。新客 / 复购以 Shopify 顾客订单数为准。</p>
     </div>
@@ -336,14 +336,15 @@
       </div>
     </div>
 
-    <div class="fb-group-head"><h3>未发货待决定</h3><span class="gcount">无新增</span></div>
+    <div class="fb-group-head"><h3>未发货待决定（1 单）</h3><span class="gcount">未决定 · 须由用户定夺</span></div>
     <div class="card">
       <div class="row">
         <div class="row-main">
-          <div class="order-line"><span class="tag tag-green">无新增未发货客诉</span></div>
-          <div class="reason"><strong>情况：</strong>本日无新增未发货待决定客诉；合并订单请求 #29551 与 #29552 已发货，不再列入。</div>
+          <div class="order-line"><span class="order-no">#29629</span><span class="amount">$33.97</span><span class="tag tag-amber">未决定 · 忘了用 WEAVA 码 / 补折扣请求</span><span class="tag tag-teal">新客</span><span class="tag tag-gray">2026-11-07 · 未发货</span></div>
+          <div class="reason"><strong>情况：</strong>顾客来信称下单时忘了用 WEAVA 折扣码，问能否更正；经核实该单未使用任何折扣码，小计 $25.98 + 运费 $7.99 = $33.97，PAID / UNFULFILLED（未发货），新客（仅 1 单）；WEAVA 码为额外 10% OFF，按小计 $25.98 计应补折扣约 $2.60，顾客实际诉求为补折扣 / 部分退款，尚未决定。</div>
+          <div class="meta">状态：待决定。</div>
         </div>
-        <div class="action"><b>下一步</b>本区无未发货待决定事项。</div>
+        <div class="action"><b>下一步 · 待决定</b>待用户决定是否补折扣 / 部分退款约 $2.60；未走完决定流程前，不写成已决定退款。</div>
       </div>
     </div>
     <p class="legend"><strong>#29137 不进本区：</strong>#29137 顾客 2026-11-05 二次催件属物流跟进，已列入下方 4PX 区，不属待决定退款或补发请求，故不进本区。</p>
@@ -773,10 +774,17 @@
       </div>
       <div class="row">
         <div class="row-main">
-          <div class="order-line"><span class="tag tag-amber">待决定客诉 10 单</span></div>
-          <div class="reason"><strong>事项：</strong>待决定客诉 #29043、#28716、#28679、#29025、#27510、#29112、#28979、#27868、#28715、#29371 的最终处理决定；#29047 已移入最终决定区。</div>
+          <div class="order-line"><span class="tag tag-amber">待决定客诉 11 单</span></div>
+          <div class="reason"><strong>事项：</strong>待决定客诉 #29043、#28716、#28679、#29025、#27510、#29112、#28979、#27868、#28715、#29371、#29629 的最终处理决定；#29047 已移入最终决定区。</div>
         </div>
         <div class="action"><b>待用户操作</b>逐单定最终处理决定后再移入最终决定区。</div>
+      </div>
+      <div class="row alert-row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29629</span><span class="tag tag-red">待决定 · 待用户决定</span></div>
+          <div class="reason"><strong>事项：</strong>WEAVA 折扣补退约 $2.60（顾客忘了用 WEAVA 码，未发货，$33.97），待用户决定是否补折扣 / 部分退款。</div>
+        </div>
+        <div class="action"><b>待用户操作</b>决定是否补退约 $2.60；决定前继续提醒。</div>
       </div>
       <div class="row">
         <div class="row-main">
