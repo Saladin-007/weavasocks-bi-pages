@@ -145,7 +145,7 @@
       <a class="kpi red" href="#sec-ship" aria-label="过期支付异常 1 单，点击定位到待发货区过期支付部分"><div class="num">1 <small>单</small></div><div class="label">过期支付异常</div><div class="desc">#28820 · EXPIRED / UNFULFILLED · $92.57 · 单独列</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-preconfirm" aria-label="发货前需确认 4 单，点击定位到发货前需确认订单汇总区"><div class="num">4 <small>单</small></div><div class="label">发货前需确认</div><div class="desc">#29610、#29616、#29617、#29624 同色 8 双，Quick check 均待发</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 0 单，点击定位到已确认可放行发货订单区"><div class="num">0 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">本日无可放行订单</div><span class="go">查看 ↓</span></a>
-      <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 13 单，点击定位到待决定区"><div class="num">13 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">12 单已发货 + 1 单未发货（#29629）</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 14 单，点击定位到待决定区"><div class="num">14 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">13 单已发货 + 1 单未发货（#29629）</div><span class="go">查看 ↓</span></a>
       <a class="kpi" href="#sec-final" aria-label="最终决定区 6 单，点击定位到最终决定区"><div class="num">6 <small>单</small></div><div class="label">最终决定区</div><div class="desc">3 单退款已完成 + 3 单补发待操作（#28818、#29348、#29047）</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 1 单，点击定位到 17TRACK 区"><div class="num">1 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">#29179 投递失败 · 包裹已处置，已转入 4PX 跟进区；聚合预警不计入</div><span class="go">查看 ↓</span></a>
       <a class="kpi red" href="#sec-timeout" aria-label="派送超时 10 单，点击定位到派送超时区"><div class="num">10 <small>单</small></div><div class="label">派送超时</div><div class="desc">已发货、超过 16 天未送达；#29190、#29206 已核实 2026-11-02 送达，不进区</div><span class="go">查看 ↓</span></a>
@@ -275,12 +275,12 @@
 
   <!-- 待决定 -->
   <section id="sec-pending" aria-labelledby="h-pending">
-    <div class="sec-head"><h2 id="h-pending">待决定 — 未决定</h2><span class="count">13 单 · 未决定</span><span class="hint">以下均为未决定，不能写成已决定取消 / 退款 / 换地址 / 补发</span></div>
+    <div class="sec-head"><h2 id="h-pending">待决定 — 未决定</h2><span class="count">14 单 · 未决定</span><span class="hint">以下均为未决定，不能写成已决定取消 / 退款 / 换地址 / 补发</span></div>
     <div class="notice" role="note" style="margin-top:0">
       <p><strong>本区口径：</strong>本区内容是尚未走完核实和决定流程的请求，只能标为<strong>未决定 / 待决定</strong>。已发货的退款 / 退货 / 换货 / 质量类，必须先沟通、定下决定后，才能移入最终决定区。新客 / 复购以 Shopify 顾客订单数为准。</p>
     </div>
 
-    <div class="fb-group-head"><h3>已发货待决定（12 单）</h3><span class="gcount">未决定 · 须先沟通再决定</span></div>
+    <div class="fb-group-head"><h3>已发货待决定（13 单）</h3><span class="gcount">未决定 · 须先沟通再决定</span></div>
     <div class="card">
       <div class="row">
         <div class="row-main">
@@ -377,6 +377,14 @@
           <div class="meta">状态：待决定。</div>
         </div>
         <div class="action"><b>下一步 · 待决定</b>先核实物流并与顾客沟通，再定处理方案；未决定前不写成已决定退款。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#22051</span><span class="amount">$41.97</span><span class="tag tag-amber">未决定 · 退款请求</span><span class="tag tag-teal">新客</span><span class="tag tag-gray">2026-02-09 · 已发货</span></div>
+          <div class="reason"><strong>情况：</strong>Lite 98% Merino Wool Crew（Burnt Orange / Soft Ivory / Iron Grey / Mustard Yellow），2026-02-09 经 4PX 发货；顾客 2026-06-09 首次来信称袜子穿了两月、脚踝后跟处磨出洞（附照片），要求补发或退款；Emma 2026-06-23 回复请提供订单号，顾客 2026-06-24 回复订单号 #22051（下单邮箱为另一邮箱），此后未再获回复；顾客 2026-10-28 再次来信要求全额退款 $41.97、限 5 个工作日内回复；2026-11-09 00:23 第三次来信跟进，称仍未收到回复，要求告知退款状态与到账时间。新客，1 单。</div>
+          <div class="meta">状态：待决定。</div>
+        </div>
+        <div class="action"><b>下一步 · 待决定</b>先与顾客沟通、了解情况，再定退款处理方案；未决定前不写成已决定退款。</div>
       </div>
     </div>
 
@@ -758,8 +766,8 @@
       </div>
       <div class="row">
         <div class="row-main">
-          <div class="order-line"><span class="tag tag-amber">待决定客诉 13 单</span></div>
-          <div class="reason"><strong>事项：</strong>待决定客诉 #29043、#28716、#28679、#29025、#27510、#29112、#28979、#27868、#28715、#29371、#29147、#29256、#29629 的最终处理决定；#29047 已移入最终决定区。</div>
+          <div class="order-line"><span class="tag tag-amber">待决定客诉 14 单</span></div>
+          <div class="reason"><strong>事项：</strong>待决定客诉 #29043、#28716、#28679、#29025、#27510、#29112、#28979、#27868、#28715、#29371、#29147、#29256、#29629、#22051 的最终处理决定；#29047 已移入最终决定区。</div>
         </div>
         <div class="action"><b>待用户操作</b>逐单定最终处理决定后再移入最终决定区。</div>
       </div>
@@ -783,6 +791,13 @@
           <div class="reason"><strong>事项：</strong>未送达退款请求待决定，$59.04，2026-10-24 已发货（4PX 承运）；顾客称 10 月 23 日下单至今未收到，要求告知能否尽快送达，否则全额退款，等用户定处理办法。</div>
         </div>
         <div class="action"><b>待用户操作</b>定处理办法；未定前继续列着。</div>
+      </div>
+      <div class="row alert-row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#22051</span><span class="tag tag-red">待决定 · 退款请求</span></div>
+          <div class="reason"><strong>事项：</strong>质量问题退款请求待决定，$41.97，2026-02-09 已发货；袜子脚踝后跟磨破，顾客 2026-06-09 首次投诉、10-28 与 11-09 两次跟进催退款，等用户定处理办法。</div>
+        </div>
+        <div class="action"><b>待用户操作</b>定退款处理办法；未定前继续列着。</div>
       </div>
       <div class="row">
         <div class="row-main">
