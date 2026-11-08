@@ -147,7 +147,7 @@
       <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 0 单，点击定位到已确认可放行发货订单区"><div class="num">0 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">本日无可放行订单</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 13 单，点击定位到待决定区"><div class="num">13 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">12 单已发货 + 1 单未发货（#29629）</div><span class="go">查看 ↓</span></a>
       <a class="kpi" href="#sec-final" aria-label="最终决定区 6 单，点击定位到最终决定区"><div class="num">6 <small>单</small></div><div class="label">最终决定区</div><div class="desc">3 单退款已完成 + 3 单补发待操作（#28818、#29348、#29047）</div><span class="go">查看 ↓</span></a>
-      <a class="kpi amber" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 0 单，点击定位到 17TRACK 区"><div class="num">0 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">本日无新增逐单警报，聚合预警不计入</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 1 单，点击定位到 17TRACK 区"><div class="num">1 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">#29179 投递失败 · 包裹已处置，已转入 4PX 跟进区；聚合预警不计入</div><span class="go">查看 ↓</span></a>
       <a class="kpi red" href="#sec-timeout" aria-label="派送超时 10 单，点击定位到派送超时区"><div class="num">10 <small>单</small></div><div class="label">派送超时</div><div class="desc">已发货、超过 16 天未送达；#29190、#29206 已核实 2026-11-02 送达，不进区</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-4px" aria-label="需要向 4PX 跟进 11 单，点击定位到 4PX 区"><div class="num">11 <small>单</small></div><div class="label">需要向 4PX 跟进</div><div class="desc">投递失败 / 地址 / 退回 / 延迟 / 无动静，逐单待问（#29190、#29206 已核实送达拿掉）</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-judge" aria-label="当日新增 Judge.me 五星 0 人，新增 Trustpilot 邀请 0 封，点击定位到好评邀请区"><div class="num">0 <small>人 · 0 封</small></div><div class="label">Judge.me 五星 → Trustpilot 邀请</div><div class="desc">新增五星 0 人 · 新增邀请 0 封 · 待审批 0 封</div><span class="go">查看 ↓</span></a>
@@ -450,18 +450,18 @@
 
   <!-- 17TRACK -->
   <section id="sec-track" aria-labelledby="h-track">
-    <div class="sec-head"><h2 id="h-track">17TRACK 逐单警报（当日新增）</h2><span class="count">0 单</span><span class="hint">只计逐单警报，不使用聚合总数</span></div>
+    <div class="sec-head"><h2 id="h-track">17TRACK 逐单警报（当日新增）</h2><span class="count">1 单</span><span class="hint">只计逐单警报，不使用聚合总数</span></div>
     <div class="card">
-      <div class="row">
+      <div class="row alert-row">
         <div class="row-main">
-          <div class="order-line"><span class="tag tag-green">无新增</span></div>
-          <div class="reason"><strong>情况：</strong>本日无新增逐单警报。</div>
-          <div class="meta">说明：17TRACK 报错本身只是警报，不是最终决定；该单已在下方 4PX 跟进区。</div>
+          <div class="order-line"><span class="order-no">#29179</span><span class="tag tag-red">投递失败 · 包裹已处置</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">发货 2026-10-21</span></div>
+          <div class="reason"><strong>情况：</strong>2026-11-02 Newbury Park, CA 91320 尝试投递失败（地址无效），2026-11-07 21:52 Montebello, CA 90640 包裹已处置（Parcel Disposal），运输 19 天；该单已在下方 4PX 跟进区。</div>
+          <div class="meta">说明：17TRACK 报错本身只是警报，不是最终决定。</div>
         </div>
-        <div class="action"><b>状态</b>本日无新增逐单警报。</div>
+        <div class="action"><b>状态</b>已转入下方 4PX 跟进区。</div>
       </div>
     </div>
-    <p class="legend">本日无新增逐单警报；2026-11-07 02:54 新增的 #29329 投递失败警报（本单第 3 次逐单警报）已转入下方 4PX 跟进区，不再重复列为当日新增；17TRACK 聚合预警按规则不计入逐单警报、不使用聚合总数。</p>
+    <p class="legend">2026-11-08 23:34 新增 #29179 投递失败警报（包裹已处置）已列入本区并转入下方 4PX 跟进区；2026-11-07 02:54 新增的 #29329 投递失败警报（本单第 3 次逐单警报）已转入下方 4PX 跟进区，不再重复列为当日新增；17TRACK 聚合预警按规则不计入逐单警报、不使用聚合总数。</p>
   </section>
 
   <!-- 派送超时 -->
@@ -533,8 +533,8 @@
       </div>
       <div class="row">
         <div class="row-main">
-          <div class="order-line"><span class="order-no">#29179</span><span class="tag tag-amber">超时 · 地址无效投递失败</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">发货 2026-10-21</span></div>
-          <div class="reason"><strong>情况：</strong>最后扫描 2026-11-02 Newbury Park, CA 投递失败（地址无效），停滞 6 天，派送 18 天；顾客 2026-11-03 已再次确认地址无误。</div>
+          <div class="order-line"><span class="order-no">#29179</span><span class="tag tag-red">超时 · 地址无效 · 包裹已处置</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">发货 2026-10-21</span></div>
+          <div class="reason"><strong>情况：</strong>最后扫描 2026-11-07 21:52 Montebello, CA 包裹已处置（Parcel Disposal）；2026-11-02 Newbury Park, CA 投递失败（地址无效），派送 19 天；顾客 2026-11-03 已再次确认地址无误。</div>
         </div>
         <div class="action"><b>状态</b>待 4PX 跟进，见下方。</div>
       </div>
@@ -635,14 +635,14 @@
       </div>
       <div class="row">
         <div class="row-main">
-          <div class="order-line"><span class="order-no">#29179</span><span class="tag tag-amber">地址无效投递失败</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">发货 2026-10-21</span></div>
-          <div class="reason"><strong>补充：</strong>顾客 2026-11-03 已再次确认地址无误并询问常用自提点。本单同时列入上方派送超时区（发货 2026-10-21，派送 17 天）。</div>
+          <div class="order-line"><span class="order-no">#29179</span><span class="tag tag-red">地址无效 · 包裹已处置</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">发货 2026-10-21</span></div>
+          <div class="reason"><strong>补充：</strong>2026-11-07 21:52 包裹已在 Montebello, CA 90640 处置（Parcel Disposal），无法再投递；顾客 2026-11-03 已再次确认地址无误并询问常用自提点。本单同时列入上方派送超时区（发货 2026-10-21，派送 19 天）。</div>
           <div class="track-lines">
             <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003289561139CN" aria-label="复制头程单号 4PX3003289561139CN">4PX3003289561139CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
             <div class="track-line"><span class="track-label">尾程：</span><span class="track-pending">尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补</span></div>
           </div>
         </div>
-        <div class="action"><b>要向 4PX 问</b>地址已确认无误为何仍判无效、是否可重新投递、自提点在哪里。</div>
+        <div class="action"><b>要向 4PX 问</b>包裹已处置的原因、是否可找回或索赔、补发/退款如何处理。</div>
       </div>
       <div class="row">
         <div class="row-main">
