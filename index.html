@@ -142,7 +142,6 @@
     <div class="kpi-grid">
       <a class="kpi" href="#sec-ship" aria-label="已付款未发货 39 单，点击定位到待发货区"><div class="num">39 <small>单</small></div><div class="label">已付款未发货</div><div class="desc">2026-11-06 下单 1 单、2026-11-07 下单 2 单、2026-11-08 下单 5 单、2026-11-09 下单 31 单</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-ship" aria-label="超 3 天未发货 1 单，点击定位到待发货区"><div class="num">1 <small>单</small></div><div class="label">超 3 天未发货</div><div class="desc">#29610 · 2026-11-06 下单，已 4 天未发货（同色确认中，见发货前确认区）；#29616、#29624 为 2026-11-07 下单，满 3 天，未超 3 天</div><span class="go">查看 ↓</span></a>
-      <a class="kpi red" href="#sec-ship" aria-label="过期支付异常 1 单，点击定位到待发货区过期支付部分"><div class="num">1 <small>单</small></div><div class="label">过期支付异常</div><div class="desc">#28820 · EXPIRED / UNFULFILLED · $92.57 · 单独列</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-preconfirm" aria-label="发货前需确认 12 单，点击定位到发货前需确认订单汇总区"><div class="num">12 <small>单</small></div><div class="label">发货前需确认</div><div class="desc">#29610、#29616、#29624、#29657、#29661、#29664、#29678、#29692、#29698、#29713 同色 8 双及以上待确认，Quick check 已发出（#29692 于 2026-11-09 17:40 发出；#29698、#29713 于 2026-11-10 08:08 发出；其余 7 单于 2026-11-09 发出）；另 #29665 已发货后补发确认（顾客已于 2026-11-09 回复确认）、#29677 已发货后补发确认（等待顾客回复）；10 单未发货、等待顾客回复确认，收到确认前不要发货</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 2 单，点击定位到已确认可放行发货订单区"><div class="num">2 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">#29617 已确认可放行，同色 8 双 Black，顾客已于 2026-11-09 10:36 回复确认；#29645 已确认可放行，同色 8 双 Slate Blue，顾客已于 2026-11-10 01:10 回复确认</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 14 单，点击定位到待决定区"><div class="num">14 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">13 单已发货 + 2 单未发货（#29629、#29685）</div><span class="go">查看 ↓</span></a>
@@ -294,7 +293,7 @@
 
   <!-- 待发货 -->
   <section id="sec-ship" aria-labelledby="h-ship">
-    <div class="sec-head"><h2 id="h-ship">已付款未发货</h2><span class="count">39 单</span><span class="hint">2026-11-06 下单 1 单、2026-11-07 下单 2 单、2026-11-08 下单 5 单、2026-11-09 下单 31 单 · 超 3 天 1 单 · 过期支付异常另列，不计入 39 单</span></div>
+    <div class="sec-head"><h2 id="h-ship">已付款未发货</h2><span class="count">39 单</span><span class="hint">2026-11-06 下单 1 单、2026-11-07 下单 2 单、2026-11-08 下单 5 单、2026-11-09 下单 31 单 · 超 3 天 1 单</span></div>
     <div class="card">
       <div class="ship-list" aria-label="39 单待发货订单号与金额">
         <span class="ship-chip"><b>#29610</b> $85.28</span>
@@ -343,14 +342,6 @@
           <div class="meta">新单同色核查结果：#29685、#29692–#29721 已逐单核对行项目，4 单达同色 8 双及以上确认门槛（#29685 8 双 Oatmeal、#29692 18 双 White、#29698 8 双 Charcoal、#29713 8 双 White），已列入发货前确认区，Quick check 已发出；其余订单同色最高 4 双，未达门槛。其中确认区 13 单须先确认再发货，不要直接包货；其余订单按正常发货流程处理。备注：$0 订单 #26371（2026-07-09，FULFILLMENT_NOT_REQUIRED，无需发货）不计入本区 39 单。</div>
         </div>
         <div class="action"><b>下一步</b>其余订单按正常发货流程处理；确认区 13 单先确认再发货。</div>
-      </div>
-      <div class="row alert-row">
-        <div class="row-main">
-          <div class="order-line"><span class="order-no">#28820</span><span class="amount">$92.57</span><span class="tag tag-red">过期支付异常 · 单独列</span><span class="tag tag-gray">2026-10-09</span><span class="tag tag-gray">EXPIRED / UNFULFILLED</span></div>
-          <div class="reason"><strong>情况：</strong>过期支付异常，单独列，不当正常待发货。</div>
-          <div class="meta">不要当作普通待发货去催仓库发货。</div>
-        </div>
-        <div class="action"><b>下一步</b>单独核查过期支付 / 支付失效的资金状态，再决定后续处理。</div>
       </div>
     </div>
   </section>
