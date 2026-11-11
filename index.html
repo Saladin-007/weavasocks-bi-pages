@@ -144,8 +144,8 @@
       <a class="kpi teal" href="#sec-ship" aria-label="超 3 天未发货 0 单，点击定位到待发货区"><div class="num">0 <small>单</small></div><div class="label">超 3 天未发货</div><div class="desc">暂无超过 3 天未发货的订单；最旧未发货为 2026-11-08 下单，满 3 天，未超 3 天</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-preconfirm" aria-label="发货前需确认 14 单，点击定位到发货前需确认订单汇总区"><div class="num">14 <small>单</small></div><div class="label">发货前需确认</div><div class="desc">#29657、#29661、#29664、#29678、#29692、#29698、#29713、#29735、#29755 共 9 单未发货、等待顾客回复确认，Quick check 已发出；另 #29665、#29677、#29610、#29616、#29624 共 5 单已发货后补发确认（#29665 顾客已于 2026-11-09 回复确认，其余 4 单等待顾客回复）；#29685 已取消退款完成，从本区拿掉</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 0 单，点击定位到已确认可放行发货订单区"><div class="num">0 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">暂无；#29617、#29645 顾客已确认且已发货（FULFILLED），按规则从本区拿掉</div><span class="go">查看 ↓</span></a>
-      <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 12 单，点击定位到待决定区"><div class="num">12 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">11 单已发货 + 1 单未发货（#29629）</div><span class="go">查看 ↓</span></a>
-      <a class="kpi" href="#sec-final" aria-label="最终决定区 10 单，点击定位到最终决定区"><div class="num">10 <small>单</small></div><div class="label">最终决定区</div><div class="desc">4 单退款已完成 + 1 单退款待操作（#29147 退 $52.48）+ 4 单补发待操作（#28818、#29348、#29047、#29065）+ 1 单补发待发（#27868，补发单 #29734 已建）</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 11 单，点击定位到待决定区"><div class="num">11 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">10 单已发货 + 1 单未发货（#29629）</div><span class="go">查看 ↓</span></a>
+      <a class="kpi" href="#sec-final" aria-label="最终决定区 11 单，点击定位到最终决定区"><div class="num">11 <small>单</small></div><div class="label">最终决定区</div><div class="desc">4 单退款已完成 + 1 单退款待操作（#29147 退 $52.48）+ 4 单补发待操作（#28818、#29348、#29047、#29065）+ 1 单补发待发（#27868，补发单 #29734 已建）+ 1 单补发待顾客确认地址（#28979，免费补发 12 双、顾客付 $20，待确认地址后发 invoice）</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 1 单，点击定位到 17TRACK 区"><div class="num">1 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">#29497 投递失败（芝加哥，无门禁码，将退回仓库），2026-11-11 07:55 收到 17TRACK 逐单警报；无对应顾客来信，标为待主动跟进</div><span class="go">查看 ↓</span></a>
       <a class="kpi red" href="#sec-timeout" aria-label="派送超时 10 单，点击定位到派送超时区"><div class="num">10 <small>单</small></div><div class="label">派送超时</div><div class="desc">已发货、超过 16 天未送达；#29190、#29206 已核实 2026-11-02 送达，不进区</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-4px" aria-label="需要向 4PX 跟进 12 单，点击定位到 4PX 区"><div class="num">12 <small>单</small></div><div class="label">需要向 4PX 跟进</div><div class="desc">新增 #29497 投递失败（无门禁码，将退回仓库）</div><span class="go">查看 ↓</span></a>
@@ -352,12 +352,12 @@
 
   <!-- 待决定 -->
   <section id="sec-pending" aria-labelledby="h-pending">
-    <div class="sec-head"><h2 id="h-pending">待决定 — 未决定</h2><span class="count">12 单 · 未决定</span><span class="hint">以下均为未决定，不能写成已决定取消 / 退款 / 换地址 / 补发</span></div>
+    <div class="sec-head"><h2 id="h-pending">待决定 — 未决定</h2><span class="count">11 单 · 未决定</span><span class="hint">以下均为未决定，不能写成已决定取消 / 退款 / 换地址 / 补发</span></div>
     <div class="notice" role="note" style="margin-top:0">
       <p><strong>本区口径：</strong>本区内容是尚未走完核实和决定流程的请求，只能标为<strong>未决定 / 待决定</strong>。已发货的退款 / 退货 / 换货 / 质量类，必须先沟通、定下决定后，才能移入最终决定区。新客 / 复购以 Shopify 顾客订单数为准。</p>
     </div>
 
-    <div class="fb-group-head"><h3>已发货待决定（11 单）</h3><span class="gcount">未决定 · 须先沟通再决定</span></div>
+    <div class="fb-group-head"><h3>已发货待决定（10 单）</h3><span class="gcount">未决定 · 须先沟通再决定</span></div>
     <div class="card">
       <div class="row">
         <div class="row-main">
@@ -409,14 +409,6 @@
       </div>
       <div class="row">
         <div class="row-main">
-          <div class="order-line"><span class="order-no">#28979</span><span class="amount">$91.15</span><span class="tag tag-amber">未决定 · 标记已送达但顾客称未收到 / 补发意向</span><span class="tag tag-teal">新客</span><span class="tag tag-gray">2026-10-15 · 已发货</span></div>
-          <div class="reason"><strong>情况：</strong>包裹 2026-10-27 标记已送达，顾客称未收到；Emma 2026-10-28 已发 GPS 与签收照片核实，顾客 2026-10-29 确认检查后仍未找到，并提出补发；2026-11-06 04:54 顾客再次来信确认补发寄本人地址也可以。顾客 2026-11-10 14:04 与 14:05 两次来信催促，称未收到回复、正在等补发包裹；本轮 Shopify 核实：该顾客名下仅 #28979 一单（PAID / FULFILLED，2026-10-27 标记已送达，4PX 承运），无补发订单、draft 订单中也无该顾客的补发单；Emma 自 2026-10-29 回复后未再回信，顾客 2026-10-30 的三封来信与 2026-11-06 的来信均未获回复。</div>
-          <div class="meta">状态：待决定。</div>
-        </div>
-        <div class="action"><b>下一步 · 待决定</b>待决定 — 由用户定补发还是退款及补发地址；注意顾客自 2026-10-30 起一直在等补发、但补发单实际尚未建，需用户尽快定夺。</div>
-      </div>
-      <div class="row">
-        <div class="row-main">
           <div class="order-line"><span class="order-no">#28715</span><span class="amount">$56.70</span><span class="tag tag-amber">未决定 · 已送达待顾客确认地址</span><span class="tag tag-teal">新客</span><span class="tag tag-gray">2026-10-05 · 已发货</span></div>
           <div class="reason"><strong>情况：</strong>9 双女款 98% 棉船袜加赠品毛巾，2026-10-05 经 4PX 发货；顾客 2026-11-07 06:39 来信称等了很久仍未收到，担心包裹寄到了旧地址（称已提供更新后的地址），已去旧地址查看也不在，物流只显示城市和州；来信未写订单号，经顾客邮箱在 Shopify 核实为 #28715。2026-11-08 01:14 经 4PX 官网实查，包裹已于 2026-10-15 11:56 送达 Duluth, GA 30096 前门，尾程承运 Speedx，尾程单号不在本区显示；Shopify 收货地址与送达地址一致；Emma 已于 2026-11-08 01:21 发邮件，附 3 张签收照片，请顾客确认上面地址是否正确、并再向家人/邻居确认门口与信箱，未做任何退款或补发承诺。</div>
           <div class="meta">状态：未决定 · 已送达待顾客确认地址。</div>
@@ -464,7 +456,7 @@
 
   <!-- 最终决定 -->
   <section id="sec-final" aria-labelledby="h-final">
-    <div class="sec-head"><h2 id="h-final">最终决定</h2><span class="count">10 单</span><span class="hint">只放走完流程后定下来的决定 · 4 单退款已完成、1 单退款待操作、4 单补发待操作、1 单补发待发</span></div>
+    <div class="sec-head"><h2 id="h-final">最终决定</h2><span class="count">11 单</span><span class="hint">只放走完流程后定下来的决定 · 4 单退款已完成、1 单退款待操作、4 单补发待操作、1 单补发待发 + 1 单补发待顾客确认地址（#28979，免费补发 12 双、顾客付 $20，待确认地址后发 invoice）</span></div>
     <div class="card">
       <div class="row">
         <div class="row-main">
@@ -545,6 +537,14 @@
           <div class="meta">退款待用户在 Shopify 操作，操作完成前继续提醒。</div>
         </div>
         <div class="action"><b>下一步 · 待用户操作</b>在 Shopify 退 $52.48 到原支付方式；完成前每日继续提醒。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#28979</span><span class="amount">$91.15</span><span class="tag tag-amber">最终决定 · 补发待顾客确认地址</span><span class="tag tag-teal">新客</span><span class="tag tag-gray">2026-10-15 · 已发货</span></div>
+          <div class="reason"><strong>情况：</strong>包裹 2026-10-27 标记已送达，顾客称未收到；Emma 2026-10-28 已发 GPS 与签收照片核实，顾客 2026-10-29 确认检查后仍未找到，并提出补发；2026-11-06 04:54 顾客再次来信确认补发寄本人地址也可以。顾客 2026-11-10 14:04 与 14:05 两次来信催促（写在 Emma 回信之前）。Emma 2026-11-10 14:38 已回信：原单按承运商记录视为已送达关闭、无法重开；免费补发同款 12 双，顾客付 $20 运费和 processing fee；请顾客确认可送达地址，确认后发 $20 invoice。补发单尚未建。</div>
+          <div class="meta">状态：最终决定 · 补发待顾客确认地址。补发单尚未建，建单前继续提醒。</div>
+        </div>
+        <div class="action"><b>下一步 · 待顾客确认地址</b>等顾客确认可送达地址；确认后发 $20 invoice，收款后建补发单；建单前每日继续提醒。</div>
       </div>
     </div>
   </section>
@@ -885,8 +885,8 @@
       </div>
       <div class="row">
         <div class="row-main">
-          <div class="order-line"><span class="tag tag-amber">待决定客诉 12 单</span></div>
-          <div class="reason"><strong>事项：</strong>待决定客诉 #29043、#28716、#28679、#29025、#27510、#29112、#28979、#28715、#29371、#29256、#29629、#22051 的最终处理决定；#29047、#27868、#29147 已移入最终决定区（#27868 补发单 #29734 已建，待仓库发货；#29147 退 $52.48 待操作）。</div>
+          <div class="order-line"><span class="tag tag-amber">待决定客诉 11 单</span></div>
+          <div class="reason"><strong>事项：</strong>待决定客诉 #29043、#28716、#28679、#29025、#27510、#29112、#28715、#29371、#29256、#29629、#22051 的最终处理决定；#29047、#27868、#29147 已移入最终决定区（#27868 补发单 #29734 已建，待仓库发货；#29147 退 $52.48 待操作）。#28979 已定免费补发同款 12 双、顾客付 $20（Emma 2026-11-10 14:38 已发邮件），现等顾客确认可送达地址，确认后发 $20 invoice。</div>
         </div>
         <div class="action"><b>待用户操作</b>逐单定最终处理决定后再移入最终决定区。</div>
       </div>
