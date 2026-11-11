@@ -525,12 +525,12 @@
       <section id="site-audit">
         <div class="sec-head">
           <span class="no">08</span><h2>站内审查：无重大 Bug</h2>
-          <p>站内审查 · 2026 年 11 月 10 日 08:00（北京时间）· 审查方式：普通美国顾客、无登录实测；未下单、未输入支付信息、未改店铺设置。</p>
+          <p>站内审查 · 2026 年 11 月 11 日 08:00（北京时间）· 审查方式：普通美国顾客、无登录实测；未下单、未输入支付信息、未改店铺设置。</p>
         </div>
         <div class="audit-ok" role="note">
           <div class="badge" aria-hidden="true">✓</div>
           <div>
-            <h3>2026-11-10 08:00 站内审查（北京时间）——结论：无重大 Bug。</h3>
+            <h3>2026-11-11 08:00 站内审查（北京时间）——结论：无重大 Bug。</h3>
             <p>方式：普通美国顾客、无登录实测；未下单、未输入支付信息、未改店铺设置。下单链路实测畅通，未发现会阻断下单的重大问题；事后测试商品已移除，购物车为空。以下小问题均不算重大 Bug，不影响下单。</p>
           </div>
         </div>
@@ -538,40 +538,39 @@
           <div class="card">
             <h3>实测通过</h3>
             <ol class="audit-list">
-              <li><b>首页：</b>正常打开，无 404、无空白，Black Friday Pre-Sale 横幅正常（滚动条“Black Friday Presale Live — Black Friday Prices, Price Protected.”，主视觉“BLACK FRIDAY PRE-SALE / Black Friday Warmth &amp; Ease / Up to 50% Off Awaits”），图片 12 张解码、0 破损；Spin 弹窗未自动弹出，点右侧“Special offers”小组件后出现、可 X 关闭。 <span class="pass">通过</span></li>
-              <li><b>主推 Dual-Knit 产品页：</b>$15.99、In Stock（显示“25 in stock”“3 sold in last 24h”），9 色可选（点 White、Black、Camel 切换成功），仅 US Women's 5–9；3 款 Slightly Thinner $13.99。 <span class="pass">通过</span></li>
-              <li><b>集合页（Women + Mid-Weight 筛选）：</b>57 款（与昨日持平），图片 41 张解码、0 破损。 <span class="pass">通过</span></li>
-              <li><b>Bundle 三档：</b>均出现且价格正确（8 双 $104.88 / 18 双 $195.66 / 30 双 $258.90）；8 双档加购成功（8 件、$104.96、省 $22.96）；18 双档加购成功（后已移除）；30 双档仅核对显示、未加购。 <span class="pass">通过</span></li>
-              <li><b>购物车与结账：</b>购物车页正常（8 件、小计 $104.96）；结账可达付款步（信用卡、PayPal、Venmo、Klarna、Afterpay、Affirm、Google Pay / Apple Pay），只到付款步为止，未填支付信息、未下单。事后测试商品已移除，购物车为空。 <span class="pass">通过</span></li>
+              <li><b>首页：</b>正常打开，无 404、无空白，Black Friday Pre-Sale 横幅正常（滚动条“Black Friday Presale Live — Black Friday Prices, Price Protected.”，主视觉“BLACK FRIDAY PRE-SALE / Black Friday Warmth &amp; Ease / Up to 50% Off Awaits”），图片 11 张解码、0 破损；Spin 弹窗在首页两次加载均未自动出现，在产品页出现（“Spin for a Surprise! SPIN TO WIN”）、可 X 关闭。 <span class="pass">通过</span></li>
+              <li><b>主推 Dual-Knit 产品页：</b>$15.99、In Stock，9 色可选（点 White、Yellow Heather、Heather Grey、Camel 切换成功），仅 US Women's 5–9；3 款 Slightly Thinner $13.99。初载 4 张缩略图短暂待加载（懒加载），复查 0 破损。 <span class="pass">通过</span></li>
+              <li><b>集合页（Women + Mid-Weight 筛选）：</b>58 款（昨日 57 款，多 1 款），图片 41 张解码、0 破损；筛选应用时数量短暂仍显示 177、随后落到 58。 <span class="pass">通过</span></li>
+              <li><b>Bundle 三档：</b>均出现且价格正确（8 双 $104.88 / 18 双 $195.66 / 30 双 $258.90），每档点开均有颜色数量选择器；8 双档加购成功（8 件、$104.96）；18 双档加购成功（26 件、合计 $282.88）；30 双档仅核对显示、未加购。 <span class="pass">通过</span></li>
+              <li><b>购物车与结账：</b>购物车页正常（26 件、小计 $282.88）；结账可达付款步（PayPal、Venmo、信用卡、Klarna、Afterpay、Affirm、Google Pay / Apple Pay 及本地支付方式），只到付款步为止，未填支付信息、未下单；结账显示 TOTAL SAVINGS $132.86。事后测试商品已移除，购物车为空。 <span class="pass">通过</span></li>
             </ol>
           </div>
           <div class="card">
             <h3>后台核对（Shopify 实查）</h3>
             <ul class="audit-list">
-              <li><b>Dual-Knit 女款：</b>ACTIVE，总库存 17,934（昨日 17,939，减 5 属正常售出），6 色 $15.99、3 款 Slightly Thinner $13.99，全部可售，与前台一致。</li>
-              <li><b>平针女款：</b>ACTIVE，6 色 $15.99，总库存 5,975（昨日 5,978，减 3）。</li>
-              <li><b>男款平针：</b>ACTIVE，总库存 5,990（与昨日持平）。</li>
-              <li><b>男款 Dual-Knit：</b>ACTIVE，总库存 5,989（昨日 5,990，减 1）。</li>
+              <li><b>Dual-Knit 女款：</b>ACTIVE，总库存 17,915（昨日 17,934，减 19 属正常售出），6 色 $15.99、3 款 Slightly Thinner $13.99，全部可售，与前台一致。</li>
+              <li><b>平针女款：</b>ACTIVE，6 色 $15.99，总库存 5,975（与昨日持平）。</li>
+              <li><b>男款平针：</b>ACTIVE，6 色 $15.99，总库存 5,990（与昨日持平）。</li>
+              <li><b>男款 Dual-Knit：</b>ACTIVE，6 色 $15.99，总库存 5,988（昨日 5,989，减 1）。</li>
             </ul>
             <h3 style="margin-top:14px">漏斗对照</h3>
             <ul class="audit-list">
-              <li>北京时间 11 月 10 日截至约 07:57 已 23 单 / $1,065.46，全部 PAID（#29699–#29721）；11 月 9 日同期 20 单 / $1,265.88。单量高于昨日同期，金额低约 16% 系客单价回落（$46.32 vs $63.29），订单持续流入，无断崖式下跌。</li>
-              <li>注：昨日审计记同期为 19 单 / $1,223.93，漏计 #29680（$41.95，23:59:35Z 落在窗口内），今次按完整窗口修正为 20 单 / $1,265.88。</li>
+              <li>北京时间 11 月 11 日截至约 08:05 已 14 单 / $787.59，全部 PAID（#29741–#29754，最新 #29754 北京时间 06:14）；11 月 10 日同期 23 单 / $1,065.46。单量少 9 单（−39%）、金额低约 26%，但客单价回升（$56.26 vs $46.32），订单整夜持续流入、无断站；下单链路实测畅通，未发现站内原因导致的转化断崖，属夜间小样本波动。</li>
             </ul>
           </div>
         </div>
         <div class="card" style="margin-top:12px">
           <h3>小问题 <span class="tag warn">不算重大 Bug · 不影响下单</span></h3>
           <ul class="audit-list">
-            <li><b>$0.08 四舍五入差异：</b>8 双档按钮 $104.88 vs 购物车 8×$13.12=$104.96（与昨日相同）。</li>
-            <li><b>Bundle 叠加计价：</b>混加 18 双档后两行均按 $10.88/双重定价、合计 $282.88（与两档标价之和 $300.54 不符，属 bundle 应用叠加计价，未影响单档下单）。</li>
-            <li><b>Shipping Protection：</b>$2.35 购物车页显示已勾选但未计入小计与结账总额（与昨日相同，未影响下单）。</li>
-            <li><b>图片初载：</b>有短暂空白占位、随后加载完成，0 破损。</li>
-            <li><b>WOMEN 大菜单：</b>偶会遮挡筛选侧栏、点页面空白处可关闭。</li>
-            <li><b>Spin 弹窗：</b>不自动出现、只从右侧“Special offers”小组件打开。</li>
+            <li><b>$0.08 四舍五入差异：</b>8 双档按钮 $104.88 vs 购物车 8×$13.12=$104.96（与昨日相同）；18 双档亦然（$195.66 vs 18×$10.88=$195.84）。</li>
+            <li><b>Bundle 叠加计价：</b>混加 18 双档后两行均按 $10.88/双重定价、合计 $282.88（与两档标价之和 $300.54 不符，对顾客有利，未影响单档下单；与昨日相同）。</li>
+            <li><b>购物车移除 bundle 行不顺畅（本次新发现）：</b>点 Remove 两次无反应、数量框输 0 被忽略，须逐件减到 1 件后 Remove 才生效；减量过程中曾出现 “Sorry, looks like we don't have enough of this product” 横幅、中间小计波动（6 件 $112.39 高于 8 件 $104.96），最终恢复正常。未阻断加购与结账，不算重大 Bug，但值得留意。</li>
+            <li><b>Shipping Protection：</b>显示价随购物车件数变化（26 件 $5.65、8 件 $2.35、1 件 $0.98），未计入小计与结账总额（与昨日相同，未影响下单）。</li>
+            <li><b>图片初载：</b>产品页缩略图与集合页有短暂空白占位、随后加载完成，0 破损。</li>
+            <li><b>Spin 弹窗：</b>首页两次加载均未自动出现（与昨日相同）。</li>
           </ul>
         </div>
-        <p class="foot" style="font-size:12px;color:var(--ink3);margin-top:10px;line-height:1.6">审查时间：2026 年 11 月 10 日 08:00（北京时间）。审查频率：每天一次，早上 8:00（北京时间）同步。</p>
+        <p class="foot" style="font-size:12px;color:var(--ink3);margin-top:10px;line-height:1.6">审查时间：2026 年 11 月 11 日 08:00（北京时间）。审查频率：每天一次，早上 8:00（北京时间）同步。</p>
       </section>
 
       <!-- 9 actions -->
