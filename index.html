@@ -142,8 +142,8 @@
     <div class="kpi-grid">
       <a class="kpi" href="#sec-ship" aria-label="已付款未发货 35 单，点击定位到待发货区"><div class="num">35 <small>单</small></div><div class="label">已付款未发货</div><div class="desc">2026-11-08 下单 4 单、2026-11-09 下单 4 单、2026-11-10 下单 27 单</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-ship" aria-label="超 3 天未发货 0 单，点击定位到待发货区"><div class="num">0 <small>单</small></div><div class="label">超 3 天未发货</div><div class="desc">暂无超过 3 天未发货的订单；最旧未发货为 2026-11-08 下单，满 3 天，未超 3 天</div><span class="go">查看 ↓</span></a>
-      <a class="kpi amber" href="#sec-preconfirm" aria-label="发货前需确认 18 单，点击定位到发货前需确认订单汇总区"><div class="num">18 <small>单</small></div><div class="label">发货前需确认</div><div class="desc">#29657、#29661、#29664、#29678、#29692、#29698、#29713、#29735、#29755、#29765、#29767、#29769、#29770 共 13 单未发货、等待顾客回复确认，Quick check 已发出；另 #29665、#29677、#29610、#29616、#29624 共 5 单已发货后补发确认（#29665 顾客已于 2026-11-09 回复确认，其余 4 单等待顾客回复）；#29685 已取消退款完成，从本区拿掉</div><span class="go">查看 ↓</span></a>
-      <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 0 单，点击定位到已确认可放行发货订单区"><div class="num">0 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">暂无；#29617、#29645 顾客已确认且已发货（FULFILLED），按规则从本区拿掉</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-preconfirm" aria-label="发货前需确认 17 单，点击定位到发货前需确认订单汇总区"><div class="num">17 <small>单</small></div><div class="label">发货前需确认</div><div class="desc">#29657、#29661、#29664、#29678、#29692、#29698、#29713、#29735、#29755、#29765、#29769、#29770 共 12 单未发货、等待顾客回复确认，Quick check 已发出；另 #29665、#29677、#29610、#29616、#29624 共 5 单已发货后补发确认（#29665 顾客已于 2026-11-09 回复确认，其余 4 单等待顾客回复）；#29685 已取消退款完成，从本区拿掉；#29767 顾客已确认，已移入已确认可放行区</div><span class="go">查看 ↓</span></a>
+      <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 1 单，点击定位到已确认可放行发货订单区"><div class="num">1 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">#29767 顾客已于 2026-11-12 02:12 回复确认（Looks good），可放行发货；#29617、#29645 顾客已确认且已发货（FULFILLED），按规则从本区拿掉</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 12 单，点击定位到待决定区"><div class="num">12 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">11 单已发货 + 1 单未发货（#29629）</div><span class="go">查看 ↓</span></a>
       <a class="kpi" href="#sec-final" aria-label="最终决定区 11 单，点击定位到最终决定区"><div class="num">11 <small>单</small></div><div class="label">最终决定区</div><div class="desc">4 单退款已完成 + 1 单退款已完成（#29147 退 $52.48、不再提醒）+ 4 单补发待操作（#28818、#29348、#29047、#29065）+ 1 单补发待发（#27868，补发单 #29734 已建）+ 1 单补发待顾客确认地址（#28979，免费补发 12 双、顾客付 $20，待确认地址后发 invoice）</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 2 单，点击定位到 17TRACK 区"><div class="num">2 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">#29497 投递失败（芝加哥，无门禁码，将退回仓库），2026-11-11 07:55 收到 17TRACK 逐单警报；顾客 2026-11-11 11:48 已回信：无门禁码，建议放 Alvarez Hardware 前台、问能否安排有人签收派送；新增 #29556 投递失败（无门禁、将重新派送）</div><span class="go">查看 ↓</span></a>
@@ -156,7 +156,7 @@
 
   <!-- 发货前需确认订单汇总 -->
   <section id="sec-preconfirm" aria-labelledby="h-preconfirm">
-    <div class="sec-head"><h2 id="h-preconfirm">发货前需确认订单汇总</h2><span class="count">18 单</span><span class="hint">没收到回复不能判定为可放行</span></div>
+    <div class="sec-head"><h2 id="h-preconfirm">发货前需确认订单汇总</h2><span class="count">17 单</span><span class="hint">没收到回复不能判定为可放行</span></div>
     <div class="card">
       <div class="row">
         <div class="row-main">
@@ -281,14 +281,6 @@
       </div>
       <div class="row">
         <div class="row-main">
-          <div class="order-line"><span class="order-no">#29767</span><span class="amount">$65.60</span><span class="tag tag-gray">2026-11-11 · 已付款未发货</span><span class="tag tag-amber">待确认 · 同色 8 双 White</span></div>
-          <div class="reason"><strong>情况：</strong>同色 8 双 White（Men's 99% Supima® Cotton Ultra-Soft Mesh Crew Socks — White，US Men's 7–10.5，8 双 White），达同色 8 双及以上确认门槛；2026-11-11 22:20 下单，PAID / UNFULFILLED；Quick check 已于 2026-11-11 22:40 发出，等待顾客回复确认。</div>
-          <div class="meta">状态：收到顾客回复确认前不要发货。</div>
-        </div>
-        <div class="action"><b>下一步 · 待确认</b>已发送 Quick check；收到顾客回复确认（Looks good / 全同色）前不要发货。</div>
-      </div>
-      <div class="row">
-        <div class="row-main">
           <div class="order-line"><span class="order-no">#29769</span><span class="amount">$58.50</span><span class="tag tag-gray">2026-11-11 · 已付款未发货</span><span class="tag tag-amber">待确认 · 同色 8 双 All White</span></div>
           <div class="reason"><strong>情况：</strong>同色 8 双 All White（Kids' Soft Macaron 97% Long-Staple Cotton 4-Pack 2 包 All White，M + XL，共 8 双），达同色 8 双及以上确认门槛；Quick check 已于 2026-11-12 00:15 发出，等待顾客回复确认。</div>
           <div class="meta">状态：收到顾客回复确认前不要发货。</div>
@@ -314,21 +306,24 @@
     <p class="legend"><strong>#29597 已从本区拿掉：</strong>#29597（$19.98）地址更正（补门牌号 2094）尚未操作即已于 2026-11-06 发货（FULFILLED），从本区拿掉，地址事项随发货结束跟进。</p>
     <p class="legend"><strong>#29617 已从本区拿掉：</strong>#29617（$73.61，同色 8 双 Black）顾客已于 2026-11-09 10:36 回复确认全要同色黑色（All black），已移入已确认可放行区。</p>
     <p class="legend"><strong>#29645 已从本区拿掉：</strong>#29645（$65.60，同色 8 双 Slate Blue）顾客已于 2026-11-10 01:10 回复确认全要同色 Slate Blue（Looks good），已移入已确认可放行区。</p>
+    <p class="legend"><strong>#29767 已从本区拿掉：</strong>#29767（$65.60，同色 8 双 White）顾客已于 2026-11-12 02:12 回复确认全要同色 White（Looks good），已移入已确认可放行区。</p>
     <p class="legend"><strong>#29685 已从本区拿掉：</strong>#29685（$65.60）顾客称下单失误要求取消，用户已批准，确认邮件已于 2026-11-10 12:15 发出，Shopify 已显示 REFUNDED / FULFILLMENT_NOT_REQUIRED，取消与全额退款均已完成。</p>
   </section>
 
   <!-- 已确认可放行发货订单 -->
   <section id="sec-releasable" aria-labelledby="h-releasable">
-    <div class="sec-head"><h2 id="h-releasable">已确认可放行发货订单</h2><span class="count">0 单</span><span class="hint">确认问题已解决、可放行包货发货的订单才列入本区 · 正常发货（FULFILLED）后即拿掉</span></div>
+    <div class="sec-head"><h2 id="h-releasable">已确认可放行发货订单</h2><span class="count">1 单</span><span class="hint">确认问题已解决、可放行包货发货的订单才列入本区 · 正常发货（FULFILLED）后即拿掉</span></div>
     <div class="card">
       <div class="row">
         <div class="row-main">
-          <div class="reason"><strong>暂无。</strong>#29617（$73.61，同色 8 双 Black）顾客已于 2026-11-09 10:36 回复确认，Shopify 实查已发货（FULFILLED），按规则从本区拿掉；#29645（$65.60，同色 8 双 Slate Blue）顾客已于 2026-11-10 01:10 回复确认，Shopify 实查已发货（FULFILLED），按规则从本区拿掉。</div>
-          <div class="meta">状态：本区暂无订单。</div>
+          <div class="order-line"><span class="order-no">#29767</span><span class="amount">$65.60</span><span class="tag tag-gray">2026-11-11 · 已付款未发货</span><span class="tag tag-green">已确认 · 同色 8 双 White</span></div>
+          <div class="reason"><strong>情况：</strong>同色 8 双 White（Men's 99% Supima® Cotton Ultra-Soft Mesh Crew Socks — White，US Men's 7–10.5，8 双 White），达同色 8 双及以上确认门槛；2026-11-11 22:20 下单，PAID / UNFULFILLED；Quick check 已于 2026-11-11 22:40 发出，顾客已于 2026-11-12 02:12 回复确认（Looks good），确认全 8 双 White 无误。</div>
+          <div class="meta">状态：已确认可放行发货。</div>
         </div>
-        <div class="action"><b>状态</b>暂无可放行订单。</div>
+        <div class="action"><b>下一步 · 已确认可放行</b>可放行包货发货；正常发货（FULFILLED）后从本区拿掉。</div>
       </div>
     </div>
+    <p class="legend"><strong>#29617、#29645 已从本区拿掉：</strong>#29617（$73.61，同色 8 双 Black）顾客已于 2026-11-09 10:36 回复确认，Shopify 实查已发货（FULFILLED），按规则从本区拿掉；#29645（$65.60，同色 8 双 Slate Blue）顾客已于 2026-11-10 01:10 回复确认，Shopify 实查已发货（FULFILLED），按规则从本区拿掉。</p>
   </section>
 
   <!-- 待发货 -->
@@ -909,10 +904,10 @@
       </div>
       <div class="row alert-row">
         <div class="row-main">
-          <div class="order-line"><span class="order-no">#29657</span><span class="order-no">#29661</span><span class="order-no">#29664</span><span class="order-no">#29678</span><span class="order-no">#29692</span><span class="order-no">#29698</span><span class="order-no">#29713</span><span class="order-no">#29735</span><span class="order-no">#29755</span><span class="order-no">#29765</span><span class="order-no">#29677</span><span class="order-no">#29610</span><span class="order-no">#29616</span><span class="order-no">#29624</span><span class="order-no">#29767</span><span class="order-no">#29769</span><span class="order-no">#29770</span><span class="tag tag-red">已发送 · 等待顾客回复</span></div>
-          <div class="reason"><strong>事项：</strong>十七单均为同色 8 双及以上，Quick check 已发出（#29692 于 2026-11-09 17:40 发出；#29698、#29713 于 2026-11-10 08:08 发出；#29735 于 2026-11-10 18:41 发出；#29755 于 2026-11-11 09:44 发出；#29765 于 2026-11-11 14:40 发出；#29767 于 2026-11-11 22:40 发出；#29770 于 2026-11-12 00:14 发出；#29769 于 2026-11-12 00:15 发出；#29610、#29616、#29624、#29677 于 2026-11-09 发出；其余 4 单于 2026-11-09 发出）；其中 #29610、#29616、#29624、#29677 已发货（FULFILLED），为已发货后补发确认、发货前未确认；#29665 顾客已于 2026-11-09 回复确认（Looks good，10 双 White 无误），不再列入等待；其余 17 单等待顾客回复确认；收到顾客回复确认前都不要发货。</div>
+          <div class="order-line"><span class="order-no">#29657</span><span class="order-no">#29661</span><span class="order-no">#29664</span><span class="order-no">#29678</span><span class="order-no">#29692</span><span class="order-no">#29698</span><span class="order-no">#29713</span><span class="order-no">#29735</span><span class="order-no">#29755</span><span class="order-no">#29765</span><span class="order-no">#29677</span><span class="order-no">#29610</span><span class="order-no">#29616</span><span class="order-no">#29624</span><span class="order-no">#29769</span><span class="order-no">#29770</span><span class="tag tag-red">已发送 · 等待顾客回复</span></div>
+          <div class="reason"><strong>事项：</strong>十六单均为同色 8 双及以上，Quick check 已发出（#29692 于 2026-11-09 17:40 发出；#29698、#29713 于 2026-11-10 08:08 发出；#29735 于 2026-11-10 18:41 发出；#29755 于 2026-11-11 09:44 发出；#29765 于 2026-11-11 14:40 发出；#29770 于 2026-11-12 00:14 发出；#29769 于 2026-11-12 00:15 发出；#29610、#29616、#29624、#29677 于 2026-11-09 发出；其余 4 单于 2026-11-09 发出）；其中 #29610、#29616、#29624、#29677 已发货（FULFILLED），为已发货后补发确认、发货前未确认；#29665 顾客已于 2026-11-09 回复确认（Looks good，10 双 White 无误），不再列入等待；#29767 顾客已于 2026-11-12 02:12 回复确认（Looks good），已移入已确认可放行区，不再列入等待；其余 16 单等待顾客回复确认；收到顾客回复确认前都不要发货。</div>
         </div>
-        <div class="action"><b>待用户操作</b>等待 17 单顾客回复确认；收到确认前不要发货。</div>
+        <div class="action"><b>待用户操作</b>等待 16 单顾客回复确认；收到确认前不要发货。</div>
       </div>
       <div class="row">
         <div class="row-main">
