@@ -143,7 +143,7 @@
       <a class="kpi" href="#sec-ship" aria-label="已付款未发货 19 单，点击定位到待发货区"><div class="num">19 <small>单</small></div><div class="label">已付款未发货</div><div class="desc">2026-11-09 下单 2 单、2026-11-11 下单 17 单</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-ship" aria-label="超 3 天未发货 0 单，点击定位到待发货区"><div class="num">0 <small>单</small></div><div class="label">超 3 天未发货</div><div class="desc">暂无超过 3 天未发货的订单；最旧未发货为 2026-11-09 下单，满 3 天，未超 3 天</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-preconfirm" aria-label="发货前需确认 17 单，点击定位到发货前需确认订单汇总区"><div class="num">17 <small>单</small></div><div class="label">发货前需确认</div><div class="desc">6 单未发货等待顾客回复（#29698、#29713、#29755、#29765、#29769、#29770），10 单已发货后补发确认等待回复（#29610、#29616、#29624、#29677、#29657、#29661、#29664、#29678、#29692、#29735），1 单已发货已确认（#29665）</div><span class="go">查看 ↓</span></a>
-      <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 1 单，点击定位到已确认可放行发货订单区"><div class="num">1 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">#29767 顾客已于 2026-11-12 02:12 回复确认（Looks good），可放行发货；#29617、#29645 顾客已确认且已发货（FULFILLED），按规则从本区拿掉</div><span class="go">查看 ↓</span></a>
+      <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 2 单，点击定位到已确认可放行发货订单区"><div class="num">2 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">#29767 顾客已于 2026-11-12 02:12 回复确认（Looks good），#29792 顾客已于 2026-11-12 23:13 回复确认（Yep all white），均可放行发货；#29617、#29645 顾客已确认且已发货（FULFILLED），按规则从本区拿掉</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 11 单，点击定位到待决定区"><div class="num">11 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">10 单已发货 + 1 单未发货（#29629）</div><span class="go">查看 ↓</span></a>
       <a class="kpi" href="#sec-final" aria-label="最终决定区 12 单，点击定位到最终决定区"><div class="num">12 <small>单</small></div><div class="label">最终决定区</div><div class="desc">5 单退款已完成 + 1 单不用理会已关闭（#22051）+ 4 单补发待操作（#28818、#29348、#29047、#29065）+ 1 单补发已发货（#27868，补发单 #29734 已发货）+ 1 单补发待顾客确认地址（#28979）</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 1 单，点击定位到 17TRACK 区"><div class="num">1 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">#29556 投递失败（无门禁、将重新派送）</div><span class="go">查看 ↓</span></a>
@@ -308,17 +308,26 @@
     <p class="legend"><strong>#29645 已从本区拿掉：</strong>#29645（$65.60，同色 8 双 Slate Blue）顾客已于 2026-11-10 01:10 回复确认全要同色 Slate Blue（Looks good），已移入已确认可放行区。</p>
     <p class="legend"><strong>#29767 已从本区拿掉：</strong>#29767（$65.60，同色 8 双 White）顾客已于 2026-11-12 02:12 回复确认全要同色 White（Looks good），已移入已确认可放行区。</p>
     <p class="legend"><strong>#29685 已从本区拿掉：</strong>#29685（$65.60）顾客称下单失误要求取消，用户已批准，确认邮件已于 2026-11-10 12:15 发出，Shopify 已显示 REFUNDED / FULFILLMENT_NOT_REQUIRED，取消与全额退款均已完成。</p>
+    <p class="legend"><strong>#29792 已从本区拿掉：</strong>#29792（$44.20，同色 8 双 All White）Quick check 已于 2026-11-12 23:12 发出，顾客已于 2026-11-12 23:13 回复确认全要 All White（"Yep all white"），已移入已确认可放行区。</p>
     <p class="legend"><strong>本日流转：</strong>#29657、#29661、#29664、#29678、#29692、#29735 已从“未发货等待回复”移入“已发货后补发确认”（2026-11-11 夜已发货，发货前未收到顾客回复确认）。</p>
   </section>
 
   <!-- 已确认可放行发货订单 -->
   <section id="sec-releasable" aria-labelledby="h-releasable">
-    <div class="sec-head"><h2 id="h-releasable">已确认可放行发货订单</h2><span class="count">1 单</span><span class="hint">确认问题已解决、可放行包货发货的订单才列入本区 · 正常发货（FULFILLED）后即拿掉</span></div>
+    <div class="sec-head"><h2 id="h-releasable">已确认可放行发货订单</h2><span class="count">2 单</span><span class="hint">确认问题已解决、可放行包货发货的订单才列入本区 · 正常发货（FULFILLED）后即拿掉</span></div>
     <div class="card">
       <div class="row">
         <div class="row-main">
           <div class="order-line"><span class="order-no">#29767</span><span class="amount">$65.60</span><span class="tag tag-gray">2026-11-11 · 已付款未发货</span><span class="tag tag-green">已确认 · 同色 8 双 White</span></div>
           <div class="reason"><strong>情况：</strong>同色 8 双 White（Men's 99% Supima® Cotton Ultra-Soft Mesh Crew Socks — White，US Men's 7–10.5，8 双 White），达同色 8 双及以上确认门槛；2026-11-11 22:20 下单，PAID / UNFULFILLED；Quick check 已于 2026-11-11 22:40 发出，顾客已于 2026-11-12 02:12 回复确认（Looks good），确认全 8 双 White 无误。</div>
+          <div class="meta">状态：已确认可放行发货。</div>
+        </div>
+        <div class="action"><b>下一步 · 已确认可放行</b>可放行包货发货；正常发货（FULFILLED）后从本区拿掉。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29792</span><span class="amount">$44.20</span><span class="tag tag-gray">2026-11-12 · 已付款未发货</span><span class="tag tag-green">已确认 · 同色 8 双 All White</span></div>
+          <div class="reason"><strong>情况：</strong>同色 8 双 All White（Kids' 97% Cotton Solid Ribbed Non-Binding Crew Socks (4-Pack) 2 包 All White，L (Shoe Size: 9.5 - 11.5 Little Kid)，共 8 双），达同色 8 双及以上确认门槛；2026-11-12 22:50 下单，PAID / UNFULFILLED；Quick check 已于 2026-11-12 23:12 发出，顾客已于 2026-11-12 23:13 回复确认（"Yep all white"），确认全 8 双 All White 无误。</div>
           <div class="meta">状态：已确认可放行发货。</div>
         </div>
         <div class="action"><b>下一步 · 已确认可放行</b>可放行包货发货；正常发货（FULFILLED）后从本区拿掉。</div>
