@@ -150,9 +150,9 @@
       <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 2 单，点击定位到已确认可放行发货订单区"><div class="num">2 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">#29767 顾客已于 2026-11-12 02:12 回复确认（Looks good），#29792 顾客已于 2026-11-12 23:13 回复确认（Yep all white），均可放行发货；#29617、#29645 顾客已确认且已发货（FULFILLED），按规则从本区拿掉</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 12 单，点击定位到待决定区"><div class="num">12 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">11 单已发货 + 1 单未发货（#29629）</div><span class="go">查看 ↓</span></a>
       <a class="kpi" href="#sec-final" aria-label="最终决定区 12 单，点击定位到最终决定区"><div class="num">12 <small>单</small></div><div class="label">最终决定区</div><div class="desc">5 单退款已完成 + 1 单不用理会已关闭（#22051）+ 4 单补发待操作（#28818、#29348、#29047、#29065）+ 1 单补发已发货（#27868，补发单 #29734 已发货）+ 1 单补发待顾客确认地址（#28979）</div><span class="go">查看 ↓</span></a>
-      <a class="kpi amber" href="#sec-track" aria-label="17TRACK 当日新增逐单警报未核实（邮箱故障），点击定位到 17TRACK 区"><div class="num">未核实</div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">邮箱故障未核实；最新已知警报 #29556（2026-11-12 02:04 收到，投递失败、将重新派送）</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 1 单，点击定位到 17TRACK 区"><div class="num">1 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">新增 #29564 投递失败（Minneapolis, MN，派送途中）</div><span class="go">查看 ↓</span></a>
       <a class="kpi red" href="#sec-timeout" aria-label="派送超时 10 单，点击定位到派送超时区"><div class="num">10 <small>单</small></div><div class="label">派送超时</div><div class="desc">已发货、超过 16 天未送达；#29190、#29206 已核实 2026-11-02 送达，不进区</div><span class="go">查看 ↓</span></a>
-      <a class="kpi amber" href="#sec-4px" aria-label="需要向 4PX 跟进 13 单，点击定位到 4PX 区"><div class="num">13 <small>单</small></div><div class="label">需要向 4PX 跟进</div><div class="desc">新增 #29556 投递失败（无门禁、将重新派送）</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-4px" aria-label="需要向 4PX 跟进 14 单，点击定位到 4PX 区"><div class="num">14 <small>单</small></div><div class="label">需要向 4PX 跟进</div><div class="desc">新增 #29564 投递失败（Minneapolis, MN，派送途中）</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-judge" aria-label="当日新增 Judge.me 五星 1 人，新增 Trustpilot 邀请 0 封，暂缓 1 封，点击定位到好评邀请区"><div class="num">1 <small>人 · 0 封</small></div><div class="label">Judge.me 五星 → Trustpilot 邀请</div><div class="desc">新增五星 1 人 · 新增邀请 0 封 · 待审批 0 封 · 暂缓 1 封</div><span class="go">查看 ↓</span></a>
     </div>
     <p class="legend">口径：待决定区只放尚未走完核实与决定流程的事项，明确标为“未决定”，不能当作已决定取消 / 退款 / 换地址 / 补发；17TRACK 报错本身只是警报，不是最终决定。</p>
@@ -595,9 +595,17 @@
 
   <!-- 17TRACK -->
   <section id="sec-track" aria-labelledby="h-track">
-    <div class="sec-head"><h2 id="h-track">17TRACK 逐单警报（当日新增）</h2><span class="count">本日新增未核实（邮箱故障）</span><span class="hint">只计逐单警报，不使用聚合总数</span></div>
-    <p class="legend" style="margin:0 0 10px"><strong>注：</strong>本日新增逐单警报未核实（Outlook 网关故障，自 2026-11-12 02:39 起无法读取邮箱；水位停在 2026-11-12 23:13:55）。</p>
+    <div class="sec-head"><h2 id="h-track">17TRACK 逐单警报（当日新增）</h2><span class="count">本日新增 1 单</span><span class="hint">只计逐单警报，不使用聚合总数</span></div>
+    <p class="legend" style="margin:0 0 10px"><strong>注：</strong>邮箱已恢复；本日（2026-11-13）新增逐单警报 1 单：#29564（投递失败），同一警报收到两封相同邮件，按 1 单计。</p>
     <div class="card">
+      <div class="row alert-row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29564</span><span class="amount">$103.73</span><span class="tag tag-red">投递失败</span><span class="tag tag-teal">新客</span><span class="tag tag-gray">2026-11-04 下单 · 2026-11-04 发货 · 4PX 承运</span><span class="tag tag-gray">PAID / FULFILLED</span></div>
+          <div class="reason"><strong>情况：</strong>2026-11-12 07:57 Minneapolis, MN 55405 已出库派送（Out for Delivery），随后投递失败；17TRACK 逐单警报于 2026-11-13 20:37 收到（同一警报收到两封相同邮件，按 1 单计）；已转入下方 4PX 跟进区。本区不写完整物流单号。顾客尚未就此来信。</div>
+          <div class="meta">状态：投递失败，暂无顾客来信。</div>
+        </div>
+        <div class="action"><b>下一步</b>已转入下方 4PX 跟进区，向 4PX 跟进投递失败原因与重新派送安排。</div>
+      </div>
       <div class="row alert-row">
         <div class="row-main">
           <div class="order-line"><span class="order-no">#29497</span><span class="amount">$38.65</span><span class="tag tag-red">投递失败 · 将退回仓库</span><span class="tag tag-gray">2026-11-01 下单 · 2026-11-02 发货 · 4PX 承运</span></div>
@@ -614,9 +622,9 @@
         </div>
         <div class="action"><b>下一步</b>已转入下方 4PX 跟进区，向 4PX 跟进重新派送安排。</div>
       </div>
-      <div class="row"><div class="row-main"><div class="reason">本日新增逐单警报未核实（邮箱故障）；上一单逐单警报为 2026-11-12 02:04 的 #29556（投递失败、将重新派送），已转入下方 4PX 跟进区；#29497 为 2026-11-11 07:55 收到的警报、仍在跟进。</div></div></div>
+      <div class="row"><div class="row-main"><div class="reason">本日（2026-11-13）新增逐单警报 1 单：#29564（投递失败），已转入下方 4PX 跟进区；上一单逐单警报为 2026-11-12 02:04 的 #29556（投递失败、将重新派送），已转入下方 4PX 跟进区；#29497 为 2026-11-11 07:55 收到的警报、仍在跟进。</div></div></div>
     </div>
-    <p class="legend">本日新增逐单警报未核实（Outlook 网关故障）；最新已知逐单警报为 2026-11-12 02:04 的 #29556；#29497 为 2026-11-11 07:55 收到的警报、仍在跟进。17TRACK 聚合预警按规则不计入逐单警报、不使用聚合总数。</p>
+    <p class="legend">本日（2026-11-13）新增逐单警报 1 单：#29564（2026-11-13 20:37 收到，投递失败）；#29556 为 2026-11-12 02:04 收到的警报、仍在跟进；#29497 为 2026-11-11 07:55 收到的警报、仍在跟进。17TRACK 聚合预警按规则不计入逐单警报、不使用聚合总数。</p>
   </section>
 
   <!-- 派送超时 -->
@@ -699,11 +707,22 @@
 
   <!-- 4PX -->
   <section id="sec-4px" aria-labelledby="h-4px">
-    <div class="sec-head"><h2 id="h-4px">需要向 4PX 物流跟进的订单</h2><span class="count">13 单</span><span class="hint">完整头程单号点击即可复制 · 点击后短暂显示“已复制”、不跳转</span></div>
+    <div class="sec-head"><h2 id="h-4px">需要向 4PX 物流跟进的订单</h2><span class="count">14 单</span><span class="hint">完整头程单号点击即可复制 · 点击后短暂显示“已复制”、不跳转</span></div>
     <div class="notice" role="note" style="margin-top:0">
       <p><strong>跟进口径：</strong>只要物流有问题 — 卡住超时、投递失败、地址问题、时效问题、退回等 — 都列入本区向 4PX 问情况。除 #28576 外，其余各单尾程未核实不编造，尾程写“尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补”。非 4PX 的 YunExpress 订单只进超时区、不进本区。</p>
     </div>
     <div class="card">
+      <div class="row alert-row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29564</span><span class="amount">$103.73</span><span class="tag tag-red">投递失败</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">发货 2026-11-04</span></div>
+          <div class="reason"><strong>情况：</strong>商品为 Women's Speckled Donegal-Style Ribbed Wool Blend Crew Socks ×8（Oatmeal Tweed 1、Dark Roast 2、Vanilla Sprinkle 1、Toasted Almond 1、Hazelnut 2、Galaxy Black 1）+ Women's 98% Premium Cotton Fully Cushioned Terry Warm Crew Socks ×2（Cream White 1、Walnut Heather 1）+ 运费险 $2.05；发货 2026-11-04，运输 10 天；2026-11-12 07:57 Minneapolis, MN 55405 已出库派送（Out for Delivery），随后投递失败；17TRACK 逐单警报 2026-11-13 20:37 收到（同一警报收到两封相同邮件，按 1 单计）；新客（仅 1 单）。顾客尚未就此来信。</div>
+          <div class="track-lines">
+            <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003347748113CN" aria-label="复制头程单号 4PX3003347748113CN">4PX3003347748113CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
+            <div class="track-line"><span class="track-label">尾程：</span><span class="track-pending">尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补</span></div>
+          </div>
+        </div>
+        <div class="action"><b>要向 4PX 问</b>投递失败的具体原因；能否重新派送及预计时效；若无法派送，包裹退回仓库后的处理。</div>
+      </div>
       <div class="row alert-row">
         <div class="row-main">
           <div class="order-line"><span class="order-no">#29556</span><span class="amount">$80.36</span><span class="tag tag-red">投递失败 · 将重新派送</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">发货 2026-11-04</span></div>
@@ -842,7 +861,7 @@
         <div class="action"><b>要向 4PX 问</b>包裹下落、是否已遗失或退回。</div>
       </div>
     </div>
-    <p class="legend">合计 13 单。#29190、#29206 已核实 2026-11-02 送达，已拿掉；#28715 已核实送达、已拿掉。跟进结果回来并与顾客沟通定案前，不把物流问题直接写成新的退款 / 补发决定。</p>
+    <p class="legend">合计 14 单。#29190、#29206 已核实 2026-11-02 送达，已拿掉；#28715 已核实送达、已拿掉。跟进结果回来并与顾客沟通定案前，不把物流问题直接写成新的退款 / 补发决定。</p>
   </section>
 
   <!-- Judge.me -->
@@ -1007,7 +1026,7 @@
   </section>
 
   <footer>
-    WeavaSocks 客服 BI 看板 · 更新时间 2026-11-13 08:00（北京时间），数据截至 2026-11-13 08:00 前。本看板只含订单号、金额、日期、状态和理由，不含顾客姓名、邮箱、地址、电话；完整物流单号仅在 4PX 跟进区显示。
+    WeavaSocks 客服 BI 看板 · 更新时间 2026-11-13 20:40（北京时间），数据截至 2026-11-13 20:40 前。本看板只含订单号、金额、日期、状态和理由，不含顾客姓名、邮箱、地址、电话；完整物流单号仅在 4PX 跟进区显示。
   </footer>
 
 </div>
