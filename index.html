@@ -607,10 +607,10 @@
       <div class="row alert-row">
         <div class="row-main">
           <div class="order-line"><span class="order-no">#29564</span><span class="amount">$103.73</span><span class="tag tag-red">投递失败</span><span class="tag tag-teal">新客</span><span class="tag tag-gray">2026-11-04 下单 · 2026-11-04 发货 · 4PX 承运</span><span class="tag tag-gray">PAID / FULFILLED</span></div>
-          <div class="reason"><strong>情况：</strong>2026-11-12 07:57 Minneapolis, MN 55405 已出库派送（Out for Delivery），随后投递失败；17TRACK 逐单警报于 2026-11-13 20:37 收到（同一警报收到两封相同邮件，按 1 单计）；已转入下方 4PX 跟进区。本区不写完整物流单号。顾客尚未就此来信。</div>
-          <div class="meta">状态：投递失败，暂无顾客来信。</div>
+          <div class="reason"><strong>情况：</strong>2026-11-12 07:57 Minneapolis, MN 55405 已出库派送（Out for Delivery），随后投递失败；17TRACK 逐单警报于 2026-11-13 20:37 收到（同一警报收到两封相同邮件，按 1 单计）；2026-11-14 17TRACK 核实最新轨迹：2026-11-12 21:11 Minneapolis 尝试派送未成，收件人要求改期派送，已安排 2026-11-15 重新派送；尾程承运商为 Speedx。</div>
+          <div class="meta">状态：投递失败，已安排 2026-11-15 重派，暂无顾客来信。</div>
         </div>
-        <div class="action"><b>下一步</b>已转入下方 4PX 跟进区，向 4PX 跟进投递失败原因与重新派送安排。</div>
+        <div class="action"><b>下一步</b>已核实尾程 Speedx，17TRACK 显示已安排 2026-11-15 重派；待用户定是否主动联系 Speedx 问情况。</div>
       </div>
       <div class="row alert-row">
         <div class="row-main">
@@ -622,9 +622,9 @@
       </div>
       <div class="row alert-row">
         <div class="row-main">
-          <div class="order-line"><span class="order-no">#29556</span><span class="amount">$80.36</span><span class="tag tag-red">投递失败 · 将重新派送</span><span class="tag tag-teal">新客</span><span class="tag tag-gray">2026-11-03 下单 · 2026-11-04 发货 · 4PX 承运</span><span class="tag tag-gray">PAID / FULFILLED</span></div>
-          <div class="reason"><strong>情况：</strong>2026-11-11 05:53 Wildomar, CA 92595 投递失败“Attempted Delivery: No access. The package is undeliverable and schedule to redeliver”；17TRACK 逐单警报于 2026-11-12 02:04 收到；已转入下方 4PX 跟进区。本区不写完整物流单号。顾客尚未就此来信。</div>
-          <div class="meta">状态：投递失败待重新派送，暂无顾客来信。</div>
+          <div class="order-line"><span class="order-no">#29556</span><span class="amount">$80.36</span><span class="tag tag-red">已送达（承运商记录）</span><span class="tag tag-teal">新客</span><span class="tag tag-gray">2026-11-03 下单 · 2026-11-04 发货 · 4PX 承运</span><span class="tag tag-gray">PAID / FULFILLED</span></div>
+          <div class="reason"><strong>情况：</strong>2026-11-11 05:53 Wildomar, CA 92595 投递失败“Attempted Delivery: No access. The package is undeliverable and schedule to redeliver”；17TRACK 逐单警报于 2026-11-12 02:04 收到；已转入下方 4PX 跟进区。本区不写完整物流单号。承运商记录显示包裹已于 2026-11-11 16:06 送达收件人前门（Speedx），并非仍在等重派；2026-11-12 已发更正邮件并附签收照片，等顾客确认是否找到包裹。</div>
+          <div class="meta">状态：承运商记录已送达，等顾客确认是否找到包裹。</div>
         </div>
         <div class="action"><b>下一步</b>已转入下方 4PX 跟进区，向 4PX 跟进重新派送安排。</div>
       </div>
@@ -710,7 +710,7 @@
       <div class="row alert-row">
         <div class="row-main">
           <div class="order-line"><span class="order-no">#28546</span><span class="amount">$50.40</span><span class="tag tag-red">超时 · 在途 46 天未送达</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">下单 2026-09-29 · 已发货（FULFILLED）</span></div>
-          <div class="reason"><strong>情况：</strong>下单 2026-09-29，已发货（FULFILLED），在途 46 天未送达；顾客 2026-11-14 来信称未收到（首购）；收件箱无该单 17TRACK 逐单警报；最新轨迹未核实（17TRACK 页面为 JS 渲染，文本抓取无结果），需向 4PX 核查包裹位置。</div>
+          <div class="reason"><strong>情况：</strong>下单 2026-09-29，已发货（FULFILLED），在途 46 天未送达；顾客 2026-11-14 来信称未收到（首购）；2026-11-14 17TRACK 核实：尾程 Speedx，2026-10-09 21:28 Fayetteville, AR 72701 已出库派送，2026-10-10 23:59 Delay in transit，之后无进展；安抚回信已发，已给顾客尾程单号。</div>
         </div>
         <div class="action"><b>状态</b>待 4PX 跟进，见下方。</div>
       </div>
@@ -722,30 +722,30 @@
   <section id="sec-4px" aria-labelledby="h-4px">
     <div class="sec-head"><h2 id="h-4px">需要向 4PX 物流跟进的订单</h2><span class="count">15 单</span><span class="hint">完整头程单号点击即可复制 · 点击后短暂显示“已复制”、不跳转</span></div>
     <div class="notice" role="note" style="margin-top:0">
-      <p><strong>跟进口径：</strong>只要物流有问题 — 卡住超时、投递失败、地址问题、时效问题、退回等 — 都列入本区向 4PX 问情况。除 #28576 外，其余各单尾程未核实不编造，尾程写“尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补”。非 4PX 的 YunExpress 订单只进超时区、不进本区。</p>
+      <p><strong>跟进口径：</strong>只要物流有问题 — 卡住超时、投递失败、地址问题、时效问题、退回等 — 都列入本区向 4PX 问情况。尾程未核实的单不编造，尾程写“尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补”。非 4PX 的 YunExpress 订单只进超时区、不进本区。</p>
     </div>
     <div class="card">
       <div class="row alert-row">
         <div class="row-main">
           <div class="order-line"><span class="order-no">#29564</span><span class="amount">$103.73</span><span class="tag tag-red">投递失败</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">发货 2026-11-04</span></div>
-          <div class="reason"><strong>情况：</strong>商品为 Women's Speckled Donegal-Style Ribbed Wool Blend Crew Socks ×8（Oatmeal Tweed 1、Dark Roast 2、Vanilla Sprinkle 1、Toasted Almond 1、Hazelnut 2、Galaxy Black 1）+ Women's 98% Premium Cotton Fully Cushioned Terry Warm Crew Socks ×2（Cream White 1、Walnut Heather 1）+ 运费险 $2.05；发货 2026-11-04，运输 10 天；2026-11-12 07:57 Minneapolis, MN 55405 已出库派送（Out for Delivery），随后投递失败；17TRACK 逐单警报 2026-11-13 20:37 收到（同一警报收到两封相同邮件，按 1 单计）；新客（仅 1 单）。顾客尚未就此来信。</div>
+          <div class="reason"><strong>情况：</strong>商品为 Women's Speckled Donegal-Style Ribbed Wool Blend Crew Socks ×8（Oatmeal Tweed 1、Dark Roast 2、Vanilla Sprinkle 1、Toasted Almond 1、Hazelnut 2、Galaxy Black 1）+ Women's 98% Premium Cotton Fully Cushioned Terry Warm Crew Socks ×2（Cream White 1、Walnut Heather 1）+ 运费险 $2.05；发货 2026-11-04，运输 10 天；2026-11-12 07:57 Minneapolis, MN 55405 已出库派送（Out for Delivery），随后投递失败；17TRACK 逐单警报 2026-11-13 20:37 收到（同一警报收到两封相同邮件，按 1 单计）；新客（仅 1 单）。顾客尚未就此来信。2026-11-14 17TRACK 核实：尾程 Speedx，2026-11-12 21:11 Minneapolis 尝试派送未成，已安排 2026-11-15 重新派送。</div>
           <div class="track-lines">
             <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003347748113CN" aria-label="复制头程单号 4PX3003347748113CN">4PX3003347748113CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
-            <div class="track-line"><span class="track-label">尾程：</span><span class="track-pending">尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补</span></div>
+            <div class="track-line"><span class="track-label">尾程（Speedx）：</span><button type="button" class="track-copy" data-copy="SPXMSP003022611060033372" aria-label="复制尾程单号 SPXMSP003022611060033372">SPXMSP003022611060033372</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
           </div>
         </div>
-        <div class="action"><b>要向 4PX 问</b>投递失败的具体原因；能否重新派送及预计时效；若无法派送，包裹退回仓库后的处理。</div>
+        <div class="action"><b>要向 4PX 问</b>已安排 2026-11-15 重派，跟进重派结果；若再次失败，包裹退回仓库后的处理。</div>
       </div>
       <div class="row alert-row">
         <div class="row-main">
-          <div class="order-line"><span class="order-no">#29556</span><span class="amount">$80.36</span><span class="tag tag-red">投递失败 · 将重新派送</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">发货 2026-11-04</span></div>
-          <div class="reason"><strong>情况：</strong>商品为 Women's 95% Cotton Ultra-Soft Heathered No-Show Socks（Espresso 2、Peach Whisper 1、Black 4、Lemon Sorbet 1）+ Baby &amp; Toddler 棉船袜 Pink 2 + 赠品毛巾 1；发货 2026-11-04，运输 10 天；2026-11-11 05:53 Wildomar, CA 92595 投递失败“Attempted Delivery: No access. The package is undeliverable and schedule to redeliver”；17TRACK 逐单警报 2026-11-12 02:04 收到；新客（仅 1 单）。</div>
+          <div class="order-line"><span class="order-no">#29556</span><span class="amount">$80.36</span><span class="tag tag-red">已送达（承运商记录）</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">发货 2026-11-04</span></div>
+          <div class="reason"><strong>情况：</strong>商品为 Women's 95% Cotton Ultra-Soft Heathered No-Show Socks（Espresso 2、Peach Whisper 1、Black 4、Lemon Sorbet 1）+ Baby &amp; Toddler 棉船袜 Pink 2 + 赠品毛巾 1；发货 2026-11-04，运输 10 天；2026-11-11 05:53 Wildomar, CA 92595 投递失败“Attempted Delivery: No access. The package is undeliverable and schedule to redeliver”；17TRACK 逐单警报 2026-11-12 02:04 收到；新客（仅 1 单）。承运商记录显示包裹已于 2026-11-11 16:06 送达收件人前门（Speedx），并非仍在等重派；2026-11-12 已发更正邮件并附签收照片，等顾客确认是否找到包裹。</div>
           <div class="track-lines">
             <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003346322123CN" aria-label="复制头程单号 4PX3003346322123CN">4PX3003346322123CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
-            <div class="track-line"><span class="track-label">尾程：</span><span class="track-pending">尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补</span></div>
+            <div class="track-line"><span class="track-label">尾程（Speedx）：</span><button type="button" class="track-copy" data-copy="SPXONT003022611040026716" aria-label="复制尾程单号 SPXONT003022611040026716">SPXONT003022611040026716</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
           </div>
         </div>
-        <div class="action"><b>要向 4PX 问</b>重新派送安排与预计时效；若再次失败，包裹退回仓库后的处理。</div>
+        <div class="action"><b>要向 4PX 问</b>无需再问重派，等顾客确认是否找到包裹。</div>
       </div>
       <div class="row alert-row">
         <div class="row-main">
@@ -876,14 +876,14 @@
       <div class="row alert-row">
         <div class="row-main">
           <div class="order-line"><span class="order-no">#28546</span><span class="amount">$50.40</span><span class="tag tag-red">超时 · 在途 46 天未送达</span><span class="tag tag-gray">4PX</span><span class="tag tag-gray">发货 2026-09-29</span></div>
-          <div class="reason"><strong>情况：</strong>发货 2026-09-29，在途 46 天未送达；顾客 2026-11-14 来信称未收到。最新轨迹未核实，包裹位置需向 4PX 核查。</div>
+          <div class="reason"><strong>情况：</strong>发货 2026-09-29，在途 46 天未送达；顾客 2026-11-14 来信称未收到。2026-11-14 17TRACK 核实：尾程 Speedx，2026-10-09 21:28 Fayetteville, AR 已出库派送，2026-10-10 23:59 Delay in transit，之后无进展；安抚回信已发。</div>
           <div class="reason"><strong>补充：</strong>本单同时列入上方派送超时区（下单 2026-09-29，已发货 FULFILLED，在途 46 天未送达）。</div>
           <div class="track-lines">
             <div class="track-line"><span class="track-label">头程（4PX）：</span><button type="button" class="track-copy" data-copy="4PX3003211162274CN" aria-label="复制头程单号 4PX3003211162274CN">4PX3003211162274CN</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
-            <div class="track-line"><span class="track-label">尾程：</span><span class="track-pending">尾程单号未在 Shopify / 17TRACK 邮件中显示，需在 17TRACK / 4PX 详情页核对后补</span></div>
+            <div class="track-line"><span class="track-label">尾程（Speedx）：</span><button type="button" class="track-copy" data-copy="SPXXNA003022609300027082" aria-label="复制尾程单号 SPXXNA003022609300027082">SPXXNA003022609300027082</button><span class="track-copy-hint">点击复制</span><span class="copy-feedback" aria-live="polite">已复制</span></div>
           </div>
         </div>
-        <div class="action"><b>要向 4PX 问</b>包裹当前位置与状态；是否丢失；能否索赔或补发。</div>
+        <div class="action"><b>要向 4PX 问</b>包裹当前位置与状态；是否丢失；能否索赔或补发（已核实尾程 Speedx，顾客已回信安抚）。</div>
       </div>
     </div>
     <p class="legend">合计 15 单。#29190、#29206 已核实 2026-11-02 送达，已拿掉；#28715 已核实送达、已拿掉。跟进结果回来并与顾客沟通定案前，不把物流问题直接写成新的退款 / 补发决定。</p>
