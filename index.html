@@ -148,7 +148,7 @@
       <a class="kpi teal" href="#sec-ship" aria-label="超 3 天未发货 0 单，点击定位到待发货区"><div class="num">0 <small>单</small></div><div class="label">超 3 天未发货</div><div class="desc">暂无超过 3 天未发货的订单；最旧未发货为 #29803，2026-11-13 下单，未满 3 天</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-preconfirm" aria-label="发货前需确认 19 单，点击定位到发货前需确认订单汇总区"><div class="num">19 <small>单</small></div><div class="label">发货前需确认</div><div class="desc">1 单未发货等待顾客回复（#29823），17 单已发货后补发确认等待回复（#29610、#29616、#29624、#29677、#29657、#29661、#29664、#29678、#29692、#29735、#29698、#29713、#29769、#29799、#29755、#29765、#29770），1 单已发货已确认（#29665）</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 0 单，点击定位到已确认可放行发货订单区"><div class="num">0 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">#29767、#29792 已发货，已从本区拿掉；目前无已确认待发货订单</div><span class="go">查看 ↓</span></a>
-      <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 12 单，点击定位到待决定区"><div class="num">12 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">含未发货 1 单（#29629），其余已发货</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 14 单，点击定位到待决定区"><div class="num">14 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">含未发货 1 单（#29629），其余 13 单已发货</div><span class="go">查看 ↓</span></a>
       <a class="kpi" href="#sec-final" aria-label="最终决定区 13 单，点击定位到最终决定区"><div class="num">13 <small>单</small></div><div class="label">最终决定区</div><div class="desc">5 单退款已完成 + 1 单不用理会已关闭（#22051）+ 4 单补发待操作（#28818、#29348、#29047、#29065）+ 1 单补发已发货（#27868，补发单 #29734 已发货）+ 1 单补发待顾客确认地址（#28979）+ 1 单部分退款待执行（#29823，$72.96）</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 0 单，点击定位到 17TRACK 区"><div class="num">0 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">本日（2026-11-14）无新增逐单警报</div><span class="go">查看 ↓</span></a>
       <a class="kpi red" href="#sec-timeout" aria-label="派送超时 11 单，点击定位到派送超时区"><div class="num">11 <small>单</small></div><div class="label">派送超时</div><div class="desc">已发货、超过 16 天未送达；#29190、#29206 已核实 2026-11-02 送达，不进区</div><span class="go">查看 ↓</span></a>
@@ -378,12 +378,12 @@
 
   <!-- 待决定 -->
   <section id="sec-pending" aria-labelledby="h-pending">
-    <div class="sec-head"><h2 id="h-pending">待决定 — 未决定</h2><span class="count">12 单 · 未决定</span><span class="hint">以下均为未决定，不能写成已决定取消 / 退款 / 换地址 / 补发</span></div>
+    <div class="sec-head"><h2 id="h-pending">待决定 — 未决定</h2><span class="count">14 单 · 未决定</span><span class="hint">以下均为未决定，不能写成已决定取消 / 退款 / 换地址 / 补发</span></div>
     <div class="notice" role="note" style="margin-top:0">
       <p><strong>本区口径：</strong>本区内容是尚未走完核实和决定流程的请求，只能标为<strong>未决定 / 待决定</strong>。已发货的退款 / 退货 / 换货 / 质量类，必须先沟通、定下决定后，才能移入最终决定区。新客 / 复购以 Shopify 顾客订单数为准。</p>
     </div>
 
-    <div class="fb-group-head"><h3>已发货待决定（12 单）</h3><span class="gcount">未决定 · 须先沟通再决定</span></div>
+    <div class="fb-group-head"><h3>已发货待决定（13 单）</h3><span class="gcount">未决定 · 须先沟通再决定</span></div>
     <div class="card">
       <div class="row">
         <div class="row-main">
@@ -480,6 +480,14 @@
           <div class="meta">状态：未决定 · 补发待建，USPS 付费问题待回复。</div>
         </div>
         <div class="action"><b>下一步 · 待决定</b>待用户定夺：按确认地址建补发单；USPS 付费问题如何回复（按现有政策尾程承运商随机、不可指定 USPS）。</div>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29431</span><span class="amount">$34.59</span><span class="tag tag-amber">未决定 · 尺码偏小 / 退货请求</span><span class="tag tag-teal">新客</span><span class="tag tag-gray">2026-10-30 · 已发货</span></div>
+          <div class="reason"><strong>情况：</strong>1 双 Kid's Organic Soft-Touch 97% Cotton Crew Socks 4-Pack，Blue Pack / L（鞋码 9.5–11.5 Little Kid），PAID / FULFILLED，2026-10-30 下单，4PX 承运；新客（仅 1 单）。顾客 2026-11-14 20:44 来信：收到的袜子未拆封，从外观上看只合婴儿、不合 6 岁孩子，问能否退货。</div>
+          <div class="meta">状态：待决定。</div>
+        </div>
+        <div class="action"><b>下一步 · 待决定</b>先与顾客沟通核实情况，再定处理方案；未决定前不写成已决定退款或退货。</div>
       </div>
     </div>
 
@@ -1015,8 +1023,8 @@
       </div>
       <div class="row">
         <div class="row-main">
-          <div class="order-line"><span class="tag tag-amber">待决定客诉 12 单</span></div>
-          <div class="reason"><strong>事项：</strong>待决定客诉 #29043、#28716、#28679、#29025、#27510、#29112、#28715、#29371、#29256、#29629、#26677、#29437、#29179 的最终处理决定；#22051 已关闭（用户决定不用理会），不再提醒。#29047、#27868、#29147 已移入最终决定区（#27868 补发单 #29734 已发货；#29147 退 $52.48 已完成、已从提醒中拿掉）。#28979 已定免费补发同款 12 双、顾客付 $20（Emma 2026-11-10 14:38 已发邮件）；顾客 2026-11-12 01:53 回信反对 $20 费用、尚未确认地址；需用户定是否免 $20 费。</div>
+          <div class="order-line"><span class="tag tag-amber">待决定客诉 14 单</span></div>
+          <div class="reason"><strong>事项：</strong>待决定客诉 #29043、#28716、#28679、#29025、#27510、#29112、#28715、#29371、#29256、#29629、#26677、#29437、#29179、#29431 的最终处理决定；#22051 已关闭（用户决定不用理会），不再提醒。#29047、#27868、#29147 已移入最终决定区（#27868 补发单 #29734 已发货；#29147 退 $52.48 已完成、已从提醒中拿掉）。#28979 已定免费补发同款 12 双、顾客付 $20（Emma 2026-11-10 14:38 已发邮件）；顾客 2026-11-12 01:53 回信反对 $20 费用、尚未确认地址；需用户定是否免 $20 费。</div>
         </div>
         <div class="action"><b>待用户操作</b>逐单定最终处理决定后再移入最终决定区。</div>
       </div>
@@ -1047,6 +1055,13 @@
           <div class="reason"><strong>事项：</strong>原包裹已处置；顾客已于 2026-11-14 00:12 提供安全收件地址（地址已确认），补发待建；另问能否付费改 USPS 尾程（SpeedX 未回复她），USPS 付费问题如何回复待定（按现有政策尾程承运商随机、不可指定 USPS）。</div>
         </div>
         <div class="action"><b>待用户定夺</b>定是否按确认地址建补发单及 USPS 付费问题的回复口径；定夺前继续提醒。</div>
+      </div>
+      <div class="row alert-row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29431</span><span class="tag tag-red">待决定 · 退货请求</span></div>
+          <div class="reason"><strong>事项：</strong>童袜尺码偏小（L 码鞋码 9.5–11.5，顾客称看着只合婴儿、不合 6 岁孩子），袜子未拆封，问能否退货；须先沟通再定处理办法。</div>
+        </div>
+        <div class="action"><b>待用户操作</b>定处理办法；未定前继续列着。</div>
       </div>
       <div class="row">
         <div class="row-main">
