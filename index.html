@@ -150,7 +150,7 @@
       <a class="kpi teal" href="#sec-releasable" aria-label="已确认可放行发货 1 单，点击定位到已确认可放行发货订单区"><div class="num">1 <small>单</small></div><div class="label">已确认可放行发货</div><div class="desc">#29980 已确认全要 Black，可放行发货；#29893、#29925 均已发货（FULFILLED），按规则从本区拿掉</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-pending" aria-label="待决定客诉 13 单，点击定位到待决定区"><div class="num">13 <small>单</small></div><div class="label">待决定客诉 · 未决定</div><div class="desc">12 单已发货、1 单未发货</div><span class="go">查看 ↓</span></a>
       <a class="kpi" href="#sec-final" aria-label="最终决定区 22 单，点击定位到最终决定区"><div class="num">22 <small>单</small></div><div class="label">最终决定区</div><div class="desc">9 单退款已完成 + 0 单退款处理中 + 2 单不用理会已关闭 #22051、#29154 + 3 单补发待操作 #29348、#29047、#29065 + 6 单补发已发货 #28818 补发单 #29535、#27868 补发单 #29734、#29179 补发单 #29826、#28979 补发单 #29827、#29371 补发单 #29910、#29528 补发单 #29913 + 1 单顾客决定捐掉已结案 #29431 + 1 单退款待操作 #26677</div><span class="go">查看 ↓</span></a>
-      <a class="kpi amber" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 0 单，点击定位到 17TRACK 区"><div class="num">0 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">本日 2026-11-20 无新增逐单警报；#29564 已于 2026-11-14 送达（放前门），已结案；#29556 承运商记录已送达，等顾客确认</div><span class="go">查看 ↓</span></a>
+      <a class="kpi amber" href="#sec-track" aria-label="17TRACK 当日新增逐单警报 1 单，点击定位到 17TRACK 区"><div class="num">1 <small>单</small></div><div class="label">17TRACK 当日新增逐单警报</div><div class="desc">本日 2026-11-20 新增逐单警报 1 单（#29670 投递失败，包裹应顾客要求暂存邮局）；#29564 已于 2026-11-14 送达（放前门），已结案；#29556 承运商记录已送达，等顾客确认</div><span class="go">查看 ↓</span></a>
       <a class="kpi red" href="#sec-timeout" aria-label="派送超时 11 单，点击定位到派送超时区"><div class="num">11 <small>单</small></div><div class="label">派送超时</div><div class="desc">已发货、超过 16 天未送达；#29190、#29206 已核实 2026-11-02 送达，不进区</div><span class="go">查看 ↓</span></a>
       <a class="kpi amber" href="#sec-4px" aria-label="需要向 4PX 跟进 13 单，点击定位到 4PX 区"><div class="num">13 <small>单</small></div><div class="label">需要向 4PX 跟进</div><div class="desc">本日无新增；#29564 已送达结案，已拿掉；#28546 仍在跟进；#29179、#28979、#29371、#29528 补发单已发货</div><span class="go">查看 ↓</span></a>
       <a class="kpi teal" href="#sec-judge" aria-label="当日新增 Judge.me 五星 2 人，新增 Trustpilot 邀请 2 封，点击定位到好评邀请区"><div class="num">2 <small>人 · 2 封</small></div><div class="label">Judge.me 五星 → Trustpilot 邀请</div><div class="desc">新增五星 2 人 · 新增邀请 2 封 · 待审批 0 封 · 暂缓 0 封</div><span class="go">查看 ↓</span></a>
@@ -709,9 +709,17 @@
 
   <!-- 17TRACK -->
   <section id="sec-track" aria-labelledby="h-track">
-    <div class="sec-head"><h2 id="h-track">17TRACK 逐单警报（当日新增）</h2><span class="count">本日新增 0 单</span><span class="hint">只计逐单警报，不使用聚合总数</span></div>
-    <p class="legend" style="margin:0 0 10px"><strong>注：</strong>本日 2026-11-20 新增 0 单；11-19 17:06 的 17TRACK 邮件为日汇总聚合数，按规则不计；最新逐单警报仍为 #29329（2026-11-16 投递失败，已在 4PX 区跟进）。</p>
+    <div class="sec-head"><h2 id="h-track">17TRACK 逐单警报（当日新增）</h2><span class="count">本日新增 1 单</span><span class="hint">只计逐单警报，不使用聚合总数</span></div>
+    <p class="legend" style="margin:0 0 10px"><strong>注：</strong>本日 2026-11-20 新增 1 单（#29670 投递失败）；11-19 17:06 的 17TRACK 邮件为日汇总聚合数，按规则不计；最新逐单警报为 #29670（2026-11-20 投递失败）。</p>
     <div class="card">
+      <div class="row alert-row">
+        <div class="row-main">
+          <div class="order-line"><span class="order-no">#29670</span><span class="amount">$48.70</span><span class="tag tag-red">投递失败</span><span class="tag tag-teal">新客</span><span class="tag tag-gray">2026-11-09 下单 · 2026-11-09 发货 · 4PX 承运</span><span class="tag tag-gray">PAID / FULFILLED</span></div>
+          <div class="reason"><strong>情况：</strong>2026-11-20 07:53 Saugerties, NY 已出库派送（Out for Delivery），随后投递失败；最新轨迹 2026-11-20 08:12 Saugerties, NY“Held at Post Office, At Customer Request”（应顾客要求暂存邮局）；17TRACK 逐单警报于 2026-11-20 22:13 收到（同一警报收到两封相同邮件，按 1 单计）。本区不写完整物流单号。包裹未丢失，等顾客去邮局取件或重新安排派送。</div>
+          <div class="meta">状态：投递失败，包裹暂存邮局（应顾客要求），等顾客取件或重派。</div>
+        </div>
+        <div class="action"><b>下一步</b>包裹应顾客要求暂存邮局，无需联系承运商；等顾客取件或来信再跟进。</div>
+      </div>
       <div class="row alert-row">
         <div class="row-main">
           <div class="order-line"><span class="order-no">#29564</span><span class="amount">$103.73</span><span class="tag tag-red">投递失败</span><span class="tag tag-teal">新客</span><span class="tag tag-gray">2026-11-04 下单 · 2026-11-04 发货 · 4PX 承运</span><span class="tag tag-gray">PAID / FULFILLED</span></div>
@@ -728,9 +736,9 @@
         </div>
         <div class="action"><b>下一步</b>已转入下方 4PX 跟进区，向 4PX 跟进重新派送安排。</div>
       </div>
-      <div class="row"><div class="row-main"><div class="reason">本日 2026-11-20 新增 0 单；11-19 17:06 的 17TRACK 邮件为日汇总聚合数，按规则不计；最新逐单警报仍为 #29329（2026-11-16 投递失败，已在 4PX 区跟进）。</div></div></div>
+      <div class="row"><div class="row-main"><div class="reason">本日 2026-11-20 新增 1 单（#29670 投递失败）；11-19 17:06 的 17TRACK 邮件为日汇总聚合数，按规则不计。</div></div></div>
     </div>
-    <p class="legend">本日 2026-11-20 新增 0 单；11-19 17:06 的 17TRACK 邮件为日汇总聚合数，按规则不计；最新逐单警报仍为 #29329（2026-11-16 投递失败，已在 4PX 区跟进）。17TRACK 聚合预警按规则不计入逐单警报、不使用聚合总数。</p>
+    <p class="legend">本日 2026-11-20 新增 1 单（#29670 投递失败）；11-19 17:06 的 17TRACK 邮件为日汇总聚合数，按规则不计；最新逐单警报为 #29670。17TRACK 聚合预警按规则不计入逐单警报、不使用聚合总数。</p>
   </section>
 
   <!-- 派送超时 -->
