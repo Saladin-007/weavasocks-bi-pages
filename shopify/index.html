@@ -565,69 +565,66 @@
       <!-- 8 site audit -->
       <section id="site-audit">
         <div class="sec-head">
-          <span class="no">08</span><h2>站内审查 — 2026-11-23 08:00（北京时间）</h2>
-          <p>站内审查 · 2026 年 11 月 23 日 08:00（北京时间）</p>
+          <span class="no">08</span><h2>站内审查 — 2026-11-24 08:00（北京时间）</h2>
+          <p>站内审查 · 2026 年 11 月 24 日 08:00（北京时间）</p>
         </div>
         <div class="audit-ok" role="note">
           <div class="badge" aria-hidden="true">✓</div>
           <div>
             <h3>结论：无重大 Bug</h3>
-            <p>审查时间：2026-11-23 08:00（北京时间）。无重大 Bug。16 双翻倍今日在新在售主题（DEBUG 2026-11-15）上三条路径均未复现，其余检查全部通过，漏斗无断崖式下跌。提醒：翻倍 Bug 间歇性、单次通过不算根治证明，08:00 审查继续轮换复测 + 盯真实订单；11 月 25 日高峰前仍须留意。</p>
+            <p>审查时间：2026-11-24 08:00（北京时间）。无重大 Bug。16 双翻倍今日在在售主题（DEBUG 2026-11-15）上三条路径均未复现：档位切换 18→30→8（0/1）、数量框手动输入“8”（0/1）、取消 bundle 两部分均通过；混色加购与 EARLY15 结账均通过，结账可达付款步。提醒：翻倍 Bug 间歇性、单次通过不算根治证明，08:00 审查继续轮换复测 + 盯真实订单；明日 11 月 25 日即黑五高峰开始，仍须留意。</p>
           </div>
         </div>
         <div class="audit-grid">
           <div class="card">
-            <h3>后台核对（Shopify GraphQL 实查 2026-11-23 约 08:00）</h3>
+            <h3>后台核对（Shopify GraphQL 实查约 07:58）</h3>
             <ul class="audit-list">
-              <li><b>在售主题已变：</b>Weavasocks BF Copy - DEBUG 2026-11-15（ID 161396097079）现为 MAIN——用户 2026-11-22 已发布；含 11-18 提交拦截修复 + 取消 bundle 修复的 DEBUG 主题。旧在售 BUNDLE FIX（ID 161439776823）现为 UNPUBLISHED。</li>
-              <li><b>Dual-Knit 女款 JL158（GID 7524035493943）：</b>ACTIVE，总库存 17,882（与昨日持平）；9 变体：6 色 $15.99（White/Cream Ivory/Oatmeal Heather/Cedar Heather/Charcoal Heather/Black），3 款 Slightly Thinner $13.99，全部有库存可售。</li>
-              <li><b>平针女款 JL157（GID 7525164023863）：</b>ACTIVE，总库存 5,960（与昨日持平）；6 色 $15.99，全部有库存可售。</li>
-              <li><b>男款平针 JK128（GID 7525163630647）：</b>ACTIVE，总库存 5,982（与昨日持平）；6 色 $15.99，全部有库存可售。</li>
-              <li><b>男款 Dual-Knit JK129（GID 7524046372919）：</b>ACTIVE，总库存 5,972（与昨日持平）；6 色 $15.99，全部有库存可售。</li>
-              <li><b>折扣码：</b>EARLY15 与 BLKFDAY 均为 DiscountCodeBasic、ACTIVE，endsAt 均为 2026-12-01T04:59:00Z（12 月 1 日 12:59 北京），与用户决定一致。</li>
+              <li><b>在售主题未变：</b>Weavasocks BF Copy - DEBUG 2026-11-15（ID 161396097079）仍为 MAIN。</li>
+              <li><b>JL158：</b>ACTIVE，总库存 17,879（昨日 17,882，−3）；9 变体：6 色 $15.99、3 款 Slightly Thinner $13.99，全部有库存可售。</li>
+              <li><b>JL157：</b>ACTIVE，总库存 5,960；6 色 $15.99，全部有库存可售。</li>
+              <li><b>JK128：</b>ACTIVE，总库存 5,982；6 色 $15.99，全部有库存可售。</li>
+              <li><b>JK129：</b>ACTIVE，总库存 5,972；6 色 $15.99，全部有库存可售。</li>
+              <li><b>折扣码：</b>EARLY15 与 BLKFDAY 均为 ACTIVE，endsAt 均为 2026-12-01T04:59:00Z（12 月 1 日 12:59 北京）。</li>
             </ul>
           </div>
           <div class="card">
-            <h3>漏斗对照（ShopifyQL 实查，店铺时区 CST/UTC+8，北京时间日；未过滤机器人，与昨日同口径）</h3>
+            <h3>漏斗对照（ShopifyQL，北京时间日，未过滤机器人）</h3>
             <ul class="audit-list">
-              <li>11-23 截至约 08:00：586 会话、45 加购、41 到达结账、13 完成结账，转化率 2.22%。</li>
-              <li>11-22 全日：1,317 会话、70 加购、54 到达结账、28 完成结账，转化率 2.13%。</li>
-              <li>11-21 全日：1,259 会话、64 加购、60 到达结账、26 完成结账，转化率 2.07%。</li>
-              <li>11-20 全日：1,515 会话、56 加购、56 到达结账、21 完成结账，转化率 1.39%。</li>
-              <li>订单 GraphQL（按北京时间换算）：今日 00:00–约 08:00 共 13 单 $772.25（#210045 00:24 $48.58 至 #210057 07:57 $125.46），全部 PAID；昨日同时段约 14 单 $762.35。单量 −7.1%、金额 +1.3%。加购率 45/586 = 7.7%（昨日同时段 35/454 = 7.7%，持平）；会话量 +29.1%（586 vs 454），加购与到达结账均高于昨日同时段、完成结账持平（13 vs 13）——漏斗无断崖式下跌。</li>
+              <li>11-24 截至约 08:00：470 会话、25 加购、18 到达结账、12 完成结账，转化率 2.55%。</li>
+              <li>11-23 全日：1,432 会话、86 加购、85 到达结账、30 完成结账，转化率 2.09%（29 单 $1,748.66）。</li>
+              <li>今日 13 单 $1,044.86 对昨日同时段 13 单 $772.25（单量持平、金额 +35.3%）。</li>
+              <li>会话量 −19.8%、加购率 5.3% vs 昨日同时段 7.7% 有所回落，但浏览器实测加购各路径全部正常、完成结账 12 vs 13 基本持平、转化率反高于昨日同时段，无断崖式下跌，回落属流量构成波动、非站内问题。</li>
             </ul>
           </div>
         </div>
         <div class="card" style="margin-top:12px">
-          <h3>浏览器实测（browser-task:4e54e92c-ec38-5640-8611-471e42dd7d4b，08:01–08:16，guest 未登录，未下单、未输支付信息、未点 Pay now；在售主题即 DEBUG 2026-11-15（161396097079，页脚条与结账 preview_theme_id 均可佐证）；结束时购物车已核实为空）</h3>
+          <h3>浏览器实测（08:03–08:12，guest 未登录，未下单、未输支付信息、未点 Pay now；结束时购物车已核实为空）</h3>
           <ul class="audit-list">
-            <li><b>首页 <span class="pass">PASS</span>：</b>https://weavasocks.com 正常加载，无空白/404；黑五横幅 &quot;Black Friday Live — Black Friday Prices, Price Protected&quot;、免邮条 &quot;Spend $35 more for FREE shipping&quot;；倒计时 &quot;Ends Tue Dec 1 2026 12:59 PM CST&quot;、&quot;08 DAYS 04 HOURS 55 MINUTES 53 SECONDS&quot;；页内 13 张图解码、0 不可用。</li>
-            <li><b>JL158 产品页 <span class="pass">PASS</span>：</b>URL 为 /products/womens-dual-knit-cotton-faced-wool-lined-thermal-crew-socks；单价 $15.99、In stock，9 色均可点选（6 色 $15.99 + 3 款 Slightly Thinner $13.99，选 Warm Butter Yellow 后加购价变为 $13.99 已验证）；bundle 档位在位：1 双 $15.99、8 双 $104.88（$13.11/双）、18 双 $195.66、30 双 $258.90；注：bundle 价随颜色变化，$13.99 薄款色 8 双 $91.76、18 双 $171.18、30 双 $226.50。另有目录接口独立核对：9 变体全部 available，价格区间 $13.99–$15.99，与后台一致。</li>
-            <li><b>集合页 <span class="pass">PASS</span>：</b>/collections/all-products，373 products（与昨日持平），首屏 33 张图解码、0 不可用。</li>
-            <li><b>档位切换复测（18→30→8）<span class="pass">PASS</span>——今日 1 次未复现：</b>三处均为 8 双：抽屉 White qty 8，ITEMS $127.92，CHECKOUT $89.22（初 capture）；/cart White qty 8，ITEMS $130.27，EARLY15 −$16.09，SUBTOTAL $91.22；结账 8 双，Subtotal $107.31，EARLY15 −$16.09，Total $91.22，TOTAL SAVINGS $39.05。无加购挂起。</li>
-            <li><b>数量框输入复测 <span class="pass">PASS</span>——今日 1 次未复现（昨日同路径复现 1 次）：</b>新开产品页（8 双档已展开、各色数量为 0），White 数量框直接键入 &quot;8&quot;、只点一次加购；抽屉、/cart、结账三处均为 8 双 $91.22；结账后重读 /cart、等 10 秒再读一次，仍为 8 双 $91.22，无延迟翻倍到 16 双。</li>
-            <li><b>取消 bundle 复测 <span class="pass">PASS</span>——两部分均通过（首次在已发布在售主题上验证）：</b>(a) 先点 8 双档加购进购物车，再回产品页点一次已选的 8 双档取消，购物车原样：8 双 bundle 行仍在，SUBTOTAL $91.22 不变；(b) 清车后点 8 双档再点一次取消，改原生颜色选 Black、原生数量框输 3、点一次加购，购物车为 3 双黑、无 bundle 标记，SUBTOTAL $41.61。</li>
-            <li><b>混色搭配加购 <span class="pass">PASS</span>：</b>清空后 8 双档 White 4 + Black 4（+ 号按钮），一次加购；抽屉两行各 qty 4，/cart 同，SUBTOTAL $91.22；共 8 双无误；已清空。</li>
-            <li><b>EARLY15 加购 <span class="pass">PASS</span>：</b>用 + 号按钮加 8 双 White，抽屉 $89.22（初 capture）、/cart $91.22、结账 8 双 $91.22；EARLY15 为自动应用（未手动输入），Order discount −$16.09。结账为单页，Contact/Delivery/Shipping method/Payment/Finalize order 五区齐全，Payment 区（卡、PayPal、Klarna 等）可滚动到达；未输支付信息、未点击 Pay now。已清空，/cart 核实为空。</li>
-            <li><b>小问题（非重大 Bug）：</b>①抽屉总计滞后仍在：抽屉 CHECKOUT 初 capture $89.22，比 /cart 与结账 $91.22 低 $2.00（抽屉不含运费险 $2.35，EARLY15 后 $2.00），稍后会更新为 $91.22；②件数口径不一致仍在：抽屉 &quot;8 items&quot;、/cart &quot;9 items&quot;（运费险计 1 件）；③EARLY15 每次加购后自动应用（未手动输入）；④运费险默认勾选、价格随双数变化（3 双 $0.98、8 双 $2.35）；⑤首页免邮门槛文案不一致：首页横幅 &quot;$35 more&quot;、购物车视图 &quot;$33 / $34.16&quot;；⑥产品页两个免费赠品选项默认显示 &quot;Added at $0.00&quot;，但抽屉/购物车里从未出现赠品行（昨日同）；⑦结账页预填了测试浏览器残留数据（test@example.com），非本站问题、未输入；⑧产品页出现一次黑五赠品弹窗，已点 X 关闭。</li>
+            <li><b>首页 <span class="pass">PASS</span>：</b>正常加载，无空白/404，黑五横幅与倒计时（Ends Dec 1 12:59 PM CST，08:03 剩 07 天 04 小时 55 分）正常，13 张图解码、0 不可用。</li>
+            <li><b>JL158 产品页 <span class="pass">PASS</span>：</b>单价 $15.99、In stock，9 色均可点选；bundle 档位在位：1 双 $15.99、8 双 $104.88、18 双 $195.66、30 双 $258.90。</li>
+            <li><b>集合页 <span class="pass">PASS</span>：</b>/collections/all-products 373 products（与昨日持平），首屏 33 张图解码、0 不可用。</li>
+            <li><b>档位切换复测 18→30→8 <span class="pass">PASS</span>——未复现：</b>抽屉、/cart、结账三处均为 8 双、总计 $91.22。</li>
+            <li><b>数量框输入复测 <span class="pass">PASS</span>——未复现：</b>White 行直接键入 8、只点一次加购，三处均为 8 双 $91.22；结账后重读 /cart、等 10 秒再读一次仍为 8 双，无延迟翻倍。</li>
+            <li><b>取消 bundle 复测 <span class="pass">PASS</span>——两部分均通过：</b>(a) 取消后购物车原样（8 双 bundle 行仍在，SUBTOTAL $91.22）；(b) 取消后原生选 Black、数量 3 加购，购物车为 3 双黑、无 bundle 标记，SUBTOTAL $41.61。</li>
+            <li><b>混色加购 <span class="pass">PASS</span>：</b>White 4 + Black 4 一次加购，两行各 4 双，SUBTOTAL $91.22。</li>
+            <li><b>EARLY15 加购 <span class="pass">PASS</span>：</b>自动应用，结账 8 双 $91.22；结账单页 Contact/Delivery/Shipping method/Payment/Finalize order 五区齐全，Payment 区可滚动到达，Pay now 未点击。</li>
+            <li><b>小问题（非重大 Bug）：</b>抽屉总计滞后仍在（初 capture $89.22，比 /cart 与结账 $91.22 低 $2.00）；件数口径不一致仍在（抽屉“8 items”、/cart“9 items”，运费险计 1 件）；EARLY15 每次加购后自动应用；运费险默认勾选、价格随双数变化（3 双 $0.98、8 双 $2.35）；首页免邮门槛文案不一致（首页横幅“$35 more”、购物车视图“$33 / $34.16”）；产品页免费赠品选项默认显示“Added at $0.00”但购物车里从未出现赠品行；结账页预填测试浏览器残留数据（非本站问题）；产品页 4 张 88×88 缩略图采样时 pending、0 不可用（懒加载时序）；步骤 4 首次 /cart 读数未含运费险、访问结账后才变为 $91.22，运费险计入 /cart 存在时序不一致，但结账总额 $91.22 全程一致。</li>
           </ul>
         </div>
         <div class="card" style="margin-top:12px">
           <h3>真实订单核查（防翻倍漏网）</h3>
           <ul class="audit-list">
-            <li>最近 100 单（11-19 至 11-23 07:57）中无 $182.22 / $192.94 翻倍特征单；11-22 全日 29 单最大单 $127.77；11-21 有一单 $189.41（#29992），非翻倍特征金额（$182.22/$192.94），未见翻倍订单。</li>
+            <li>最近 100 单（11-20 至 11-24 07:52）中无 $182.22 / $192.94 翻倍特征单；今日最大单 $254.76（#210080），11-23 最大单 $202.33（#210059），未见翻倍订单。</li>
           </ul>
         </div>
         <div class="card" style="margin-top:12px">
-          <h3>结论（2026-11-23 约 08:17）</h3>
+          <h3>结论（2026-11-24 08:00）</h3>
           <ul class="audit-list">
-            <li>无重大 Bug。16 双翻倍今日在新在售主题（DEBUG 2026-11-15）上三条路径均未复现：档位切换 18→30→8（0/1）、数量框手动输入 &quot;8&quot;（0/1，昨日同路径曾复现 1 次）、取消 bundle 两部分均通过；混色加购与 EARLY15 结账均通过，结账可达付款步。</li>
-            <li>其余检查全部通过：首页、JL158 产品页、集合页均正常打开；主推 4 款价格库存与后台一致、全部可售；bundle 档位在位、可选、加购成功；购物车与结账可达付款步；EARLY15 自动应用、总计 $91.22 落在预期区间。</li>
-            <li>漏斗无断崖式下跌：今日截至约 08:00 转化率 2.22%（586 会话/13 完成结账），昨日同时段 2.86%（454 会话/13 单）；加购率 7.7% 与昨日同时段持平；今日 13 单 $772.25 对昨日同时段约 14 单 $762.35（单量 −7.1%、金额 +1.3%）。11-22 全日收官 1,317 会话、转化率 2.13%、29 单 $1,645.43。</li>
-            <li>提醒：翻倍 Bug 间歇性、单次通过不算根治证明，08:00 审查继续轮换复测 + 盯真实订单；11 月 25 日高峰前仍须留意。</li>
+            <li>无重大 Bug。16 双翻倍今日在在售主题（DEBUG 2026-11-15）上三条路径均未复现：档位切换 18→30→8（0/1）、数量框手动输入“8”（0/1）、取消 bundle 两部分均通过；混色加购与 EARLY15 结账均通过，结账可达付款步。</li>
+            <li>提醒：翻倍 Bug 间歇性、单次通过不算根治证明，08:00 审查继续轮换复测 + 盯真实订单；明日 11 月 25 日即黑五高峰开始，仍须留意。</li>
           </ul>
         </div>
-        <p class="foot" style="font-size:12px;color:var(--ink3);margin-top:10px;line-height:1.6">审查时间：2026-11-23 08:00（北京时间）。结论：无重大 Bug。在售主题：Weavasocks BF Copy - DEBUG 2026-11-15（ID 161396097079）现为 MAIN。审查频率：每天一次，早上 8:00（北京时间）同步。</p>
+        <p class="foot" style="font-size:12px;color:var(--ink3);margin-top:10px;line-height:1.6">审查时间：2026-11-24 08:00（北京时间）。结论：无重大 Bug。在售主题：Weavasocks BF Copy - DEBUG 2026-11-15（ID 161396097079）仍为 MAIN。审查频率：每天一次，早上 8:00（北京时间）同步。</p>
       </section>
 
       <!-- 9 actions -->
